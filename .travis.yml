@@ -20,6 +20,7 @@ script:
 
 before_deploy:
   - cd backend
+  - ls
 
 deploy:
   provider: elasticbeanstalk
