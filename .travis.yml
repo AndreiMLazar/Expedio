@@ -1,7 +1,11 @@
 language: node_js
 
 node_js:
-  - "8.16.0"
+  - "10"
+
+branches:
+  only:
+    - develop
 
 cache:
   directories:
@@ -16,14 +20,14 @@ script:
 
 deploy:
   provider: elasticbeanstalk
-  access_key_id: "AKIAIKYPGN6QNLOKPV5Q"
+  access_key_id: $ACCESS_KEY_ID
   secret_access_key:
-    secure: "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"
+    secure: $SECRET_ACCESS_KEY
   region: "eu-central-1"
   local_dir: backend
   app: "expedio"
   env: "Expedio-environment"
-  bucket_name: "expedio-environment.trwa4fmphr.eu-central-1"
+  bucket_name: $BUCKET_NAME
   skip_cleanup: true
   on:
     branch: develop
