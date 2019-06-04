@@ -7,11 +7,12 @@ cache:
   directories:
     - node_modules
 
-install:
-  -npm install
+before_script:
+  - npm install -g @angular/cli
+  - npm install
 
 script:
-  -ng build --prod
+  - ng build --prod
 
 deploy:
   provider: elasticbeanstalk
@@ -29,3 +30,8 @@ deploy:
 
 after_deploy:
   - echo "Expedio App Deployed"
+
+notifications:
+  email:
+    on_failure: change
+    on_success: change
