@@ -1,8 +1,8 @@
 {
   "name": "Expedio",
   "short_name": "Expedio",
-  "theme_color": "#0D9EDF",
-  "background_color": "#0D9EDF",
+  "theme_color": "#374670",
+  "background_color": "#374670",
   "display": "fullscreen",
   "scope": "/",
   "start_url": "/",
