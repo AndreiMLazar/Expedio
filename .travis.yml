@@ -18,13 +18,15 @@ before_script:
 script:
   - ng build --prod
 
+before_deploy:
+  - cd backend
+
 deploy:
   provider: elasticbeanstalk
   access_key_id: $ACCESS_KEY_ID
   secret_access_key:
     secure: $SECRET_ACCESS_KEY
   region: "eu-central-1"
-  local_dir: backend
   app: "expedio"
   env: "Expedio-environment"
   bucket_name: $BUCKET_NAME
