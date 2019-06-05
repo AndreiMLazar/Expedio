@@ -22,10 +22,10 @@ before_script:
   - if [ "$ENV" = "EXPRESS" ]; then npm install; fi
 
 script:
-  - if [ "$ENV" = "ANGULAR" ]; ng build --prod; fi
+  - if [ "$ENV" = "ANGULAR" ]; then ng build --prod; fi
 
 before_deploy:
-  - if [ "$ENV" = "EXPRESS" ]; cd backend && ls; fi
+  - if [ "$ENV" = "EXPRESS" ]; then cd backend && ls; fi
 
 deploy:
   - provider: elasticbeanstalk
@@ -56,8 +56,8 @@ deploy:
 
 
 after_deploy:
-  - if [ "$ENV" = "ANGULAR" ]; echo "Expedio Frontend Deployed"; fi
-  - if [ "$ENV" = "EXPRESS" ]; echo "Expedio API Deployed"; fi
+  - if [ "$ENV" = "ANGULAR" ]; then echo "Expedio Frontend Deployed"; fi
+  - if [ "$ENV" = "EXPRESS" ]; then echo "Expedio API Deployed"; fi
 
 notifications:
   email:
