@@ -1,28 +1,5 @@
 @import "../../../styles/variables.scss";
 
-.dashboard {
-  width: 100%;
-  min-height: 75vh;
-  height: 75vh;
-  background: rgba($white, 0.95);
-  border-radius: 10px;
-  // overflow: hidden;
-  filter: drop-shadow(0.2em 0.6em 4.5em rgba($black, 0.34));
-}
-
-// Left Section
-.left_section {
-  padding: 4em 1em 4em 1em;
-  width: 20%;
-  height: 100%;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  float: left;
-  box-sizing: border-box;
-  background: rgba($whitest, 0.95);
-  box-shadow: 0.1em 0 3em -0.5em rgba($black, 0.3);
-}
-
 // User Details
 .user_section {
   text-align: center;
@@ -155,13 +132,4 @@
   font-size: 1.2em;
   letter-spacing: -0.05em;
   font-weight: 600;
-}
-
-// Right Section
-
-.right_section {
-  width: 80%;
-  padding: 2em 3em;
-  float: right;
-  box-sizing: border-box;
 }

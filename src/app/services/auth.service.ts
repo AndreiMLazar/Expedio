@@ -7,6 +7,9 @@ const AUTH_URL = environment.apiURL + '/auth';
   providedIn: 'root'
 })
 export class AuthService {
+  isLoggedIn() {
+    return false;
+  }
 
   constructor() { }
 }

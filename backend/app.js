@@ -2,6 +2,9 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 // Models
 const Ex = require("./models/ex");
@@ -9,7 +12,7 @@ const Ex = require("./models/ex");
 const app = express();
 app.use(bodyParser.json());
 
-// Databse Connection (MongoDB)
+// Database Connection (MongoDB)
 mongoose
   .connect(
     "mongodb+srv://expedioRW:" +
