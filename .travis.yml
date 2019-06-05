@@ -24,9 +24,6 @@ before_script:
 script:
   - if [ "$ENV" = "ANGULAR" ]; then ng build --prod; fi
 
-before_deploy:
-  - if [ "$ENV" = "EXPRESS" ]; then cd backend && ls; fi
-
 deploy:
   - provider: elasticbeanstalk
     access_key_id: $ACCESS_KEY_ID
@@ -37,6 +34,7 @@ deploy:
     env: "Expedio-environment"
     bucket_name: $BUCKET_NAME
     skip_cleanup: true
+    local_dir: backend
     on:
       branch: develop
       condition: $ENV=EXPRESS
@@ -49,7 +47,7 @@ deploy:
     bucket: "expedio"
     acl: public_read
     skip_cleanup: true
-    local_dir: build
+    local_dir: dist
     on:
       branch: develop
       condition: $ENV=ANGULAR
