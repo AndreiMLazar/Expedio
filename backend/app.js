@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv-safe");
 
 dotenv.config();
 
@@ -16,8 +16,9 @@ app.use(bodyParser.json());
 mongoose
   .connect(
     "mongodb+srv://expedioRW:" +
-      process.env.MONGO_ATLAS_PW +
-      "@expedio-ge1m7.mongodb.net/expedio?retryWrites=true&w=majority"
+    process.env.MONGO_ATLAS_PW +
+    "@expedio-ge1m7.mongodb.net/expedio?retryWrites=true&w=majority",
+    { useNewUrlParser: true }
   )
   .then(() => {
     console.log("Connected to database!");
@@ -44,7 +45,6 @@ app.use((req, res, next) => {
 // Static Sources
 app.use("/", express.static(path.join(__dirname, "expedioUI")));
 
-
 // Api URLs
 app.use("/api/test", (req, res, next) => {
   Ex.find().then(documents => {
@@ -56,7 +56,7 @@ app.use("/api/test", (req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "expedioUI", "index.html"))
+  res.sendFile(path.join(__dirname, "expedioUI", "index.html"));
 });
 
 module.exports = app;
