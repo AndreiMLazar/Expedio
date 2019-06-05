@@ -1,0 +1,135 @@
+@import "../../../styles/variables.scss";
+
+// User Details
+.user_section {
+  text-align: center;
+}
+
+.user_picture img {
+  border-radius: 40%;
+  background: $navy;
+  width: 80px;
+  height: 80px;
+  box-shadow: 0 0.5em 1.5em rgba($black, 0.15);
+}
+
+.user_role {
+  margin-top: -0.6em;
+}
+
+// Links
+.links_section {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.links ul li {
+  color: $gray-dark;
+  background: rgba($white, 0);
+  transition: 0.5s $transition;
+  cursor: pointer;
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    background: $logo-dark;
+    padding: 0.95em 0.2em;
+    margin-top: -0.3em;
+    transition: 0.1s $transition;
+    opacity: 0;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    background: blue;
+    padding: 0.95em 0;
+    margin-top: -0.3em;
+    width: 20%;
+    background: linear-gradient(
+      90deg,
+      rgba($logo-dark, 0.3) 0%,
+      transparent 75%
+    );
+    transition: 0.15s $transition;
+    opacity: 0;
+  }
+}
+
+.links ul li:visited,
+.links ul li:active {
+  font-weight: 500;
+  background: rgba($logo-dark, 0.2);
+  width: 100%;
+  margin-left: -2em;
+  padding: 0.3em 1em 0.3em 3em;
+}
+
+.links ul li:hover {
+  transition: 0.15s $transition;
+  color: $navy;
+  width: 100%;
+  margin-left: -2em;
+  padding: 0.3em 1em 0.3em 3em;
+
+  &:before {
+    transition: 0.3s $transition;
+    opacity: 1;
+  }
+
+  &:after {
+    transition: 0.3s $transition;
+    opacity: 1;
+  }
+}
+
+.link_title {
+  display: inline-block;
+  background: $whitest;
+  padding: 0.5em 0.5em 0.5em 0;
+  margin: 0;
+  z-index: 2;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.divider_title {
+  display: inline-block;
+  text-align: right;
+  width: 90%;
+  background: $gray-dark;
+  position: absolute;
+  right: 0;
+  top: 1em;
+  z-index: 1;
+}
+
+// Application Details
+.logo {
+  position: absolute;
+  text-align: center;
+  height: 10em;
+  width: 20%;
+  left: 0;
+  bottom: 0;
+  border-bottom-left-radius: 10px;
+  padding-bottom: 0.5em;
+  background: linear-gradient(transparent 0%, rgba($divider, 0.8) 100%);
+}
+
+.logo img {
+  width: 5em;
+  height: auto;
+  margin-top: 2em;
+}
+
+.logo .app_title {
+  margin: -0.5em 0 0 0;
+  color: $navy;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  letter-spacing: -0.05em;
+  font-weight: 600;
+}

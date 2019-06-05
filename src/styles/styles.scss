@@ -1,0 +1,266 @@
+/* You can add global styles to this file, and also import other style files */
+@import "variables.scss";
+
+body {
+  background-color: $white;
+  background-image: url("../assets/images/background.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: $sans-serif;
+  font-size: 10px;
+  color: $gray-dark;
+  text-rendering: optimizeLegibility;
+  line-height: 1.6em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  text-shadow: 0.1em 0.2em 0.2em rgba($black, 0.1);
+  letter-spacing: normal;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 16px;
+}
+
+h2 {
+  font-size: 1.6em;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: $gray;
+}
+
+h3,
+h4,
+h5,
+h6,
+p {
+  font-size: 1.4em;
+  font-weight: 400;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 1.5em;
+}
+
+li {
+  padding: 0.3em 0;
+  font-size: 1.2em;
+  color: $gray-dark;
+}
+
+a {
+  color: $gray-dark;
+  text-decoration: none !important;
+  transition: 0.1s $transition;
+}
+
+// Dashboard
+.dashboard {
+  width: 100%;
+  min-height: 75vh;
+  height: 75vh;
+  background: rgba($white, 0.95);
+  border-radius: 10px;
+  // overflow: hidden;
+  filter: drop-shadow(0.2em 0.6em 4.5em rgba($black, 0.34));
+}
+
+// Left Section
+.left_section {
+  padding: 4em 1em 4em 1em;
+  width: 20%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  float: left;
+  box-sizing: border-box;
+  background: rgba($whitest, 0.95);
+  box-shadow: 0.1em 0 3em -0.5em rgba($black, 0.3);
+}
+
+// Right Section
+.right_section {
+  width: 80%;
+  padding: 2em 3em;
+  float: right;
+  box-sizing: border-box;
+}
+
+.page_title {
+  display: inline-block;
+  position: relative;
+  width: auto;
+  margin-right: 3em;
+
+  hr {
+    display: inline-block;
+    width: 2em;
+    border: 1px solid $divider;
+    margin-right: 1em;
+  }
+  .page_title_h1 {
+    display: inline-block;
+    color: $navy;
+  }
+}
+
+.divider {
+  display: inline-block;
+  width: 0.2em;
+  height: 2.4em;
+  margin: 0 1em -0.4em 1em;
+  background: $divider;
+}
+
+.search_bar {
+  display: inline-block;
+}
+
+.notifications {
+  display: inline-block;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  text-shadow: 0 0 0.4em rgba($red-dark, 0.5);
+  transition: 0.1s $transition;
+
+  mat-icon {
+    cursor: pointer;
+    fill: $red-dark;
+    color: $red-dark;
+    &:hover {
+      fill: $red;
+      color: $red;
+      transition: 0.1s $transition;
+    }
+  }
+
+  .notifications_number {
+    height: 1.3em;
+    width: 1.3em;
+    background: $red;
+    position: absolute;
+    top: 0;
+    right: -0.4em;
+    border-radius: 100%;
+    box-shadow: -0.1em 0.1em 0.4em rgba($red, 0.3);
+
+    p {
+      color: $whitest;
+      font-size: 1em;
+      margin-top: -0.1em;
+      margin-left: 0.3em;
+      font-weight: 800;
+      text-shadow: 0 0 0.1em rgba($black, 1);
+    }
+  }
+}
+
+.table_header {
+  position: relative;
+  display: block;
+  width: 100%;
+
+  .selector {
+    position: absolute;
+    top: -0.9em;
+    right: 0;
+    box-sizing: content-box;
+    padding: 0.5em 0;
+    border-radius: 2em;
+    background: rgba($navy, 0.9);
+    box-shadow: 0 0 1em rgba($black, 0.3);
+
+    ul li {
+      display: inline;
+      padding: 0 1em;
+      color: $white;
+      border-left: 2px solid $white;
+      cursor: pointer;
+      transition: .1s $transition;
+
+      &:hover {
+        color: $whitest;
+        text-shadow: 0 0 0.5em $whitest;
+        transition: .1s $transition;
+      }
+
+      &:focus, &:active {
+        color: $whitest;
+        text-shadow: 0 0 0.5em $whitest;
+        transition: .1s $transition;
+      }
+
+      &:first-child {
+        border-left: none;
+      }
+    }
+  }
+}
+
+.top_bar {
+  position: relative;
+}
+
+table {
+  width: 100%;
+  border-radius: 4px;
+  background: $whitest;
+  box-shadow: 0 2em 4em rgba($gray-dark, 0.1);
+}
+
+.title_divider {
+  border: 0.05em solid $divider;
+  margin: -0.2em 0 2em 0;
+}
+
+// Angular Material Overrides
+
+.mat-flat-button {
+  box-shadow: 0 0.5em 1em $accent;
+}
+
+.mat-fab, .mat-flat-button, .mat-mini-fab, .mat-raised-button {
+  background: linear-gradient($logo-dark 0%, $accent 100%);
+  color: $white;
+  width: 7.5em;
+  padding: 0 2em;
+}
+
+.mat-form-field-flex {
+  border: 1px solid $divider;
+  box-shadow: 0 .5em 1.5em -0.4em rgba($black, 0.1);
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: $red;
+}
+
+.mat-error {
+  color: $red;
+  font-size: 1.3em;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-underline::before {
+  background: $divider;
+}
+
+.mat-table {
+  background: $whitest;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  background: none;
+}
