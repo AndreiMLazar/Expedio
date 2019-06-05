@@ -3,12 +3,6 @@ language: node_js
 node_js:
   - "10"
 
-matrix:
-  include:
-    - env: ENV=ANGULAR
-    - env: ENV=EXPRESS
-  fast_finish: true
-
 branches:
   only:
     - develop
@@ -18,44 +12,24 @@ cache:
     - node_modules
 
 before_script:
-  - if [ "$ENV" = "ANGULAR" ]; then npm install -g @angular/cli && npm install; fi
-  - if [ "$ENV" = "EXPRESS" ]; then npm install; fi
+  - npm install -g @angular/cli
+  - npm install
+  - npm version patch
 
 script:
-  - if [ "$ENV" = "ANGULAR" ]; then ng build --prod; fi
+  - then ng build --prod
 
 deploy:
-  - provider: elasticbeanstalk
-    access_key_id: $ACCESS_KEY_ID
-    secret_access_key:
-      secure: $SECRET_ACCESS_KEY
-    region: "eu-central-1"
-    app: "expedio"
-    env: "Expedio-environment"
-    bucket_name: $BUCKET_NAME
+  - provider: heroku
+    api_key:
+      secure: $HEROKU_API_KEY
     skip_cleanup: true
     local_dir: backend
     on:
       branch: develop
-      condition: $ENV=EXPRESS
-
-  - provider: s3
-    access_key_id: $ACCESS_KEY_ID
-    secret_access_key:
-      secure: $SECRET_ACCESS_KEY
-    region: "eu-central-1"
-    bucket: "expedio"
-    acl: public_read
-    skip_cleanup: true
-    local_dir: dist
-    on:
-      branch: develop
-      condition: $ENV=ANGULAR
-
 
 after_deploy:
-  - if [ "$ENV" = "ANGULAR" ]; then echo "Expedio Frontend Deployed"; fi
-  - if [ "$ENV" = "EXPRESS" ]; then echo "Expedio API Deployed"; fi
+  - echo "Expedio Deployed"
 
 notifications:
   email:

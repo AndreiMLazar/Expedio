@@ -2,7 +2,7 @@
 
 # compiled output
 /backend/*.zip
-/backend/ExpedioUI
+/backend/expedioUI
 /*.zip
 /dist
 /tmp

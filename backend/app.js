@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 });
 
 // Static Sources
-app.use("/", express.static(path.join(__dirname, "ExpedioUI")));
+app.use("/", express.static(path.join(__dirname, "expedioUI")));
 
 
 // Api URLs
@@ -56,7 +56,7 @@ app.use("/api/test", (req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "ExpedioUI", "index.html"))
+  res.sendFile(path.join(__dirname, "expedioUI", "index.html"))
 });
 
 module.exports = app;
