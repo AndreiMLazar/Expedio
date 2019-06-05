@@ -14,7 +14,6 @@ cache:
 before_script:
   - npm install -g @angular/cli
   - npm install
-  - npm version patch
 
 script:
   - then ng build --prod
