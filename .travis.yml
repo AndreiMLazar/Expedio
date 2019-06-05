@@ -3,6 +3,12 @@ language: node_js
 node_js:
   - "10"
 
+matrix:
+  include:
+    - env: ENV=ANGULAR
+    - env: ENV=EXPRESS
+  fast_finish: true
+
 branches:
   only:
     - develop
@@ -12,31 +18,46 @@ cache:
     - node_modules
 
 before_script:
-  - npm install -g @angular/cli
-  - npm install
+  - if [ "$ENV" = "ANGULAR" ]; then npm install -g @angular/cli && npm install; fi
+  - if [ "$ENV" = "EXPRESS" ]; then npm install; fi
 
 script:
-  - ng build --prod
+  - if [ "$ENV" = "ANGULAR" ]; ng build --prod; fi
 
 before_deploy:
-  - cd backend
-  - ls
+  - if [ "$ENV" = "EXPRESS" ]; cd backend && ls; fi
 
 deploy:
-  provider: elasticbeanstalk
-  access_key_id: $ACCESS_KEY_ID
-  secret_access_key:
-    secure: $SECRET_ACCESS_KEY
-  region: "eu-central-1"
-  app: "expedio"
-  env: "Expedio-environment"
-  bucket_name: $BUCKET_NAME
-  skip_cleanup: true
-  on:
-    branch: develop
+  - provider: elasticbeanstalk
+    access_key_id: $ACCESS_KEY_ID
+    secret_access_key:
+      secure: $SECRET_ACCESS_KEY
+    region: "eu-central-1"
+    app: "expedio"
+    env: "Expedio-environment"
+    bucket_name: $BUCKET_NAME
+    skip_cleanup: true
+    on:
+      branch: develop
+      condition: $ENV=EXPRESS
+
+  - provider: s3
+    access_key_id: $ACCESS_KEY_ID
+    secret_access_key:
+      secure: $SECRET_ACCESS_KEY
+    region: "eu-central-1"
+    bucket: "expedio"
+    acl: public_read
+    skip_cleanup: true
+    local_dir: build
+    on:
+      branch: develop
+      condition: $ENV=ANGULAR
+
 
 after_deploy:
-  - echo "Expedio App Deployed"
+  - if [ "$ENV" = "ANGULAR" ]; echo "Expedio Frontend Deployed"; fi
+  - if [ "$ENV" = "EXPRESS" ]; echo "Expedio API Deployed"; fi
 
 notifications:
   email:
