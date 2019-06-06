@@ -41,9 +41,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Static Sources
-app.use("/", express.static(path.join(__dirname, "expedioUI")));
-
 // Api URLs
 app.use("/api/test", (req, res, next) => {
   Ex.find().then(documents => {
@@ -53,6 +50,21 @@ app.use("/api/test", (req, res, next) => {
     });
   });
 });
+
+app.get("/ngsw-worker.js", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "expedioUI", "ngsw-worker.js"));
+});
+
+app.get("/safety-worker.js", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "expedioUI", "safety-worker.js"));
+});
+
+app.get("/worker-basic.min.js", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "expedioUI", "worker-basic.min.js"));
+});
+
+// Static Sources
+app.use("/", express.static(path.join(__dirname, "expedioUI")));
 
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "expedioUI", "index.html"));
