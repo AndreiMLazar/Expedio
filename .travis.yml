@@ -12,7 +12,7 @@ install:
   - npm install
 
 script:
-  - ng build --prod
+  - npm run prod
 
 deploy:
   - provider: heroku
