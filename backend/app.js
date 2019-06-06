@@ -2,9 +2,8 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const dotenv = require('dotenv');
 
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 
 // Models
 const Ex = require("./models/ex");
