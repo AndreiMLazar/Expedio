@@ -2,7 +2,7 @@ import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NgForm, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
-import { User } from 'src/app/models/user';
+import { User } from 'src/app/models/user.model';
 import { mimeType } from '../../../../validators/mime-type.validator';
 
 @Component({

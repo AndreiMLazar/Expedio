@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const CORS = require("cors")
 
 // Routes
-const signupRoute = require("./routes/signup");
+const userRoute = require("./routes/user");
 
 // Environment Variables
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
@@ -34,7 +34,7 @@ mongoose
   });
 
 // Api URLs
-app.use("/api/auth", signupRoute);
+app.use("/api/auth", userRoute);
 
 // Static Sources
 app.get("/ngsw-worker.js", (req, res) => {

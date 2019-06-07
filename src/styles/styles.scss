@@ -66,20 +66,45 @@ a {
   transition: 0.1s $transition;
 }
 
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $accent;
+  background: linear-gradient($logo-dark 0%, $accent 100%);
+}
+
+::-moz-selection {
+  color: $white;
+  background: $accent;
+}
+
+::selection {
+  color: $white;
+  background: $accent;
+}
+
 // Dashboard
 .dashboard {
   width: 100%;
-  min-height: 75vh;
-  height: 75vh;
+  min-height: 80vh;
+  height: 80vh;
+  max-height: 80vh;
   background: rgba($white, 0.95);
   border-radius: 10px;
-  // overflow: hidden;
+  overflow: auto;
   filter: drop-shadow(0.2em 0.6em 4.5em rgba($black, 0.34));
 }
 
 // Left Section
 .left_section {
-  padding: 4em 1em 4em 1em;
+  position: relative;
+  padding: 4em 1em 0 1em;
   width: 20%;
   height: 100%;
   border-top-left-radius: 10px;
@@ -93,10 +118,13 @@ a {
 
 // Right Section
 .right_section {
+  position: relative;
   width: 80%;
+  height: 100%;
   padding: 2em 3em;
   float: right;
   box-sizing: border-box;
+  overflow: auto;
 }
 
 .page_title {
@@ -281,6 +309,35 @@ table {
 .mat-form-field-appearance-fill .mat-form-field-underline::before {
   left: 4px !important;
   width: calc(100% - 8px) !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+  background: $accent;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: $logo-dark;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label {
+  color: $black;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0 0 0 .4em;
+}
+
+.mat-snack-bar-container {
+  background: $navy;
+  border-radius: 4px;
+  box-shadow: 0 0 .8em rgba($black, 0.8);
+  letter-spacing: .04em;
+  color: $white;
+  font-weight: 600;
+  font-size: 1.2em;
 }
 
 input:-internal-autofill-selected {

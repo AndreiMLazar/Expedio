@@ -1,10 +1,12 @@
 @import "../../../styles/variables.scss";
 
 .left_section {
-  width: 100%;
+  width: 90%;
+  height: 100%;
   padding: 7em 5em;
   background: linear-gradient(65deg, $whitest 0%, $white 50%);
   border-radius: 10px;
+  position: relative;
 
   h1 {
     position: relative;
@@ -94,7 +96,7 @@ mat-form-field {
 
 ::ng-deep .mat-form-field-infix {
   display: block;
-  width: 30em !important;
+  width: 25em !important;
   margin: 0.5em;
   border-radius: 1em;
 }
@@ -128,4 +130,8 @@ mat-form-field {
     height: 34px;
     width: auto;
   }
+}
+
+mat-radio-button {
+  margin: 1em 1em 1em 0
 }

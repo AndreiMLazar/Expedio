@@ -1,7 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 // User Model
 const User = require("../models/user");
@@ -40,7 +40,6 @@ const storage = multer.diskStorage({
 router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {
     const url = req.protocol + "://" + req.hostname;
-    const url2 = url + "/images/avatars/" + req.file.filename;
     const newUser = new User({
       email: req.body.email,
       password: hash,
@@ -66,6 +65,49 @@ router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res,
       error: err
     })
   });
+});
+
+router.post("/login", (req, res, next) => {
+  let fetchedUser;
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (!user) {
+        return res.status(401).json({
+          message: "User does not exist"
+        });
+      }
+      fetchedUser = user;
+      return bcrypt.compare(req.body.password, user.password);
+    })
+    .then(result => {
+      if (!result) {
+        return res.status(401).json({
+          message: "Passwords do not match"
+        });
+      }
+      const token = jwt.sign(
+        { email: fetchedUser.email, userId: fetchedUser._id },
+        'rtK1e`/r2X@@7g#~<]]<;^:9<_7Hp5',
+        { expiresIn: "1h" }
+      );
+      res.status(200).json({
+        token: token,
+        expiresIn: 3600,
+        userId: fetchedUser._id,
+        fullName: fetchedUser.fullName,
+        userType: fetchedUser.userType,
+        telephone: fetchedUser.telephone,
+        company: fetchedUser.company,
+        address: fetchedUser.address,
+        avatarPath: fetchedUser.avatarPath,
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      return res.status(401).json({
+        message: "Auth failed"
+      });
+    });
 });
 
 module.exports = router;
