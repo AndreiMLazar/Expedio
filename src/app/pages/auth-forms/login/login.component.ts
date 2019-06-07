@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Validators, FormControl } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['../auth-forms.component.scss'],
   animations: [
     trigger('flyInOut', [
       state('in', style({transform: 'translateY(0)'})),
@@ -26,13 +26,13 @@ import { trigger, state, style, transition, animate, keyframes } from '@angular/
 })
 export class LoginComponent implements OnInit, AfterViewInit {
   state = 'none';
-
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+  isLoading = false;
 
   constructor() { }
+
+  onLogin(form: NgForm) {
+    console.log(form.value);
+  }
 
   ngOnInit() {
   }
