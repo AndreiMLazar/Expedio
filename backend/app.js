@@ -49,7 +49,7 @@ app.get("/worker-basic.min.js", (req, res) => {
   res.sendFile(path.resolve(__dirname, "expedioUI", "worker-basic.min.js"));
 });
 
-app.use("/images", express.static(path.join("images/avatars")));
+app.use("/images/avatars", express.static(path.join(__dirname, "images/avatars")));
 
 app.use("/", express.static(path.join(__dirname, "expedioUI")));
 

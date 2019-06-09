@@ -1,0 +1,21 @@
+{
+  "name": "Expedio",
+  "short_name": "Expedio",
+  "theme_color": "#faf9f8",
+  "background_color": "#faf9f8",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/assets/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

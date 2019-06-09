@@ -1,15 +1,13 @@
 <div class="dashboard">
-  <div class="left_section">
+  <div *ngIf="userIsAuthenticated" class="left_section">
     <div class="user_section">
       <div class="user_picture">
-        <img
-          src="../../../assets/images/avatar.jpeg"
-          alt="User Profile Image"
-        />
+        <img [src]="this.authService.currentUser.avatarPath" onError="this.src='../../../assets/images/avatar.jpeg';"
+          alt="User Profile Image" />
       </div>
 
-      <h2 class="user_name">EDWARD NORTON</h2>
-      <h3 class="user_role">Admin</h3>
+      <h2 class="user_name">{{ this.authService.currentUser.fullName }}</h2>
+      <h3 class="user_role">{{ this.authService.currentUser.userType }}</h3>
       <br />
     </div>
 
@@ -33,7 +31,7 @@
       </div>
       <ul>
         <li><a href="">Settings</a></li>
-        <li><a href="">Log Out</a></li>
+        <li (click)="logout()"><a href="">Log Out</a></li>
         <li><a href="">Change Picture</a></li>
       </ul>
     </div>
@@ -44,7 +42,7 @@
     </div>
   </div>
 
-  <div class="right_section">
+  <div *ngIf="userIsAuthenticated" class="right_section">
     <div class="page_section">
       <app-overview></app-overview>
     </div>

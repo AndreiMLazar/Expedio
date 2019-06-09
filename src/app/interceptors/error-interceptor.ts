@@ -24,7 +24,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error.error.message) {
           errorMessage = error.error.message;
         }
-        this.snackBar.openFromComponent(ErrorComponent, { data: { message: errorMessage }, duration: 500000 });
+        this.snackBar.openFromComponent(ErrorComponent, { data: { message: errorMessage }, duration: 3000 });
         return throwError(error);
       })
     );

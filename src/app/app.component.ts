@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  constructor(private swUpdate: SwUpdate) { }
+export class AppComponent implements OnInit {
+  constructor(private swUpdate: SwUpdate, private authService: AuthService) { }
 
   ngOnInit(): void {
     if (this.swUpdate.isEnabled) {
@@ -17,5 +18,7 @@ export class AppComponent {
         }
       });
     }
+
+    this.authService.autoAuthUser();
   }
 }
