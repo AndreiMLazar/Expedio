@@ -40,6 +40,7 @@ const storage = multer.diskStorage({
 router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {
     const url = req.protocol + "://" + req.hostname;
+    console.log(req.body);
     const newUser = new User({
       email: req.body.email,
       password: hash,
@@ -47,6 +48,9 @@ router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res,
       userType: req.body.userType,
       telephone: req.body.telephone,
       company: req.body.company,
+      cui: req.body.cui,
+      country: req.body.country,
+      postalCode: req.body.postalCode,
       address: req.body.address,
       avatarPath: url + "/images/avatars/" + req.file.filename
     });
@@ -56,14 +60,16 @@ router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res,
         result: createdUser
       });
     }).catch(err => {
-      res.status(500).json({
-        error: err
-      })
+      console.log(err);
+      return res.status(500).json({
+        message: "User already exists"
+      });
     });
   }).catch(err => {
-    res.status(500).json({
-      error: err
-    })
+    console.log(err);
+    return res.status(500).json({
+      message: "Signup failed"
+    });
   });
 });
 
@@ -98,8 +104,11 @@ router.post("/login", (req, res, next) => {
         userType: fetchedUser.userType,
         telephone: fetchedUser.telephone,
         company: fetchedUser.company,
+        cui: fetchedUser.cui,
+        country: fetchedUser.country,
+        postalCode: fetchedUser.postalCode,
         address: fetchedUser.address,
-        avatarPath: fetchedUser.avatarPath,
+        avatarPath: fetchedUser.avatarPath
       });
     })
     .catch(err => {

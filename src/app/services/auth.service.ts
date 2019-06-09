@@ -41,7 +41,8 @@ export class AuthService {
   }
 
   createUser(email: string, password: string, fullName: string, userType: string,
-    telephone: string, company: string, address: string, avatar: File) {
+             telephone: string, company: string, cui: string, country: string,
+             address: string, postalCode: string, avatar: File) {
     const signupData = new FormData();
     signupData.append('email', email);
     signupData.append('password', password);
@@ -51,6 +52,9 @@ export class AuthService {
     signupData.append('company', company);
     signupData.append('address', address);
     signupData.append('avatar', avatar);
+    signupData.append('cui', cui);
+    signupData.append('country', country);
+    signupData.append('postalCode', postalCode);
 
     console.table(signupData);
 

@@ -7,7 +7,10 @@ const userSchema = mongoose.Schema({
   userType: { type: String, required: true },
   fullName: { type: String, required: true },
   telephone: { type: String, required: true },
-  company: { type: String, required: false },
+  company: { type: String, required: true },
+  cui: { type: String, required: true },
+  country: { type: String, required: true },
+  postalCode: { type: String, required: true },
   address: { type: String, required: false },
   avatarPath: { type: String, required: false }
 });

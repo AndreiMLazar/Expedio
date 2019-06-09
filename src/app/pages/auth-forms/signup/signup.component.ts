@@ -4,6 +4,7 @@ import { NgForm, FormGroup, FormBuilder, Validators, FormControl } from '@angula
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 import { User } from 'src/app/models/user.model';
 import { mimeType } from '../../../../validators/mime-type.validator';
+import { AllCountries } from 'src/app/models/all-countries.model';
 
 @Component({
   selector: 'app-signup',
@@ -35,6 +36,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
   signupForm: FormGroup;
   user = new User();
 
+  allCountries = AllCountries.countriesList;
   constructor(public authService: AuthService) { }
 
   ngOnInit() {
@@ -44,8 +46,11 @@ export class SignupComponent implements OnInit, AfterViewInit {
       userType: new FormControl('client', { validators: [Validators.required] }),
       fullName: new FormControl('', { validators: [Validators.required] }),
       telephone: new FormControl('', { validators: [Validators.required] }),
-      company: new FormControl(''),
+      company: new FormControl('', { validators: [Validators.required] }),
+      cui: new FormControl('', { validators: [Validators.required] }),
+      country: new FormControl('', { validators: [Validators.required] }),
       address: new FormControl('', { validators: [Validators.minLength(5), Validators.maxLength(80)] }),
+      postalCode: new FormControl('', { validators: [Validators.minLength(2), Validators.required] }),
       avatar: new FormControl('', { asyncValidators: [mimeType] })
     });
   }
@@ -81,7 +86,10 @@ export class SignupComponent implements OnInit, AfterViewInit {
       this.signupForm.value.userType,
       this.signupForm.value.telephone,
       this.signupForm.value.company,
+      this.signupForm.value.cui,
+      this.signupForm.value.country,
       this.signupForm.value.address,
+      this.signupForm.value.postalCode,
       this.signupForm.value.avatar
     );
 

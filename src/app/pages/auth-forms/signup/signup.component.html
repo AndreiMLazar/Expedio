@@ -28,11 +28,25 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input formControlName="company" matInput type="text" autocomplete="new-password" placeholder="Company" />
+        <input formControlName="company" matInput type="text" autocomplete="new-password" placeholder="Company" required />
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="cui" matInput type="text" autocomplete="new-password" placeholder="CUI" required />
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="country" placeholder="Country" required>
+          <mat-option *ngFor="let country of allCountries" [value]="country.name">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field>
         <input formControlName="address" matInput type="text" autocomplete="new-password"
-          placeholder="Company / Your Address" />
+          placeholder="Company Address" required minlength="5" maxlength="80" />
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="postalCode" matInput type="text" autocomplete="new-password"
+          placeholder="Postal Code" required minlength="2" />
       </mat-form-field>
       <button class="upload_image_button" mat-stroked-button type="button" (click)="filePicker.click()">Upload
         Avatar</button>
