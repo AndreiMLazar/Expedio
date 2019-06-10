@@ -3,6 +3,7 @@
 # compiled output
 /backend/*.zip
 /backend/expedioUI
+/backend/images
 /*.zip
 /dist
 /tmp
@@ -49,3 +50,4 @@ testem.log
 .DS_Store
 Thumbs.db
 backend/.env
+backend/jsconfig.json

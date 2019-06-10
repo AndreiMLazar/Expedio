@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiURL: "http://expedio-environment.trwa4fmphr.eu-central-1.elasticbeanstalk.com/api"
+  apiURL: 'http://expedio.herokuapp.com/api',
+  imagesURL: 'http://expedio.herokuapp.com/images/'
 };

@@ -1,13 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+import { AuthService } from './services/auth.service';
+import { appAnimation } from './animations/app-animation';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [appAnimation]
 })
-export class AppComponent {
-  constructor(private swUpdate: SwUpdate) { }
+export class AppComponent implements OnInit {
+  clientHeight: number;
+
+  constructor(private swUpdate: SwUpdate, private authService: AuthService) {
+    this.clientHeight = window.innerHeight;
+    console.log(this.clientHeight)
+  }
 
   ngOnInit(): void {
     if (this.swUpdate.isEnabled) {
@@ -17,5 +25,8 @@ export class AppComponent {
         }
       });
     }
+
+    this.authService.autoAuthUser();
   }
 }
+

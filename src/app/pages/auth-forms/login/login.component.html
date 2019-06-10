@@ -1,0 +1,28 @@
+<div class="dashboard" [@fadeAnimation]="'in'">
+  <div class="left_section">
+    <h1>Login</h1>
+    <h2>Don't have an account? <a [routerLink]="['/signup']">Create an account</a></h2>
+    <form class="credentials_form" (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+      <mat-form-field>
+        <input matInput type="email" autocomplete="current-password" name="email" ngModel placeholder="Email" #emailInput="ngModel" required email />
+        <mat-error *ngIf="emailInput.invalid">Please enter a valid email address</mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <input matInput type="password" autocomplete="current-password" name="password" ngModel placeholder="Password" #passwordInput="ngModel" required />
+        <mat-error>Please enter a valid password</mat-error>
+        <mat-error *ngIf="passwordInput.invalid">Password is <strong>required</strong></mat-error>
+      </mat-form-field>
+      <br />
+      <button class="submit_button" mat-flat-button type="submit" >Login</button>
+    </form>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+  </div>
+
+  <div class="triangle">
+    <div class="triangle_text">
+      <h2>Expedio</h2>
+      <hr class="login_divider" />
+    </div>
+  </div>
+</div>

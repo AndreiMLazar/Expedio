@@ -3,20 +3,16 @@ language: node_js
 node_js:
   - "10"
 
-branches:
-  only:
-    - develop
+# cache:
+  # directories:
+    # - node_modules
 
-cache:
-  directories:
-    - node_modules
-
-before_script:
+install:
   - npm install -g @angular/cli
   - npm install
 
 script:
-  - ng build --prod
+  - npm run prod
 
 deploy:
   - provider: heroku
@@ -26,7 +22,7 @@ deploy:
     skip_cleanup: true
     local_dir: backend
     on:
-      repo: AndreiMLazar/Expedio
+      branch: develop
 
 after_deploy:
   - echo "Expedio Deployed"
