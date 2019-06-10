@@ -4,6 +4,11 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const CORS = require("cors")
 
+// Mongoose Options
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+
 // Routes
 const userRoute = require("./routes/user");
 

@@ -39,8 +39,6 @@ const storage = multer.diskStorage({
 
 router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {
-    debugger
-    const url = req.protocol + "://" + req.hostname;
     console.log(req.body);
     const newUser = new User({
       email: req.body.email,
@@ -59,11 +57,12 @@ router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res,
       res.status(201).json({
         message: "User created",
         result: createdUser
-      });
+      },
+        console.log(createdUser));
     }).catch(err => {
       console.log(err);
       return res.status(500).json({
-        message: "User already exists"
+        message: "User created"
       });
     });
   }).catch(err => {
@@ -101,6 +100,7 @@ router.post("/login", (req, res, next) => {
         token: token,
         expiresIn: 3600,
         userId: fetchedUser._id,
+        email: fetchedUser.email,
         fullName: fetchedUser.fullName,
         userType: fetchedUser.userType,
         telephone: fetchedUser.telephone,
@@ -118,6 +118,45 @@ router.post("/login", (req, res, next) => {
         message: "Auth failed"
       });
     });
+});
+
+router.post("/update", multer({ storage: storage }).single("avatar"), (req, res, next) => {
+  User.findOne({ _id: req.body.userId })
+    .then(user => {
+      bcrypt.compare(req.body.password, user.password).then(result => {
+        if (result) {
+          User.findOneAndUpdate({ _id: req.body.userId }, {
+            $set: {
+              fullName: req.body.fullName,
+              telephone: req.body.telephone,
+              company: req.body.company,
+              cui: req.body.cui,
+              country: req.body.country,
+              address: req.body.address,
+              postalCode: req.body.postalCode,
+              userType: req.body.userType
+            }
+          }, {
+              "new": true
+            }).then(doc => {
+              res.status(200).json({
+                message: "User updated",
+                result: doc
+              })
+            }).catch(err => {
+              console.log(err);
+              res.status(500).json({
+                message: "Error Occured"
+              })
+            })
+        }
+        else {
+          return res.status(401).json({
+            message: "Password is not correct"
+          });
+        }
+      })
+    })
 });
 
 module.exports = router;

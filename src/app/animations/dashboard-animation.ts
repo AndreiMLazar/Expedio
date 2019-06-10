@@ -18,7 +18,7 @@ export const dashboardAnimation =
         })
       ], { optional: true }),
       query(':enter', [
-        animate('300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        animate('350ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
           style({
             opacity: 1,
             left: 0,

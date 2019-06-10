@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { UserLoginData } from '../interfaces/user-login-data.interface';
 import { User } from '../models/user.model';
 import { CurrentUser } from '../models/current-user.model';
+import { UpdatedUserResponse } from '../models/updated-user-response';
 
 const AUTH_URL = environment.apiURL + '/auth';
 
@@ -41,8 +42,8 @@ export class AuthService {
   }
 
   createUser(email: string, password: string, fullName: string, userType: string,
-             telephone: string, company: string, cui: string, country: string,
-             address: string, postalCode: string, avatar: File) {
+    telephone: string, company: string, cui: string, country: string,
+    address: string, postalCode: string, avatar: File) {
     const signupData = new FormData();
     signupData.append('email', email);
     signupData.append('password', password);
@@ -60,6 +61,32 @@ export class AuthService {
 
     return this.http.post(AUTH_URL + '/signup', signupData).subscribe(response => {
       this.router.navigate(['/dashboard/overview']);
+    });
+  }
+
+  updateUser(email: string, password: string, fullName: string, userType: string,
+    telephone: string, company: string, cui: string, country: string,
+    address: string, postalCode: string, avatar: File) {
+    const updateData = new FormData();
+    updateData.append('userId', localStorage.getItem('userId'))
+    updateData.append('email', email);
+    updateData.append('password', password);
+    updateData.append('fullName', fullName);
+    updateData.append('userType', userType);
+    updateData.append('telephone', telephone);
+    updateData.append('company', company);
+    updateData.append('address', address);
+    updateData.append('avatar', avatar);
+    updateData.append('cui', cui);
+    updateData.append('country', country);
+    updateData.append('postalCode', postalCode);
+
+    console.table(updateData);
+
+    return this.http.post<UpdatedUserResponse>(AUTH_URL + '/update', updateData).subscribe(response => {
+      console.log(response);
+      localStorage.setItem('user', JSON.stringify(response.result));
+      this.currentUser = response.result;
     });
   }
 

@@ -51,7 +51,7 @@ p {
 ul {
   list-style: none;
   margin: 0;
-  padding: 0 1.5em;
+  padding: 0;
 }
 
 li {
@@ -87,6 +87,17 @@ a {
 ::selection {
   color: $white;
   background: $accent;
+}
+
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 // Dashboard
@@ -155,6 +166,30 @@ a {
 
 .search_bar {
   display: inline-block;
+}
+
+.file_upload {
+  display: none;
+}
+
+.avatar_preview {
+  position: absolute;
+  display: inline-block;
+  height: 34px;
+  width: auto;
+  margin-left: 20px;
+
+  img {
+    height: 34px;
+    width: auto;
+  }
+}
+
+.upload_image_button {
+  width: 10em;
+  margin: 0 0 1.5em 0 !important;
+  background: $white;
+  color: $black;
 }
 
 .notifications {
@@ -260,7 +295,6 @@ table {
 
 .mat-flat-button {
   box-shadow: none !important;
-  filter: drop-shadow(0 0.25em 0.4em rgba($accent, 0.6));
   text-transform: uppercase;
   letter-spacing: 0.02em;
   text-shadow: 0 0.1em 0.3em rgba($white, 0.3);
@@ -274,10 +308,25 @@ table {
   color: $white;
   width: 7.5em;
   padding: 0 2em;
+
+  &:before {
+    background: linear-gradient($logo-dark 0%, $accent 100%);
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0.6em;
+    left: 0;
+    opacity: 0.7;
+    border-radius: 8em;
+    z-index: -1;
+    filter: blur(0.8em);
+  }
 }
 
 .mat-form-field-flex {
   border: 1px solid $divider;
+  padding: 2px 4px;
   filter: drop-shadow(0 0 0.2em rgba($black, 0.15));
 }
 
@@ -341,6 +390,23 @@ table {
   font-size: 1.2em;
 }
 
+.mat-radio-label-content {
+  padding-left: 3px !important;
+}
+
+.mat-form-field-disabled .mat-form-field-flex {
+  background: $gray;
+  color: $white;
+}
+
+.mat-form-field-disabled .mat-form-field-label {
+  color: $white;
+}
+
+.mat-input-element:disabled {
+  color: $white;
+}
+
 input:-internal-autofill-selected {
   background: none !important;
 }
@@ -353,13 +419,6 @@ mat-spinner {
   }
 }
 
-input:-webkit-autofill {
-  -webkit-animation-name: autofill;
-  -webkit-animation-fill-mode: both;
-}
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  transition: background-color 5000s ease-in-out 0s;
+mat-radio-button {
+  margin: 1em 1em 1em 0;
 }

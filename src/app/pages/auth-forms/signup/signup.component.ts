@@ -77,6 +77,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
       this.signupForm.value.avatar
     );
 
+    this.isLoading = false;
     this.signupForm.reset();
   }
 }

@@ -31,19 +31,30 @@
 }
 
 .links ul li {
+  position: relative;
   color: $gray-dark;
   background: rgba($white, 0);
   transition: 0.5s $transition;
   cursor: pointer;
+  padding: 0.3em 1.5em;
+  z-index: 2;
+
+  a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+  }
+
   &:before {
     content: "";
     position: absolute;
-    left: 0;
     background: $logo-dark;
     padding: 0.95em 0.2em;
     margin-top: -0.3em;
+    margin-left: -1.9em;
     transition: 0.1s $transition;
     opacity: 0;
+    z-index: 1;
   }
   &:after {
     content: "";
@@ -52,14 +63,15 @@
     background: blue;
     padding: 0.95em 0;
     margin-top: -0.3em;
-    width: 20%;
+    width: 60%;
     background: linear-gradient(
       90deg,
-      rgba($logo-dark, 0.3) 0%,
-      transparent 75%
+      rgba($logo-dark, 0.2) 0%,
+      transparent 90%
     );
     transition: 0.15s $transition;
     opacity: 0;
+    z-index: -1;
   }
 }
 
@@ -71,12 +83,49 @@
   padding: 0.3em 1em 0.3em 3em;
 }
 
+.active_link {
+  width: 100%;
+  margin-left: -1em;
+  font-weight: 600;
+  transition: 0.15s $transition;
+  color: $navy;
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: -0.8em;
+    background: $logo-dark;
+    padding: 0.95em 0.2em;
+    margin-top: -0.3em;
+    transition: 0.1s $transition;
+    opacity: 1;
+    z-index: 1;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    left: -0.4em;
+    background: blue;
+    padding: 0.95em 0;
+    margin-top: -0.3em;
+    width: 60%;
+    background: linear-gradient(
+      90deg,
+      rgba($logo-dark, 0.2) 0%,
+      transparent 90%
+    );
+    transition: 0.15s $transition;
+    opacity: 1;
+    z-index: -1;
+  }
+}
+
 .links ul li:hover {
   transition: 0.15s $transition;
   color: $navy;
-  width: 100%;
+  width: auto;
   margin-left: -2em;
-  padding: 0.3em 1em 0.3em 3em;
+  padding: 0.3em 1.5em 0.3em 3em;
 
   &:before {
     transition: 0.3s $transition;

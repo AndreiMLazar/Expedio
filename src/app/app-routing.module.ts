@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/auth-forms/login/login.component';
 import { SignupComponent } from './pages/auth-forms/signup/signup.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AccountComponent } from './pages/account/account.component';
+import { AccountComponent } from './pages/dashboard/account/account.component';
 import { OverviewComponent } from './pages/dashboard/overview/overview.component';
 
 const routes: Routes = [

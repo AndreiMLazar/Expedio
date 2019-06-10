@@ -17,7 +17,7 @@ import { environment } from '../environments/environment';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { ErrorComponent } from './pages/error/error.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
-import { AccountComponent } from './pages/account/account.component';
+import { AccountComponent } from './pages/dashboard/account/account.component';
 
 @NgModule({
   declarations: [
