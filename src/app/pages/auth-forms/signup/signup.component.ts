@@ -1,32 +1,16 @@
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { NgForm, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { mimeType } from '../../../../validators/mime-type.validator';
 import { AllCountries } from 'src/app/models/all-countries.model';
+import { fadeAnimation } from 'src/app/animations/fade-animation';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['../auth-forms.component.scss'],
-  animations: [
-    trigger('flyInOut', [
-      state('in', style({ transform: 'translateY(0)' })),
-      transition('void => *', [
-        animate(400, keyframes([
-          style({ opacity: 0, transform: 'translateY(5%)', offset: 0 }),
-          style({ opacity: 1, transform: 'translateY(0)', offset: 1.0 })
-        ]))
-      ]),
-      transition('* => void', [
-        animate(400, keyframes([
-          style({ opacity: 0, transform: 'translateY(5%)', offset: 0 }),
-          style({ opacity: 1, transform: 'translateY(0)', offset: 1.0 })
-        ]))
-      ])
-    ])
-  ],
+  animations: [fadeAnimation]
 })
 export class SignupComponent implements OnInit, AfterViewInit {
   state = 'none';

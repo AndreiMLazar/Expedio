@@ -1,9 +1,9 @@
 <div class="dashboard">
   <div *ngIf="userIsAuthenticated" class="left_section">
     <div class="user_section">
-      <div class="user_picture">
-        <img [src]="this.authService.currentUser.avatarPath" onError="this.src='../../../assets/images/avatar.jpeg';"
-          alt="User Profile Image" />
+      <div class="user_picture">'
+        <img [src]="this.env + this.authService.currentUser.avatarPath"
+          onError="this.src='../../../assets/images/avatar.jpeg';" alt="User Profile Image" />
       </div>
 
       <h2 class="user_name">{{ this.authService.currentUser.fullName }}</h2>
@@ -17,7 +17,7 @@
         <hr class="divider_title" />
       </div>
       <ul>
-        <li><a href="">Overview</a></li>
+        <li><a routerLink="overview">Overview</a></li>
         <li><a href="">Gallery</a></li>
         <li><a href="">Contact</a></li>
         <li><a href="">Plan</a></li>
@@ -30,9 +30,9 @@
         <hr class="divider_title" />
       </div>
       <ul>
-        <li><a href="">Settings</a></li>
+        <li><a routerLink="account">Settings</a></li>
         <li><a href="">Change Picture</a></li>
-        <li (click)="logout()"><a href="">Log Out</a></li>
+        <li (click)="logout()"><a>Log Out</a></li>
       </ul>
     </div>
 
@@ -43,8 +43,9 @@
   </div>
 
   <div *ngIf="userIsAuthenticated" class="right_section">
-    <div class="page_section">
-      <app-overview></app-overview>
+    <div class="page_section" [@dashboardAnimation]="dashboardOutlet.isActivated ? dashboardOutlet.activatedRoute : ''"
+      style="position: relative">
+      <router-outlet #dashboardOutlet="outlet"></router-outlet>
     </div>
   </div>
 </div>

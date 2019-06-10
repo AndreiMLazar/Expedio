@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 
 export interface PeriodicElement {
@@ -26,7 +26,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss']
 })
-export class OverviewComponent implements OnInit {
+export class OverviewComponent implements OnInit, AfterViewInit {
+  state = 'none';
 
   constructor() { }
 
@@ -39,4 +40,7 @@ export class OverviewComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
+  ngAfterViewInit() {
+    this.state = 'maximum';
+  }
 }

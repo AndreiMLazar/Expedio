@@ -59,7 +59,7 @@ export class AuthService {
     console.table(signupData);
 
     return this.http.post(AUTH_URL + '/signup', signupData).subscribe(response => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/dashboard/overview']);
     });
   }
 
@@ -80,7 +80,7 @@ export class AuthService {
           const now = new Date();
           const expirationDate = new Date(now.getTime() + (expiresInDuration + this.timeZone) * 1000);
           this.saveAuthData(token, expirationDate, this.userId, response);
-          this.router.navigate(['/']);
+          this.router.navigate(['/dashboard/overview']);
         }
       });
   }
@@ -108,7 +108,7 @@ export class AuthService {
     this.userId = null;
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
   private setAuthTimer(duration: number) {

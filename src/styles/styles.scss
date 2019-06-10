@@ -98,7 +98,7 @@ a {
   background: rgba($white, 0.95);
   border-radius: 10px;
   overflow: auto;
-  filter: drop-shadow(0.2em 0.6em 4.5em rgba($black, 0.34));
+  filter: drop-shadow(0 1.4em 2.5em rgba($black, 0.5));
 }
 
 // Left Section
@@ -112,7 +112,7 @@ a {
   float: left;
   box-sizing: border-box;
   background: rgba($whitest, 0.95);
-  box-shadow: 0.1em 0 3em -0.5em rgba($black, 0.3);
+  box-shadow: 0.1em 0 3em -0.5em rgba($black, 0.2);
   overflow: auto;
 }
 
@@ -162,7 +162,7 @@ a {
   position: absolute;
   right: 1em;
   top: 1em;
-  text-shadow: 0 0 0.4em rgba($red-dark, 0.5);
+  filter: drop-shadow(0 0 0.3em rgba($red-dark, 0.5));
   transition: 0.1s $transition;
 
   mat-icon {
@@ -184,7 +184,7 @@ a {
     top: 0;
     right: -0.4em;
     border-radius: 100%;
-    box-shadow: -0.1em 0.1em 0.4em rgba($red, 0.3);
+    filter: drop-shadow(-0.1em 0.1em 0.4em rgba($red, 0.3));
 
     p {
       color: $whitest;
@@ -248,7 +248,7 @@ table {
   width: 100%;
   border-radius: 4px;
   background: $whitest;
-  box-shadow: 0 0.5em 2em -0.5em rgba($gray-dark, 0.1);
+  filter: drop-shadow(0 1em 1.2em rgba($black, 0.15));
 }
 
 .title_divider {
@@ -259,7 +259,8 @@ table {
 // Angular Material Overrides
 
 .mat-flat-button {
-  box-shadow: 0 0.3em 0.5em rgba($accent, 0.4) !important;
+  box-shadow: none !important;
+  filter: drop-shadow(0 0.25em 0.4em rgba($accent, 0.6));
   text-transform: uppercase;
   letter-spacing: 0.02em;
   text-shadow: 0 0.1em 0.3em rgba($white, 0.3);
@@ -277,7 +278,7 @@ table {
 
 .mat-form-field-flex {
   border: 1px solid $divider;
-  box-shadow: 0 0.5em 1.5em -0.4em rgba($black, 0.1);
+  filter: drop-shadow(0 0 0.2em rgba($black, 0.15));
 }
 
 .mat-form-field.mat-form-field-invalid .mat-form-field-label {
@@ -327,14 +328,14 @@ table {
 }
 
 .mat-form-field-appearance-fill .mat-form-field-flex {
-  padding: 0 0 0 .4em;
+  padding: 0 0 0 0.4em;
 }
 
 .mat-snack-bar-container {
   background: $navy;
   border-radius: 4px;
-  box-shadow: 0 0 .8em rgba($black, 0.8);
-  letter-spacing: .04em;
+  box-shadow: 0 0 0.8em rgba($black, 0.8);
+  letter-spacing: 0.04em;
   color: $white;
   font-weight: 600;
   font-size: 1.2em;
@@ -350,4 +351,15 @@ mat-spinner {
     width: 50px;
     height: 50px;
   }
+}
+
+input:-webkit-autofill {
+  -webkit-animation-name: autofill;
+  -webkit-animation-fill-mode: both;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
 }

@@ -4,11 +4,24 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/auth-forms/login/login.component';
 import { SignupComponent } from './pages/auth-forms/signup/signup.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AccountComponent } from './pages/account/account.component';
+import { OverviewComponent } from './pages/dashboard/overview/overview.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, canActivate: [LoginActivateGuard] },
+  {
+    path: '', redirectTo: '/dashboard', pathMatch: 'full'
+  },
+  {
+    path: 'dashboard', component: DashboardComponent, canActivate: [LoginActivateGuard], children: [
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      { path: 'account', component: AccountComponent },
+      { path: 'overview', component: OverviewComponent },
+      { path: '**', redirectTo: 'overview', pathMatch: 'full' }
+    ]
+  },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent }
+  { path: 'signup', component: SignupComponent },
+  { path: '**', redirectTo: '/dashboard', pathMatch: 'full' }
 ];
 
 @NgModule({

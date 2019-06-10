@@ -1,4 +1,6 @@
-<div class="page-padding">
-  <router-outlet></router-outlet>
-  <app-footer></app-footer>
+<div class="page-padding" [ngStyle]="{'min-height': 'calc(' + clientHeight + 'px - 20vh)'}">
+  <div class="page-animation" [@appAnimation]="appOutlet.isActivated ? appOutlet.activatedRoute : ''">
+    <router-outlet #appOutlet="outlet"></router-outlet>
+    <app-footer></app-footer>
+  </div>
 </div>

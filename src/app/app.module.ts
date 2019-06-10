@@ -17,6 +17,7 @@ import { environment } from '../environments/environment';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { ErrorComponent } from './pages/error/error.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
+import { AccountComponent } from './pages/account/account.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ErrorInterceptor } from './interceptors/error-interceptor';
     OverviewComponent,
     LoginComponent,
     SignupComponent,
-    ErrorComponent
+    ErrorComponent,
+    AccountComponent
   ],
   imports: [
     MaterialModule,

@@ -39,6 +39,7 @@ const storage = multer.diskStorage({
 
 router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {
+    debugger
     const url = req.protocol + "://" + req.hostname;
     console.log(req.body);
     const newUser = new User({
@@ -52,7 +53,7 @@ router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res,
       country: req.body.country,
       postalCode: req.body.postalCode,
       address: req.body.address,
-      avatarPath: url + "/images/avatars/" + req.file.filename
+      avatarPath: req.file.filename
     });
     newUser.save().then(createdUser => {
       res.status(201).json({
