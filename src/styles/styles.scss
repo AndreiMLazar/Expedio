@@ -412,6 +412,7 @@ input:-internal-autofill-selected {
 }
 
 mat-spinner {
+  margin: auto;
   z-index: 999;
   svg {
     width: 50px;

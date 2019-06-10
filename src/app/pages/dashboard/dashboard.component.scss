@@ -10,7 +10,19 @@
   background: $navy;
   width: 80px;
   height: 80px;
+  z-index: 2;
   filter: drop-shadow(0 0.5em 0.5em rgba($black, 0.25));
+}
+
+.blur {
+  content: "";
+  width: 80px;
+  height: 80px;
+  margin-right: -80px;
+  opacity: 0.5;
+  z-index: 1 !important;
+  -webkit-filter: blur(0.8em) saturate(4) !important;
+  filter: blur(1.4em) saturate(4) !important;
 }
 
 .user_role {
@@ -64,11 +76,7 @@
     padding: 0.95em 0;
     margin-top: -0.3em;
     width: 60%;
-    background: linear-gradient(
-      90deg,
-      rgba($logo-dark, 0.2) 0%,
-      transparent 90%
-    );
+    background: linear-gradient(90deg, rgba($logo-dark, 0.2) 0%, transparent 90%);
     transition: 0.15s $transition;
     opacity: 0;
     z-index: -1;
@@ -109,11 +117,7 @@
     padding: 0.95em 0;
     margin-top: -0.3em;
     width: 60%;
-    background: linear-gradient(
-      90deg,
-      rgba($logo-dark, 0.2) 0%,
-      transparent 90%
-    );
+    background: linear-gradient(90deg, rgba($logo-dark, 0.2) 0%, transparent 90%);
     transition: 0.15s $transition;
     opacity: 1;
     z-index: -1;

@@ -22,17 +22,47 @@ export class AccountComponent implements OnInit {
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      email: new FormControl({value: this.authService.currentUser.email, disabled: true}, { validators: [Validators.required] }),
-      password: new FormControl('', { validators: [Validators.required] }),
-      userType: new FormControl(this.authService.currentUser.userType, { validators: [Validators.required] }),
-      fullName: new FormControl(this.authService.currentUser.fullName, { validators: [Validators.required] }),
-      telephone: new FormControl(this.authService.currentUser.telephone, { validators: [Validators.required] }),
-      company: new FormControl(this.authService.currentUser.company, { validators: [Validators.required] }),
-      cui: new FormControl(this.authService.currentUser.cui, { validators: [Validators.required] }),
-      country: new FormControl(this.authService.currentUser.country, { validators: [Validators.required] }),
-      address: new FormControl(this.authService.currentUser.address, { validators: [Validators.minLength(5), Validators.maxLength(80)] }),
-      postalCode: new FormControl(this.authService.currentUser.postalCode, { validators: [Validators.minLength(2), Validators.required] }),
-      avatar: new FormControl(this.authService.currentUser.avatarPath, { asyncValidators: [mimeType] })
+      email: new FormControl({ value: this.authService.currentUser.email, disabled: true }),
+      password: new FormControl('', {
+        validators: [Validators.required],
+        updateOn: 'blur'
+      }),
+      userType: new FormControl(this.authService.currentUser.userType, {
+        validators: [Validators.required],
+        updateOn: 'blur'
+      }),
+      fullName: new FormControl(this.authService.currentUser.fullName, {
+        validators: [Validators.required],
+        updateOn: 'blur'
+      }),
+      telephone: new FormControl(this.authService.currentUser.telephone, {
+        validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(8)],
+        updateOn: 'blur'
+      }),
+      company: new FormControl(this.authService.currentUser.company, {
+        validators: [Validators.required],
+        updateOn: 'blur'
+      }),
+      cui: new FormControl(this.authService.currentUser.cui, {
+        validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(7)],
+        updateOn: 'blur'
+      }),
+      country: new FormControl(this.authService.currentUser.country, {
+        validators: [Validators.required],
+        updateOn: 'blur'
+      }),
+      address: new FormControl(this.authService.currentUser.address, {
+        validators: [Validators.minLength(5), Validators.maxLength(80)],
+        updateOn: 'blur'
+      }),
+      postalCode: new FormControl(this.authService.currentUser.postalCode, {
+        validators: [Validators.minLength(2), Validators.required],
+        updateOn: 'blur'
+      }),
+      avatar: new FormControl(this.authService.currentUser.avatarPath, {
+        asyncValidators: [mimeType],
+        updateOn: 'blur'
+      })
     });
   }
 
