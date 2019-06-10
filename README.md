@@ -1,3 +1,5 @@
+![Expedio App](https://i.ibb.co/WWTzmKC/app.jpg)
+
 # Expedio
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
