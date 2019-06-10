@@ -1,43 +1,10 @@
-const express = require("express");
-const multer = require("multer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 // User Model
-const User = require("../models/user");
+const User = require("../models/user.model");
 
-// Router
-const router = express.Router();
-
-const MIME_TYPE_MAP = {
-  'image/png': 'png',
-  'image/jpeg': 'jpeg',
-  'image/jpg': 'jpg'
-}
-
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    const isValid = MIME_TYPE_MAP[file.mimetype];
-    let error = new Error("Invalid mime type");
-    if (isValid) {
-      error = null;
-    }
-    callback(error, "backend/images/avatars");
-  },
-
-  filename: (req, file, cb) => {
-    const name = file.originalname
-      .toLowerCase()
-      .split(" ")
-      .join("-");
-    const ext = MIME_TYPE_MAP[file.mimetype];
-
-    // cb(null, name + "-" + Date.now() + "." + ext);
-    cb(null, name);
-  }
-});
-
-router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res, next) => {
+exports.createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {
     const url = req.protocol + "://" + req.get("host");
     console.log(req.body);
@@ -72,9 +39,9 @@ router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res,
       message: "Signup failed"
     });
   });
-});
+}
 
-router.post("/login", (req, res, next) => {
+exports.loginUser = (req, res, next) => {
   let fetchedUser;
   User.findOne({ email: req.body.email })
     .then(user => {
@@ -119,9 +86,9 @@ router.post("/login", (req, res, next) => {
         message: "Auth failed"
       });
     });
-});
+}
 
-router.post("/update", multer({ storage: storage }).single("avatar"), (req, res, next) => {
+exports.updateUser = (req, res, next) => {
   User.findOne({ _id: req.body.userId })
     .then(user => {
       bcrypt.compare(req.body.password, user.password).then(result => {
@@ -158,6 +125,4 @@ router.post("/update", multer({ storage: storage }).single("avatar"), (req, res,
         }
       })
     })
-});
-
-module.exports = router;
+}

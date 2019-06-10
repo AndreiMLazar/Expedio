@@ -10,7 +10,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 // Routes
-const userRoute = require("./routes/user");
+const userRoute = require("./routes/user.route");
 
 // Environment Variables
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
