@@ -18,6 +18,7 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { ErrorComponent } from './pages/error/error.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
 import { AccountComponent } from './pages/dashboard/account/account.component';
+import { ClientFormComponent } from './pages/dashboard/client-form/client-form.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AccountComponent } from './pages/dashboard/account/account.component';
     LoginComponent,
     SignupComponent,
     ErrorComponent,
-    AccountComponent
+    AccountComponent,
+    ClientFormComponent
   ],
   imports: [
     MaterialModule,

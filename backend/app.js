@@ -4,6 +4,10 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const CORS = require("cors")
 
+// Swagger UI
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 // Mongoose Options
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -37,6 +41,9 @@ mongoose
   .catch(() => {
     console.log("Connection failed!");
   });
+
+// Swagger
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Api URLs
 app.use("/api/auth", userRoute);

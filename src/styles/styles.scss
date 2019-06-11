@@ -7,7 +7,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  font-family: $sans-serif;
+  font-family: $sans-serif !important;
   font-size: 10px;
   color: $gray-dark;
   text-rendering: optimizeLegibility;
@@ -71,12 +71,14 @@ a {
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: $accent;
   background: linear-gradient($logo-dark 0%, $accent 100%);
+  border-radius: 10px;
 }
 
 ::-moz-selection {
@@ -325,7 +327,7 @@ table {
 }
 
 .mat-form-field-flex {
-  border: 1px solid $divider;
+  border: 1px solid rgba($divider, 0.45);
   padding: 2px 4px;
   filter: drop-shadow(0 0 0.2em rgba($black, 0.15));
 }
@@ -403,8 +405,67 @@ table {
   color: $white;
 }
 
+.mat-button,
+.mat-flat-button,
+.mat-icon-button,
+.mat-stroked-button {
+  margin-right: 0.5em !important;
+}
+
+.mat-button.mat-warn,
+.mat-icon-button.mat-warn,
+.mat-stroked-button.mat-warn {
+  color: $red;
+}
+
 .mat-input-element:disabled {
   color: $white;
+}
+
+.mat-expansion-panel-header-description {
+  flex-grow: 0 !important;
+  color: $gray;
+}
+
+.mat-content .mat-icon {
+  margin-right: 0.5em;
+}
+
+.mat-expansion-panel-header-title {
+  color: $accent;
+  font-weight: 600;
+}
+
+.mat-expansion-panel {
+  box-shadow: 0 0 3em -0.5em rgba($black, 0.2) !important;
+}
+
+.mat-expansion-panel-header-description,
+.mat-expansion-panel-header-title {
+  line-height: 1.6em;
+  transition: 0.1s $transition;
+}
+
+.mat-expansion-panel-header:hover {
+  background: rgba($gray, 0.15) !important;
+  transition: 0.1s $transition;
+}
+
+mat-accordion mat-expansion-panel {
+  mat-expansion-panel-header {
+    height: 48px;
+  }
+  .mat-expansion-panel-content {
+    height: 0;
+  }
+  &.mat-expanded {
+    mat-expansion-panel-header {
+      height: 48px; // height may be different for you
+    }
+    .mat-expansion-panel-content {
+      height: auto;
+    }
+  }
 }
 
 input:-internal-autofill-selected {

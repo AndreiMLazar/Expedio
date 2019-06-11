@@ -7,7 +7,6 @@ const User = require("../models/user.model");
 exports.createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {
     const url = req.protocol + "://" + req.get("host");
-    console.log(req.body);
     const newUser = new User({
       email: req.body.email,
       password: hash,
@@ -25,8 +24,7 @@ exports.createUser = (req, res, next) => {
       res.status(201).json({
         message: "User created",
         result: createdUser
-      },
-        console.log(createdUser));
+      })
     }).catch(err => {
       console.log(err);
       return res.status(500).json({

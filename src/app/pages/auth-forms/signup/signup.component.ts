@@ -3,7 +3,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { mimeType } from '../../../../validators/mime-type.validator';
-import { AllCountries } from 'src/app/models/all-countries.model';
+import { CountriesList } from 'src/app/models/lists/countries-list';
 import { fadeAnimation } from 'src/app/animations/fade-animation';
 
 @Component({
@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
   signupForm: FormGroup;
   user = new User();
 
-  allCountries = AllCountries.countriesList;
+  allCountries = CountriesList.countriesList;
   constructor(public authService: AuthService) { }
 
   ngOnInit() {

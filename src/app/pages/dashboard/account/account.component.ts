@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
-import { AllCountries } from 'src/app/models/all-countries.model';
+import { CountriesList } from 'src/app/models/lists/countries-list';
 import { AuthService } from 'src/app/services/auth.service';
 import { mimeType } from 'src/validators/mime-type.validator';
 
@@ -17,7 +17,7 @@ export class AccountComponent implements OnInit {
   signupForm: FormGroup;
   user = new User();
 
-  allCountries = AllCountries.countriesList;
+  allCountries = CountriesList.countriesList;
   constructor(public authService: AuthService) { }
 
   ngOnInit() {
@@ -82,7 +82,7 @@ export class AccountComponent implements OnInit {
 
   onUpdate() {
     if (this.signupForm.invalid) {
-      // return;
+      return;
     }
     this.isLoading = true;
 

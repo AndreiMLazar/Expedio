@@ -1,6 +1,15 @@
 {
   "name": "expedio",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreiMLazar/Expedio.git"
+  },
+  "homepage": "https://github.com/AndreiMLazar/Expedio#readme",
+  "keywords": [
+    "Expedio"
+  ],
+  "author": "Andrei Lazar (https://www.linkedin.com/in/mihai-andrei-lazar-3b10227b/)",
   "scripts": {
     "ng": "ng",
     "start": "node ./backend/server.js --no-deprecation",

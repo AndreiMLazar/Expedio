@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
 
   constructor(private swUpdate: SwUpdate, private authService: AuthService) {
     this.clientHeight = window.innerHeight;
-    console.log(this.clientHeight)
   }
 
   ngOnInit(): void {

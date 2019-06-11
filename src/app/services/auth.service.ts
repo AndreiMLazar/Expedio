@@ -1,12 +1,11 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { UserLoginData } from '../interfaces/user-login-data.interface';
-import { User } from '../models/user.model';
 import { CurrentUser } from '../models/current-user.model';
-import { UpdatedUserResponse } from '../models/updated-user-response';
+import { UpdatedUserResponse } from '../models/responses/updated-user-response';
 
 const AUTH_URL = environment.apiURL + '/auth';
 
@@ -57,7 +56,7 @@ export class AuthService {
     signupData.append('country', country);
     signupData.append('postalCode', postalCode);
 
-    return this.http.post(AUTH_URL + '/signup', signupData).subscribe(response => {
+    return this.http.post(AUTH_URL + '/signup', signupData).subscribe(() => {
       this.router.navigate(['/login']);
     });
   }

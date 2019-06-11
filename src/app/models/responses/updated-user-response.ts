@@ -1,4 +1,4 @@
-import { CurrentUser } from './current-user.model';
+import { CurrentUser } from '../current-user.model';
 
 export class UpdatedUserResponse {
   message: string;

@@ -6,6 +6,7 @@ import { SignupComponent } from './pages/auth-forms/signup/signup.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AccountComponent } from './pages/dashboard/account/account.component';
 import { OverviewComponent } from './pages/dashboard/overview/overview.component';
+import { ClientFormComponent } from './pages/dashboard/client-form/client-form.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       { path: 'account', component: AccountComponent },
       { path: 'overview', component: OverviewComponent },
+      { path: 'client-form', component: ClientFormComponent },
       { path: '**', redirectTo: 'overview', pathMatch: 'full' }
     ]
   },

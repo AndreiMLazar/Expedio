@@ -3,11 +3,6 @@ language: node_js
 node_js:
   - "10"
 
-branches:
-  only:
-    - develop
-    - master
-
 cache:
   directories:
     - node_modules
@@ -15,6 +10,7 @@ cache:
 install:
   - npm install -g @angular/cli
   - npm install
+  - cd backend && npm install
 
 script:
   - npm run prod
@@ -28,6 +24,7 @@ deploy:
     local_dir: backend
     on:
       repo: AndreiMLazar/Expedio
+      all_branches: true
 
 after_deploy:
   - echo "Expedio Deployed"
