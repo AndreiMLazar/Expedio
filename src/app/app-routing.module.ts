@@ -7,6 +7,10 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AccountComponent } from './pages/dashboard/account/account.component';
 import { OverviewComponent } from './pages/dashboard/overview/overview.component';
 import { ClientFormComponent } from './pages/dashboard/client-form/client-form.component';
+import { MyCommandsComponent } from './pages/dashboard/my-commands/my-commands.component';
+import { ReportsComponent } from './pages/dashboard/reports/reports.component';
+import { ContactComponent } from './pages/dashboard/contact/contact.component';
+import { ChangePictureComponent } from './pages/dashboard/change-picture/change-picture.component';
 
 const routes: Routes = [
   {
@@ -15,9 +19,13 @@ const routes: Routes = [
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [LoginActivateGuard], children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      { path: 'account', component: AccountComponent },
       { path: 'overview', component: OverviewComponent },
+      { path: 'my-commands', component: MyCommandsComponent },
       { path: 'client-form', component: ClientFormComponent },
+      { path: 'reports', component: ReportsComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: 'account', component: AccountComponent },
+      { path: 'change-picture', component: ChangePictureComponent },
       { path: '**', redirectTo: 'overview', pathMatch: 'full' }
     ]
   },

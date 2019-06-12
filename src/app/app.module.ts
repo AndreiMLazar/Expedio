@@ -19,6 +19,10 @@ import { ErrorComponent } from './pages/error/error.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
 import { AccountComponent } from './pages/dashboard/account/account.component';
 import { ClientFormComponent } from './pages/dashboard/client-form/client-form.component';
+import { MyCommandsComponent } from './pages/dashboard/my-commands/my-commands.component';
+import { ContactComponent } from './pages/dashboard/contact/contact.component';
+import { ReportsComponent } from './pages/dashboard/reports/reports.component';
+import { ChangePictureComponent } from './pages/dashboard/change-picture/change-picture.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,11 @@ import { ClientFormComponent } from './pages/dashboard/client-form/client-form.c
     SignupComponent,
     ErrorComponent,
     AccountComponent,
-    ClientFormComponent
+    ClientFormComponent,
+    MyCommandsComponent,
+    ContactComponent,
+    ReportsComponent,
+    ChangePictureComponent
   ],
   imports: [
     MaterialModule,

@@ -10,10 +10,10 @@ cache:
 install:
   - npm install -g @angular/cli
   - npm install
-  - cd backend && npm install
 
 script:
   - npm run prod
+  - cd backend && npm install && cd ..
 
 deploy:
   - provider: heroku

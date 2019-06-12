@@ -7,9 +7,9 @@ export class ClientFormModel {
   fullName: string;
   address: string;
   country: string;
+  instructions: string;
   recipient: Recipient;
   loadingPlace: LoadingPlace;
   deposit: Deposit;
-  instructions: string;
   packagesList: Package[];
 }

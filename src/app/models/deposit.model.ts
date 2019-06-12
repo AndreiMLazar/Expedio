@@ -1,6 +1,5 @@
 export class Deposit {
   name: string;
-  adress: string;
+  address: string;
   country: string;
-  opening: string;
 }

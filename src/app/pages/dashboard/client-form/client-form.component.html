@@ -15,8 +15,8 @@
 <form [formGroup]="clientForm" (submit)="onClientForm()" *ngIf="!isLoading">
 
 
-  <mat-accordion class="example-headers-align">
-    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+  <mat-accordion>
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>account_circle</mat-icon>
@@ -29,7 +29,7 @@
 
       <mat-form-field>
         <input formControlName="clientFullName" matInput type="text" autocomplete="new-password"
-          placeholder="Your Full Name" />
+          placeholder="Client Name" />
         <mat-error *ngIf="clientForm.get('clientFullName').invalid">Your full name is <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -38,7 +38,7 @@
       </mat-form-field>
       <mat-form-field>
         <input formControlName="clientAddress" matInput type="text" autocomplete="new-password"
-          placeholder="Company Address" />
+          placeholder="Client Address" />
       </mat-form-field>
       <mat-form-field fxFlex>
         <mat-select formControlName="clientCountry" placeholder="Client Country">
@@ -47,12 +47,9 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-action-row>
-        <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
-      </mat-action-row>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>explore</mat-icon>
@@ -83,13 +80,9 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
-      </mat-action-row>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>reply</mat-icon>
@@ -115,13 +108,9 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
-      </mat-action-row>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>airport_shuttle</mat-icon>
@@ -147,13 +136,9 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-flat-button color="primary" (click)="nextStep()">Next</button>
-      </mat-action-row>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)">
+    <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>business_center</mat-icon>
@@ -163,32 +148,51 @@
           Packages you want to transport
         </mat-panel-description>
       </mat-expansion-panel-header>
-
-      <mat-form-field fxFlex>
-        <mat-select formControlName="packageMode" placeholder="Package Mode">
-          <mat-option *ngFor="let packageMode of allPackageModes" [value]="packageMode.name">
-            {{ packageMode.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
-        <input formControlName="packageType" matInput type="text" autocomplete="new-password"
-          placeholder="Package Type" />
-      </mat-form-field>
-      <mat-form-field>
-        <input formControlName="packageWeight" matInput type="text" autocomplete="new-password"
-          placeholder="Package Weight" />
-      </mat-form-field>
-      <mat-form-field>
-        <input formControlName="packageVolume" matInput type="text" autocomplete="new-password"
-          placeholder="Package Volume" />
-      </mat-form-field>
-
-      <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-flat-button color="primary" class="submit_button" type="submit">Submit</button>
-      </mat-action-row>
+      <button mat-stroked-button color="primary" (click)="addPackage()" type="button">Add Package</button>
+      <div class="package" formArrayName="packages"
+        *ngFor="let package of clientForm.controls.packages?.value | slice:1; let i = index;">
+        <div [formGroupName]="i">
+          <mat-chip-list aria-label="Packages">
+            <mat-chip color="accent" selected>Package {{ i + 1 }}</mat-chip>
+          </mat-chip-list>
+          <mat-form-field fxFlex>
+            <mat-select formControlName="packageMode" placeholder="Package Mode">
+              <mat-option *ngFor="let packageMode of allPackageModes" [value]="packageMode.name">
+                {{ packageMode.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="packageType" matInput type="text" autocomplete="new-password"
+              placeholder="Package Type" />
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="packageWeight" matInput type="text" autocomplete="new-password"
+              placeholder="Package Weight" />
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="packageVolume" matInput type="text" autocomplete="new-password"
+              placeholder="Package Volume" />
+          </mat-form-field>
+        </div>
+      </div>
     </mat-expansion-panel>
 
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>short_text</mat-icon>
+          Details
+        </mat-panel-title>
+        <mat-panel-description>
+          Instructions that need to be executed
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <textarea formControlName="instructions" matInput placeholder="Instructions"></textarea>
+      </mat-form-field>
+    </mat-expansion-panel>
   </mat-accordion>
+  <button mat-flat-button color="primary" class="submit_button" type="submit">Submit</button>
 </form>
