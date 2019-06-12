@@ -1,11 +1,11 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { UserLoginData } from '../interfaces/user-login-data.interface';
-import { User } from '../models/user.model';
 import { CurrentUser } from '../models/current-user.model';
+import { UpdatedUserResponse } from '../models/responses/updated-user-response';
 
 const AUTH_URL = environment.apiURL + '/auth';
 
@@ -56,10 +56,31 @@ export class AuthService {
     signupData.append('country', country);
     signupData.append('postalCode', postalCode);
 
-    console.table(signupData);
+    return this.http.post(AUTH_URL + '/signup', signupData).subscribe(() => {
+      this.router.navigate(['/login']);
+    });
+  }
 
-    return this.http.post(AUTH_URL + '/signup', signupData).subscribe(response => {
-      this.router.navigate(['/dashboard/overview']);
+  updateUser(email: string, password: string, fullName: string, userType: string,
+             telephone: string, company: string, cui: string, country: string,
+             address: string, postalCode: string, avatar: File) {
+    const updateData = new FormData();
+    updateData.append('userId', localStorage.getItem('userId'));
+    updateData.append('email', email);
+    updateData.append('password', password);
+    updateData.append('fullName', fullName);
+    updateData.append('userType', userType);
+    updateData.append('telephone', telephone);
+    updateData.append('company', company);
+    updateData.append('address', address);
+    updateData.append('avatar', avatar);
+    updateData.append('cui', cui);
+    updateData.append('country', country);
+    updateData.append('postalCode', postalCode);
+
+    return this.http.post<UpdatedUserResponse>(AUTH_URL + '/update', updateData).subscribe(response => {
+      localStorage.setItem('user', JSON.stringify(response.result));
+      this.currentUser = response.result;
     });
   }
 

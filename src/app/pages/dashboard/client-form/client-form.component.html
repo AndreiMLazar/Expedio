@@ -1,0 +1,198 @@
+<div class="top_bar">
+  <div class="page_title">
+    <hr class="" />
+    <h1 class="page_title_h1">Client Form</h1>
+  </div>
+  <div class="notifications">
+    <mat-icon aria-hidden="false" aria-label="Notification">
+      notifications_active</mat-icon>
+    <div class="notifications_number">
+      <p>2</p>
+    </div>
+  </div>
+</div>
+<hr class="title_divider" />
+<form [formGroup]="clientForm" (submit)="onClientForm()" *ngIf="!isLoading">
+
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>account_circle</mat-icon>
+          Your Details
+        </mat-panel-title>
+        <mat-panel-description>
+          Your name, address and country
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <input formControlName="clientFullName" matInput type="text" autocomplete="new-password"
+          placeholder="Client Name" />
+        <mat-error *ngIf="clientForm.get('clientFullName').invalid">Your full name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="clientCNP" matInput type="text" autocomplete="new-password" placeholder="Client CNP" />
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="clientAddress" matInput type="text" autocomplete="new-password"
+          placeholder="Client Address" />
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="clientCountry" placeholder="Client Country">
+          <mat-option *ngFor="let country of this.allCountries" [value]="country.name">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>explore</mat-icon>
+          Recipient
+        </mat-panel-title>
+        <mat-panel-description>
+          Recipient name, cnp, address and country
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input formControlName="recipientFullName" matInput type="text" autocomplete="new-password"
+          placeholder="Recipient Full Name" />
+        <mat-error *ngIf="clientForm.get('recipientFullName').invalid">Recipient name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="recipientCNP" matInput type="text" autocomplete="new-password"
+          placeholder="Recipient CNP" />
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="recipientAddress" matInput type="text" autocomplete="new-password"
+          placeholder="Recipient Address" />
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="recipientCountry" placeholder="Recipient Country">
+          <mat-option *ngFor="let country of allCountries" [value]="country.name">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>reply</mat-icon>
+          Loading Place
+        </mat-panel-title>
+        <mat-panel-description>
+          The place where the packages will be found
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input formControlName="loadingAddress" matInput type="text" autocomplete="new-password"
+          placeholder="Loading Address" />
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="loadingCountry" placeholder="Loading Country">
+          <mat-option *ngFor="let country of allCountries" [value]="country.name">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="loadingDate" matInput [matDatepicker]="picker" placeholder="Loading Date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>airport_shuttle</mat-icon>
+          Deposit
+        </mat-panel-title>
+        <mat-panel-description>
+          Deposit name, location and country
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input formControlName="depositName" matInput type="text" autocomplete="new-password"
+          placeholder="Deposit Name" />
+        <mat-error *ngIf="clientForm.get('depositName').invalid">Deposit name is <strong>required</strong></mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="depositAddress" matInput type="text" autocomplete="new-password"
+          placeholder="Deposit Address" />
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="depositCountry" placeholder="Deposit Country">
+          <mat-option *ngFor="let country of allCountries" [value]="country.name">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>business_center</mat-icon>
+          Package
+        </mat-panel-title>
+        <mat-panel-description>
+          Packages you want to transport
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <button mat-stroked-button color="primary" (click)="addPackage()" type="button">Add Package</button>
+      <div class="package" formArrayName="packages"
+        *ngFor="let package of clientForm.controls.packages?.value | slice:1; let i = index;">
+        <div [formGroupName]="i">
+          <mat-chip-list aria-label="Packages">
+            <mat-chip color="accent" selected>Package {{ i + 1 }}</mat-chip>
+          </mat-chip-list>
+          <mat-form-field fxFlex>
+            <mat-select formControlName="packageMode" placeholder="Package Mode">
+              <mat-option *ngFor="let packageMode of allPackageModes" [value]="packageMode.name">
+                {{ packageMode.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="packageType" matInput type="text" autocomplete="new-password"
+              placeholder="Package Type" />
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="packageWeight" matInput type="text" autocomplete="new-password"
+              placeholder="Package Weight" />
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="packageVolume" matInput type="text" autocomplete="new-password"
+              placeholder="Package Volume" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>short_text</mat-icon>
+          Details
+        </mat-panel-title>
+        <mat-panel-description>
+          Instructions that need to be executed
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <textarea formControlName="instructions" matInput placeholder="Instructions"></textarea>
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <button mat-flat-button color="primary" class="submit_button" type="submit">Submit</button>
+</form>

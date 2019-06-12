@@ -1,6 +1,6 @@
 
 
-export class AllCountries {
+export class CountriesList {
   static countriesList = [
     {
       name: 'Afghanistan'

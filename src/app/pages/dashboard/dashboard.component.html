@@ -1,8 +1,10 @@
 <div class="dashboard">
   <div *ngIf="userIsAuthenticated" class="left_section">
     <div class="user_section">
-      <div class="user_picture">'
-        <img [src]="this.env + this.authService.currentUser.avatarPath"
+      <div class="user_picture">
+        <img class="blur" [src]="this.authService.currentUser.avatarPath"
+          onError="this.src='../../../assets/images/avatar.jpeg';" alt="User Profile Blur Image" />
+        <img [src]="this.authService.currentUser.avatarPath"
           onError="this.src='../../../assets/images/avatar.jpeg';" alt="User Profile Image" />
       </div>
 
@@ -17,12 +19,13 @@
         <hr class="divider_title" />
       </div>
       <ul>
-        <li><a routerLink="overview">Overview</a></li>
-        <li><a href="">Gallery</a></li>
-        <li><a href="">Contact</a></li>
+        <li><a routerLink="overview" routerLinkActive="active_link">Overview</a></li>
+        <li><a routerLink="my-commands" routerLinkActive="active_link">My Commands</a></li>
+        <li><a routerLink="client-form" routerLinkActive="active_link">Create Command</a></li>
         <li><a href="">Plan</a></li>
-        <li><a href="">Reports</a></li>
+        <li><a routerLink="reports" routerLinkActive="active_link">Reports</a></li>
         <li><a href="">Reviews</a></li>
+        <li><a routerLink="contact" routerLinkActive="active_link">Contact</a></li>
       </ul>
       <br />
       <div class="links_section">
@@ -30,8 +33,8 @@
         <hr class="divider_title" />
       </div>
       <ul>
-        <li><a routerLink="account">Settings</a></li>
-        <li><a href="">Change Picture</a></li>
+        <li><a routerLink="account" routerLinkActive="active_link">Settings</a></li>
+        <li><a routerLink="change-picture" routerLinkActive="active_link">Change Picture</a></li>
         <li (click)="logout()"><a>Log Out</a></li>
       </ul>
     </div>

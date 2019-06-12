@@ -3,7 +3,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { mimeType } from '../../../../validators/mime-type.validator';
-import { AllCountries } from 'src/app/models/all-countries.model';
+import { CountriesList } from 'src/app/models/lists/countries-list';
 import { fadeAnimation } from 'src/app/animations/fade-animation';
 
 @Component({
@@ -20,22 +20,55 @@ export class SignupComponent implements OnInit, AfterViewInit {
   signupForm: FormGroup;
   user = new User();
 
-  allCountries = AllCountries.countriesList;
+  allCountries = CountriesList.countriesList;
   constructor(public authService: AuthService) { }
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      email: new FormControl('', { validators: [Validators.required] }),
-      password: new FormControl('', { validators: [Validators.required] }),
-      userType: new FormControl('client', { validators: [Validators.required] }),
-      fullName: new FormControl('', { validators: [Validators.required] }),
-      telephone: new FormControl('', { validators: [Validators.required] }),
-      company: new FormControl('', { validators: [Validators.required] }),
-      cui: new FormControl('', { validators: [Validators.required] }),
-      country: new FormControl('', { validators: [Validators.required] }),
-      address: new FormControl('', { validators: [Validators.minLength(5), Validators.maxLength(80)] }),
-      postalCode: new FormControl('', { validators: [Validators.minLength(2), Validators.required] }),
-      avatar: new FormControl('', { asyncValidators: [mimeType] })
+      email: new FormControl('', {
+        validators: [Validators.required, Validators.email],
+        updateOn: 'blur'
+      }),
+      password: new FormControl('', {
+        validators: [Validators.required, Validators.minLength(4)],
+        updateOn: 'blur'
+      }),
+      userType: new FormControl('client', {
+        validators: [Validators.required],
+        updateOn: 'blur'
+      }),
+      fullName: new FormControl('', {
+        validators: [Validators.required],
+        updateOn: 'blur'
+      }),
+      telephone: new FormControl('', {
+        validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(8)],
+        updateOn: 'blur'
+      }),
+      company: new FormControl('', {
+        validators: [Validators.required],
+        updateOn: 'blur'
+      }),
+      cui: new FormControl('', {
+        validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(7)],
+        updateOn: 'blur'
+      }),
+      country: new FormControl('Romania', {
+        validators: [Validators.required],
+        updateOn: 'blur'
+      }),
+      address: new FormControl('', {
+        validators: [Validators.minLength(5), Validators.maxLength(80)],
+        updateOn: 'blur'
+      }),
+      postalCode: new FormControl('', {
+        validators: [Validators.minLength(2), Validators.required],
+        updateOn: 'blur'
+      }),
+      avatar: new FormControl('', {
+        asyncValidators: [mimeType],
+        updateOn: 'blur'
+      })
     });
   }
 
@@ -59,7 +92,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
 
   onSignup() {
     if (this.signupForm.invalid) {
-      // return;
+      return;
     }
     this.isLoading = true;
 
@@ -77,6 +110,7 @@ export class SignupComponent implements OnInit, AfterViewInit {
       this.signupForm.value.avatar
     );
 
+    this.isLoading = false;
     this.signupForm.reset();
   }
 }

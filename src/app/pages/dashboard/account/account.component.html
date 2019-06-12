@@ -1,0 +1,70 @@
+<div class="top_bar">
+  <div class="page_title">
+    <hr class="" />
+    <h1 class="page_title_h1">Account Settings</h1>
+  </div>
+  <div class="notifications">
+    <mat-icon aria-hidden="false" aria-label="Notification">
+      notifications_active</mat-icon
+    >
+    <div class="notifications_number"><p>2</p></div>
+  </div>
+</div>
+<hr class="title_divider" />
+
+
+<form [formGroup]="signupForm" class="credentials_form" (submit)="onUpdate()" *ngIf="!isLoading">
+  <mat-radio-group aria-label="Tipul contului" formControlName="userType" required>
+    <mat-radio-button value="client">Client</mat-radio-button>
+    <mat-radio-button value="firma">Firma de Transport</mat-radio-button>
+  </mat-radio-group>
+  <mat-form-field>
+    <input formControlName="email" matInput type="email" autocomplete="new-password" placeholder="Mail" required />
+    <mat-error *ngIf="signupForm.get('email').invalid">Please enter a valid email address</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input formControlName="password" matInput type="password" autocomplete="new-password" placeholder="Confirm "
+      required />
+    <mat-error *ngIf="signupForm.get('email').invalid">Please enter your password</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input formControlName="fullName" matInput type="text" autocomplete="new-password" placeholder="Your Full Name"
+      required />
+    <mat-error *ngIf="signupForm.get('fullName').invalid">Your full name is <strong>required</strong></mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input formControlName="telephone" matInput type="text" autocomplete="new-password"
+      placeholder="Your Telephone Number" required />
+    <mat-error *ngIf="signupForm.get('telephone').invalid">Your telephone number is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input formControlName="company" matInput type="text" autocomplete="new-password" placeholder="Company" required />
+  </mat-form-field>
+  <mat-form-field>
+    <input formControlName="cui" matInput type="text" autocomplete="new-password" placeholder="CUI" required />
+  </mat-form-field>
+  <mat-form-field fxFlex>
+    <mat-select formControlName="country" placeholder="Country" required>
+      <mat-option *ngFor="let country of allCountries" [value]="country.name">
+        {{ country.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input formControlName="address" matInput type="text" autocomplete="new-password" placeholder="Company Address"
+      required minlength="5" maxlength="80" />
+  </mat-form-field>
+  <mat-form-field>
+    <input formControlName="postalCode" matInput type="text" autocomplete="new-password" placeholder="Postal Code"
+      required minlength="2" />
+  </mat-form-field>
+  <button class="upload_image_button" mat-stroked-button type="button" (click)="filePicker.click()">Upload
+    Avatar</button>
+  <input class="file_upload" name="avatar" type="file" #filePicker (change)="onImagePicked($event)">
+  <div class="avatar_preview" *ngIf="avatarPreview !== '' && avatarPreview && signupForm.get('avatar').valid">
+    <img [src]="avatarPreview" [alt]="signupForm.value.fullName + ' Avatar'">
+  </div>
+  <br />
+  <button class="submit_button" mat-flat-button type="submit">Save</button>
+</form>

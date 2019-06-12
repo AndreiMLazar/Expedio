@@ -17,7 +17,12 @@ import { environment } from '../environments/environment';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { ErrorComponent } from './pages/error/error.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
-import { AccountComponent } from './pages/account/account.component';
+import { AccountComponent } from './pages/dashboard/account/account.component';
+import { ClientFormComponent } from './pages/dashboard/client-form/client-form.component';
+import { MyCommandsComponent } from './pages/dashboard/my-commands/my-commands.component';
+import { ContactComponent } from './pages/dashboard/contact/contact.component';
+import { ReportsComponent } from './pages/dashboard/reports/reports.component';
+import { ChangePictureComponent } from './pages/dashboard/change-picture/change-picture.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,12 @@ import { AccountComponent } from './pages/account/account.component';
     LoginComponent,
     SignupComponent,
     ErrorComponent,
-    AccountComponent
+    AccountComponent,
+    ClientFormComponent,
+    MyCommandsComponent,
+    ContactComponent,
+    ReportsComponent,
+    ChangePictureComponent
   ],
   imports: [
     MaterialModule,

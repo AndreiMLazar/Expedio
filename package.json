@@ -1,16 +1,25 @@
 {
   "name": "expedio",
-  "version": "1.1.5",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreiMLazar/Expedio.git"
+  },
+  "homepage": "https://github.com/AndreiMLazar/Expedio#readme",
+  "keywords": [
+    "Expedio"
+  ],
+  "author": "Andrei Lazar (https://www.linkedin.com/in/mihai-andrei-lazar-3b10227b/)",
   "scripts": {
     "ng": "ng",
-    "start": "node ./server.js --no-deprecation",
+    "start": "node ./backend/server.js --no-deprecation",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "backend": "nodemon ./server.js --no-deprecation",
-    "backend-debug": "nodemon ./server.js --inspect --no-deprecation",
-    "node-debug": "node --nolazy --inspect-brk=9229 ./server.js --no-deprecation",
+    "backend": "nodemon ./backend/server.js --no-deprecation",
+    "backend-debug": "nodemon ./backend/server.js --inspect --no-deprecation",
+    "node-debug": "node --nolazy --inspect-brk=9229 ./backend/server.js --no-deprecation",
     "prod": "ng build --prod && npm run ngsw-config && npm run ngsw-copy",
     "ngsw-config": "node_modules/.bin/ngsw-config backend/expedioUI ngsw-config.json",
     "ngsw-copy": "cp node_modules/@angular/service-worker/ngsw-worker.js backend/expedioUI/"

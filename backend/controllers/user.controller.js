@@ -1,47 +1,12 @@
-const express = require("express");
-const multer = require("multer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 // User Model
-const User = require("../models/user");
+const User = require("../models/user.model");
 
-// Router
-const router = express.Router();
-
-const MIME_TYPE_MAP = {
-  'image/png': 'png',
-  'image/jpeg': 'jpeg',
-  'image/jpg': 'jpg'
-}
-
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    const isValid = MIME_TYPE_MAP[file.mimetype];
-    let error = new Error("Invalid mime type");
-    if (isValid) {
-      error = null;
-    }
-    callback(error, "backend/images/avatars");
-  },
-
-  filename: (req, file, cb) => {
-    const name = file.originalname
-      .toLowerCase()
-      .split(" ")
-      .join("-");
-    const ext = MIME_TYPE_MAP[file.mimetype];
-
-    // cb(null, name + "-" + Date.now() + "." + ext);
-    cb(null, name);
-  }
-});
-
-router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res, next) => {
+exports.createUser = (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {
-    debugger
-    const url = req.protocol + "://" + req.hostname;
-    console.log(req.body);
+    const url = req.protocol + "://" + req.get("host");
     const newUser = new User({
       email: req.body.email,
       password: hash,
@@ -53,17 +18,17 @@ router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res,
       country: req.body.country,
       postalCode: req.body.postalCode,
       address: req.body.address,
-      avatarPath: req.file.filename
+      avatarPath: url + "/images/avatars/" + req.file.filename,
     });
     newUser.save().then(createdUser => {
       res.status(201).json({
         message: "User created",
         result: createdUser
-      });
+      })
     }).catch(err => {
       console.log(err);
       return res.status(500).json({
-        message: "User already exists"
+        message: "User created"
       });
     });
   }).catch(err => {
@@ -72,9 +37,9 @@ router.post("/signup", multer({ storage: storage }).single("avatar"), (req, res,
       message: "Signup failed"
     });
   });
-});
+}
 
-router.post("/login", (req, res, next) => {
+exports.loginUser = (req, res, next) => {
   let fetchedUser;
   User.findOne({ email: req.body.email })
     .then(user => {
@@ -101,6 +66,7 @@ router.post("/login", (req, res, next) => {
         token: token,
         expiresIn: 3600,
         userId: fetchedUser._id,
+        email: fetchedUser.email,
         fullName: fetchedUser.fullName,
         userType: fetchedUser.userType,
         telephone: fetchedUser.telephone,
@@ -118,6 +84,43 @@ router.post("/login", (req, res, next) => {
         message: "Auth failed"
       });
     });
-});
+}
 
-module.exports = router;
+exports.updateUser = (req, res, next) => {
+  User.findOne({ _id: req.body.userId })
+    .then(user => {
+      bcrypt.compare(req.body.password, user.password).then(result => {
+        if (result) {
+          User.findOneAndUpdate({ _id: req.body.userId }, {
+            $set: {
+              fullName: req.body.fullName,
+              telephone: req.body.telephone,
+              company: req.body.company,
+              cui: req.body.cui,
+              country: req.body.country,
+              address: req.body.address,
+              postalCode: req.body.postalCode,
+              userType: req.body.userType
+            }
+          }, {
+              "new": true
+            }).then(doc => {
+              res.status(200).json({
+                message: "User updated",
+                result: doc
+              })
+            }).catch(err => {
+              console.log(err);
+              res.status(500).json({
+                message: "Error Occured"
+              })
+            })
+        }
+        else {
+          return res.status(401).json({
+            message: "Password is not correct"
+          });
+        }
+      })
+    })
+}
