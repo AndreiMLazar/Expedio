@@ -40,7 +40,7 @@ import { AllOrdersComponent } from './pages/dashboard/all-orders/all-orders.comp
     ContactComponent,
     ReportsComponent,
     ChangePictureComponent,
-    AllOrdersComponent
+    AllOrdersComponent,
   ],
   imports: [
     MaterialModule,

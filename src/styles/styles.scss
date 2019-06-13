@@ -279,10 +279,6 @@ input:-webkit-autofill:active {
   }
 }
 
-.top_bar {
-  position: relative;
-}
-
 table {
   width: 100%;
   border-radius: 4px;
@@ -296,7 +292,6 @@ table {
 }
 
 // Angular Material Overrides
-
 .mat-flat-button {
   box-shadow: none !important;
   text-transform: uppercase;

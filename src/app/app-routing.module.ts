@@ -15,7 +15,7 @@ import { AllOrdersComponent } from './pages/dashboard/all-orders/all-orders.comp
 
 const routes: Routes = [
   {
-    path: '', redirectTo: '/dashboard', pathMatch: 'full'
+    path: '', redirectTo: '/dashboard/overview', pathMatch: 'full'
   },
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [LoginActivateGuard], children: [

@@ -1,25 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatSort, MatTableDataSource } from '@angular/material';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { ClientFormModel } from 'src/app/models/client-form.model';
+import { OrderService } from 'src/app/services/order.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-overview',
@@ -28,16 +11,37 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class OverviewComponent implements OnInit, AfterViewInit {
   state = 'none';
+  displayedColumns: string[] = ['AWB', 'Recipient Name', 'Recipient Address', 'Date'];
+  ELEMENT_DATA: ClientFormModel[] = [];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor() { }
+  constructor(public orderService: OrderService, public authService: AuthService) { }
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   ngOnInit() {
-    this.dataSource.sort = this.sort;
+    this.orderService.getClientOrders(this.authService.currentUser.email).subscribe(res => {
+      this.ELEMENT_DATA = res;
+      console.log(this.ELEMENT_DATA);
+      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+
+      this.dataSource.sortingDataAccessor = (item, property) => {
+        switch (property) {
+          case 'AWB': return item.awb;
+          case 'Recipient Name': return item.recipient.fullName;
+          case 'Recipient Address': return item.recipient.address;
+          case 'Date': return item.loadingPlace.date;
+          default: return item[property];
+        }
+      };
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
+
   }
 
   ngAfterViewInit() {

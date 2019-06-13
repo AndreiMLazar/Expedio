@@ -1,7 +1,7 @@
 <div class="top_bar">
   <div class="page_title">
     <hr class="" />
-    <h1 class="page_title_h1">Client Form</h1>
+    <h1 class="page_title_h1">Create Client Order</h1>
   </div>
   <div class="notifications">
     <mat-icon aria-hidden="false" aria-label="Notification">
@@ -167,11 +167,11 @@
           </mat-form-field>
           <mat-form-field>
             <input formControlName="packageWeight" matInput type="text" autocomplete="new-password"
-              placeholder="Package Weight" />
+              placeholder="Package Weight (kg)" />
           </mat-form-field>
           <mat-form-field>
             <input formControlName="packageVolume" matInput type="text" autocomplete="new-password"
-              placeholder="Package Volume" />
+              placeholder="Package Volume (cubic meters)" />
           </mat-form-field>
           <button *ngIf="i>0" mat-button color="danger" (click)="removePackage(i)" type="button">Remove Package</button>
         </div>
