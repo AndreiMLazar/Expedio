@@ -92,7 +92,9 @@ a {
 }
 
 input:-webkit-autofill {
+  animation-name: autofill;
   -webkit-animation-name: autofill;
+  animation-fill-mode: both;
   -webkit-animation-fill-mode: both;
 }
 input:-webkit-autofill,
@@ -458,8 +460,8 @@ table {
   border-radius: 0 !important;
 }
 
-.mat-chip-list-wrapper .mat-standard-chip, .mat-chip-list-wrapper input.mat-input-element {
-  margin: 0.8em 0.4em 0.2em 0.4em !important;
+.mat-chip-list-wrapper {
+  width: 100% !important;
 }
 
 .mat-chip.mat-standard-chip.mat-chip-selected.mat-accent {

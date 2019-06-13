@@ -1,15 +1,15 @@
-// Command Model
-const Command = require("../models/command.model");
+// Order Model
+const Order = require("../models/order.model");
 const randomstring = require("randomstring");
 
-exports.createClientCommand = (req, res, next) => {
+exports.createClientOrder = (req, res, next) => {
   let awbGeneratedNumber = randomstring.generate({
     capitalization: 'uppercase',
     charset: 'alphanumeric',
     length: 16
   })
   console.log(awbGeneratedNumber);
-  const newCommand = new Command({
+  const newOrder = new Order({
     sender: req.body.sender,
     recipient: req.body.recipient,
     loadingPlace: req.body.loadingPlace,
@@ -17,30 +17,30 @@ exports.createClientCommand = (req, res, next) => {
     packagesList: req.body.packagesList,
     awb: awbGeneratedNumber
   });
-  newCommand.save().then(createdCommand => {
+  newOrder.save().then(createdOrder => {
     res.status(201).json({
-      message: "Command created"
+      message: "Order created"
     });
   }).catch(err => {
     console.log(err);
     return res.status(500).json({
-      message: "Error creating command"
+      message: "Error creating order"
     });
   });
 }
 
-exports.showClientCommands = (req, res, next) => {
-  Command.find({ "sender.email": req.params.id })
-    .then(command => {
-      if (command) {
-        res.status(200).json(command);
+exports.showClientOrders = (req, res, next) => {
+  Order.find({ "sender.email": req.params.id })
+    .then(order => {
+      if (order) {
+        res.status(200).json(order);
       } else {
-        res.status(404).json({ message: "You have no commands yet" });
+        res.status(404).json({ message: "You have no orders yet" });
       }
     })
     .catch(error => {
       res.status(500).json({
-        message: "Fetching command failed"
+        message: "Fetching order failed"
       });
     });
 }

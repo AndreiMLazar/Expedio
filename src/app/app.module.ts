@@ -19,11 +19,11 @@ import { ErrorComponent } from './pages/error/error.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
 import { AccountComponent } from './pages/dashboard/account/account.component';
 import { ClientFormComponent } from './pages/dashboard/client-form/client-form.component';
-import { MyCommandsComponent } from './pages/dashboard/my-commands/my-commands.component';
+import { MyOrdersComponent } from './pages/dashboard/my-orders/my-orders.component';
 import { ContactComponent } from './pages/dashboard/contact/contact.component';
 import { ReportsComponent } from './pages/dashboard/reports/reports.component';
 import { ChangePictureComponent } from './pages/dashboard/change-picture/change-picture.component';
-import { AllCommandsComponent } from './pages/dashboard/all-commands/all-commands.component';
+import { AllOrdersComponent } from './pages/dashboard/all-orders/all-orders.component';
 
 @NgModule({
   declarations: [
@@ -36,11 +36,11 @@ import { AllCommandsComponent } from './pages/dashboard/all-commands/all-command
     ErrorComponent,
     AccountComponent,
     ClientFormComponent,
-    MyCommandsComponent,
+    MyOrdersComponent,
     ContactComponent,
     ReportsComponent,
     ChangePictureComponent,
-    AllCommandsComponent
+    AllOrdersComponent
   ],
   imports: [
     MaterialModule,

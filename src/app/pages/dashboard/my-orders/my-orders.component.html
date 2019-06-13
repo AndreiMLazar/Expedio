@@ -1,0 +1,82 @@
+<div class="top_bar">
+  <div class="page_title">
+    <hr class="" />
+    <h1 class="page_title_h1">My Orders</h1>
+  </div>
+  <div class="notifications">
+    <mat-icon aria-hidden="false" aria-label="Notification">
+      notifications_active</mat-icon>
+    <div class="notifications_number">
+      <p>2</p>
+    </div>
+  </div>
+</div>
+<hr class="title_divider" />
+
+<mat-accordion *ngFor="let order of userOrders">
+
+  <mat-expansion-panel [expanded]="panelOpenState">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        AWB:&nbsp;{{order.awb}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{order.loadingPlace.date | date: 'dd/MM/yyyy'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-tab-group>
+      <mat-tab label="Your Information">
+        <ng-template matTabContent>
+          <p>Name: {{order.sender.fullName}}</p>
+          <p>CNP: {{order.sender.cnp}}</p>
+          <p>Address: {{order.sender.address}}</p>
+          <p>Country: {{order.sender.country}}</p>
+        </ng-template>
+      </mat-tab>
+
+      <mat-tab label="Recipient Information">
+        <ng-template matTabContent>
+          <p>Name: {{order.recipient.fullName}}</p>
+          <p>CNP: {{order.recipient.cnp}}</p>
+          <p>Address: {{order.recipient.address}}</p>
+          <p>Country: {{order.recipient.country}}</p>
+        </ng-template>
+      </mat-tab>
+
+      <mat-tab label="Loading Place">
+        <ng-template matTabContent>
+          <p>Date: {{order.loadingPlace.date | date: 'dd/MM/yyyy'}}</p>
+          <p>Address: {{order.loadingPlace.address}}</p>
+          <p>Country: {{order.loadingPlace.country}}</p>
+        </ng-template>
+      </mat-tab>
+
+      <mat-tab label="Deposit Place">
+        <ng-template matTabContent>
+          <p>Name: {{order.deposit.name}}</p>
+          <p>Address: {{order.deposit.address}}</p>
+          <p>Country: {{order.deposit.country}}</p>
+        </ng-template>
+      </mat-tab>
+
+      <mat-tab label="Packages">
+        <ng-template matTabContent>
+          <p>Instructions: {{order.sender.instructions}}</p>
+          <mat-card class="packages_cards" *ngFor="let _package of order.packagesList; let i = index">
+            <mat-chip-list aria-label="Packages">
+              <mat-chip color="accent" selected>Package {{i + 1}}</mat-chip>
+            </mat-chip-list>
+            <mat-card-content>
+              <p>Type: {{_package.packageType}}</p>
+              <p>Mode: {{_package.packageMode}}</p>
+              <p>Weight: {{_package.packageWeight}} kg</p>
+              <p>Volume: {{_package.packageVolume}} m<sup>3</sup></p>
+            </mat-card-content>
+          </mat-card>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+
+  </mat-expansion-panel>
+</mat-accordion>

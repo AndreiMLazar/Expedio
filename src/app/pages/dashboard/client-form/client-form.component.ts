@@ -4,7 +4,7 @@ import { CountriesList } from 'src/app/models/lists/countries-list';
 import { AuthService } from 'src/app/services/auth.service';
 import { ClientFormModel } from 'src/app/models/client-form.model';
 import { PackagesList } from 'src/app/models/lists/package-list';
-import { CommandService } from 'src/app/services/command.service';
+import { OrderService } from 'src/app/services/order.service';
 import { Recipient } from 'src/app/models/recipient.model';
 import { LoadingPlace } from 'src/app/models/loading-place.model';
 import { Deposit } from 'src/app/models/deposit.model';
@@ -26,8 +26,8 @@ export class ClientFormComponent implements OnInit {
   step = 0;
 
   constructor(public authService: AuthService,
-    public commandService: CommandService,
-    private formBuilder: FormBuilder) { }
+              public orderService: OrderService,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.clientForm = new FormGroup({
@@ -143,7 +143,7 @@ export class ClientFormComponent implements OnInit {
     this.clientFormModel.deposit.country = this.clientForm.value.depositCountry;
     this.clientFormModel.packagesList = this.clientForm.value.packages;
 
-    this.commandService.createClientCommand(this.clientFormModel);
+    this.orderService.createClientOrder(this.clientFormModel);
 
     this.isLoading = false;
   }
