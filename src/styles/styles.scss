@@ -438,6 +438,8 @@ table {
 
 .mat-expansion-panel {
   box-shadow: 0 0 3em -0.5em rgba($black, 0.2) !important;
+  transition: 0.2s $transition !important;
+  margin-bottom: 0.4em !important;
 }
 
 .mat-expansion-panel-header-description,
@@ -452,8 +454,8 @@ table {
 }
 
 .mat-expansion-panel-spacing {
-  margin: 0 !important;
-  border-radius: none !important;
+  margin: 0 0 0.4em 0 !important;
+  border-radius: 0 !important;
 }
 
 .mat-chip-list-wrapper .mat-standard-chip, .mat-chip-list-wrapper input.mat-input-element {

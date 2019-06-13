@@ -2,7 +2,7 @@
   "name": "expedio-api",
   "version": "1.0.0",
   "private": true,
-  "baseUrlPath" : "/api/docs",
+  "baseUrlPath": "/api/docs",
   "dependencies": {
     "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
@@ -15,6 +15,7 @@
     "mongoose": "^5.1.2",
     "mongoose-unique-validator": "^2.0.1",
     "multer": "^1.4.1",
+    "randomstring": "^1.1.5",
     "swagger-ui-express": "^4.0.6"
   },
   "scripts": {

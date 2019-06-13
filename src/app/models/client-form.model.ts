@@ -2,12 +2,11 @@ import { Recipient } from './recipient.model';
 import { LoadingPlace } from './loading-place.model';
 import { Deposit } from './deposit.model';
 import { Package } from './package.model';
+import { Sender } from './sender.model';
 
 export class ClientFormModel {
-  fullName: string;
-  address: string;
-  country: string;
-  instructions: string;
+  awb: string;
+  sender: Sender;
   recipient: Recipient;
   loadingPlace: LoadingPlace;
   deposit: Deposit;

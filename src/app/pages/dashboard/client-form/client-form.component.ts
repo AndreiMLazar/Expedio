@@ -9,6 +9,7 @@ import { Recipient } from 'src/app/models/recipient.model';
 import { LoadingPlace } from 'src/app/models/loading-place.model';
 import { Deposit } from 'src/app/models/deposit.model';
 import { Package } from 'src/app/models/package.model';
+import { Sender } from 'src/app/models/sender.model';
 
 @Component({
   selector: 'app-client-form',
@@ -102,24 +103,31 @@ export class ClientFormComponent implements OnInit {
       packageType: new FormControl(''),
       packageWeight: new FormControl(''),
       packageVolume: new FormControl('')
-    })
-    );
+    }));
+  }
+
+  removePackage(index: number) {
+    const packages = this.clientForm.controls.packages as FormArray;
+    packages.removeAt(index);
   }
 
   onClientForm() {
     if (this.clientForm.invalid) {
       console.log(this.clientForm.value);
       return;
-    } else {
-      this.clientForm.value.packages.pop();
     }
+    this.clientForm.value.packages.pop();
+    this.clientForm.controls.packages.updateValueAndValidity();
     this.isLoading = true;
     console.log(this.clientForm.value);
 
-    this.clientFormModel.fullName = this.clientForm.value.clientFullName;
-    this.clientFormModel.address = this.clientForm.value.clientAddress;
-    this.clientFormModel.country = this.clientForm.value.clientCountry;
-    this.clientFormModel.instructions = this.clientForm.value.instructions;
+    this.clientFormModel.sender = new Sender();
+    this.clientFormModel.sender.email = this.authService.currentUser.email;
+    this.clientFormModel.sender.fullName = this.clientForm.value.clientFullName;
+    this.clientFormModel.sender.address = this.clientForm.value.clientAddress;
+    this.clientFormModel.sender.country = this.clientForm.value.clientCountry;
+    this.clientFormModel.sender.cnp = this.clientForm.value.clientCNP;
+    this.clientFormModel.sender.instructions = this.clientForm.value.instructions;
     this.clientFormModel.recipient = new Recipient();
     this.clientFormModel.recipient.address = this.clientForm.value.recipientAddress;
     this.clientFormModel.recipient.cnp = this.clientForm.value.recipientCNP;

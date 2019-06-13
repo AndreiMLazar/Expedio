@@ -11,6 +11,7 @@ import { MyCommandsComponent } from './pages/dashboard/my-commands/my-commands.c
 import { ReportsComponent } from './pages/dashboard/reports/reports.component';
 import { ContactComponent } from './pages/dashboard/contact/contact.component';
 import { ChangePictureComponent } from './pages/dashboard/change-picture/change-picture.component';
+import { AllCommandsComponent } from './pages/dashboard/all-commands/all-commands.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       { path: 'overview', component: OverviewComponent },
       { path: 'my-commands', component: MyCommandsComponent },
+      { path: 'all-commands', component: AllCommandsComponent },
       { path: 'client-form', component: ClientFormComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'contact', component: ContactComponent },

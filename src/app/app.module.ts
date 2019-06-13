@@ -23,6 +23,7 @@ import { MyCommandsComponent } from './pages/dashboard/my-commands/my-commands.c
 import { ContactComponent } from './pages/dashboard/contact/contact.component';
 import { ReportsComponent } from './pages/dashboard/reports/reports.component';
 import { ChangePictureComponent } from './pages/dashboard/change-picture/change-picture.component';
+import { AllCommandsComponent } from './pages/dashboard/all-commands/all-commands.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ChangePictureComponent } from './pages/dashboard/change-picture/change-
     MyCommandsComponent,
     ContactComponent,
     ReportsComponent,
-    ChangePictureComponent
+    ChangePictureComponent,
+    AllCommandsComponent
   ],
   imports: [
     MaterialModule,

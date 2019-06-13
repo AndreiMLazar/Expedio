@@ -4,7 +4,8 @@ import { ClientFormModel } from '../models/client-form.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
-const COMMANDS_URL = environment.apiURL + '/commands';
+const COMMANDS_URL = environment.apiURL + '/command';
+const CLIENTS_URL = COMMANDS_URL + '/client';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,12 @@ export class CommandService {
   constructor(private http: HttpClient, private router: Router) { }
 
   createClientCommand(clientFormModel: ClientFormModel) {
-    const updateData = new FormData();
-    updateData.append('address', clientFormModel.address);
-    console.log(clientFormModel);
-    console.log(updateData);
-    return this.http.post(COMMANDS_URL + '/client/create', clientFormModel).subscribe(() => {
-      this.router.navigate(['/commands']);
+    return this.http.post(CLIENTS_URL + '/create', clientFormModel).subscribe(() => {
+      this.router.navigate(['dashboard/my-commands']);
     });
+  }
+
+  getClientCommands(email: string) {
+    return this.http.get<ClientFormModel[]>(CLIENTS_URL + '/commands/' + email);
   }
 }
