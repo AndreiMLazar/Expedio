@@ -44,3 +44,19 @@ exports.showClientOrders = (req, res, next) => {
       });
     });
 }
+
+exports.getOrder = (req, res, next) => {
+  Order.find({ "awb": req.params.awb })
+    .then(order => {
+      if (order) {
+        res.status(200).json(order);
+      } else {
+        res.status(404).json({ message: "Order does not exist" });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Fetching order failed"
+      });
+    });
+}

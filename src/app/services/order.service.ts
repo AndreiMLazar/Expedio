@@ -4,8 +4,8 @@ import { ClientFormModel } from '../models/client-form.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
-const COMMANDS_URL = environment.apiURL + '/order';
-const CLIENTS_URL = COMMANDS_URL + '/client';
+const ORDERS_URL = environment.apiURL + '/orders';
+const CLIENTS_URL = ORDERS_URL + '/client';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,10 @@ export class OrderService {
   }
 
   getClientOrders(email: string) {
-    return this.http.get<ClientFormModel[]>(CLIENTS_URL + '/orders/' + email);
+    return this.http.get<ClientFormModel[]>(CLIENTS_URL + '/all/' + email);
+  }
+
+  getClientOrder(awb: string) {
+    return this.http.get<ClientFormModel>(CLIENTS_URL + '/get/' + awb);
   }
 }

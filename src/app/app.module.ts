@@ -24,6 +24,7 @@ import { ContactComponent } from './pages/dashboard/contact/contact.component';
 import { ReportsComponent } from './pages/dashboard/reports/reports.component';
 import { ChangePictureComponent } from './pages/dashboard/change-picture/change-picture.component';
 import { AllOrdersComponent } from './pages/dashboard/all-orders/all-orders.component';
+import { PdfExportComponent } from './pages/pdf-export/pdf-export.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AllOrdersComponent } from './pages/dashboard/all-orders/all-orders.comp
     ReportsComponent,
     ChangePictureComponent,
     AllOrdersComponent,
+    PdfExportComponent,
   ],
   imports: [
     MaterialModule,

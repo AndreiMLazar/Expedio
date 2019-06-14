@@ -33,6 +33,7 @@
             <p>CNP: {{order.sender.cnp}}</p>
             <p>Address: {{order.sender.address}}</p>
             <p>Country: {{order.sender.country}}</p>
+            <button mat-button (click)="exportPDF(order.awb)">Export PDF</button>
           </ng-template>
         </mat-tab>
 

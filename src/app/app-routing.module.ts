@@ -12,6 +12,7 @@ import { ReportsComponent } from './pages/dashboard/reports/reports.component';
 import { ContactComponent } from './pages/dashboard/contact/contact.component';
 import { ChangePictureComponent } from './pages/dashboard/change-picture/change-picture.component';
 import { AllOrdersComponent } from './pages/dashboard/all-orders/all-orders.component';
+import { PdfExportComponent } from './pages/pdf-export/pdf-export.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'pdf-export/:awb', component: PdfExportComponent },
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' }
 ];
 

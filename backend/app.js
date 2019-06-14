@@ -48,7 +48,7 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Api URLs
 app.use("/api/auth", userRoute);
-app.use("/api/order", orderRoute)
+app.use("/api/orders", orderRoute)
 
 // Static Sources
 app.get("/ngsw-worker.js", (req, res) => {
