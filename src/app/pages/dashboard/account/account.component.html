@@ -16,7 +16,7 @@
 <form [formGroup]="signupForm" class="credentials_form" (submit)="onUpdate()" *ngIf="!isLoading">
   <mat-radio-group aria-label="Tipul contului" formControlName="userType" required>
     <mat-radio-button value="client">Client</mat-radio-button>
-    <mat-radio-button value="shipping company">Shpping Company</mat-radio-button>
+    <mat-radio-button value="company">Shipping Company</mat-radio-button>
   </mat-radio-group>
   <mat-form-field>
     <input formControlName="email" matInput type="email" autocomplete="new-password" placeholder="Mail" required />

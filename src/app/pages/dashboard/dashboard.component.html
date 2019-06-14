@@ -4,8 +4,8 @@
       <div class="user_picture">
         <img class="blur" [src]="this.authService.currentUser.avatarPath"
           onError="this.src='../../../assets/images/avatar.jpeg';" alt="User Profile Blur Image" />
-        <img [src]="this.authService.currentUser.avatarPath"
-          onError="this.src='../../../assets/images/avatar.jpeg';" alt="User Profile Image" />
+        <img [src]="this.authService.currentUser.avatarPath" onError="this.src='../../../assets/images/avatar.jpeg';"
+          alt="User Profile Image" />
       </div>
 
       <h2 class="user_name">{{ this.authService.currentUser.fullName }}</h2>
@@ -21,10 +21,25 @@
       <ul>
         <li><a routerLink="overview" routerLinkActive="active_link">Overview</a></li>
         <li><a routerLink="my-orders" routerLinkActive="active_link">My Orders</a></li>
-        <li><a routerLink="client-form" routerLinkActive="active_link">Create Order</a></li>
-        <li><a href="">Plan</a></li>
-        <li><a routerLink="reports" routerLinkActive="active_link">Reports</a></li>
-        <li><a href="">Reviews</a></li>
+        <li *ngIf="this.authService.currentUser.userType === 'client'"><a routerLink="client-form"
+            routerLinkActive="active_link">Create Order</a>
+        </li>
+        <li *ngIf="this.authService.currentUser.userType === 'company'"><a routerLink="company-form"
+            routerLinkActive="active_link">Create Order</a>
+        </li>
+        <li
+          *ngIf="this.authService.currentUser.userType === 'agent' || this.authService.currentUser.userType === 'admin'">
+          <a routerLink="agent-form" routerLinkActive="active_link">Create Order</a>
+        </li>
+        <li *ngIf="this.authService.currentUser.userType === 'admin'"><a href="">Plan</a>
+        </li>
+        <li *ngIf="this.authService.currentUser.userType === 'admin'"><a routerLink="reports"
+            routerLinkActive="active_link">Reports</a>
+        </li>
+        <li
+          *ngIf="this.authService.currentUser.userType === 'admin' || this.authService.currentUser.userType === 'agent'">
+          <a routerLink="order-review" routerLinkActive="active_link">Orders Review</a>
+        </li>
         <li><a routerLink="contact" routerLinkActive="active_link">Contact</a></li>
       </ul>
       <br />

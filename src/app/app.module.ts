@@ -18,13 +18,17 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { ErrorComponent } from './pages/error/error.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
 import { AccountComponent } from './pages/dashboard/account/account.component';
-import { ClientFormComponent } from './pages/dashboard/client-form/client-form.component';
+import { ClientFormComponent } from './pages/dashboard/create-order/client/client-form.component';
 import { MyOrdersComponent } from './pages/dashboard/my-orders/my-orders.component';
 import { ContactComponent } from './pages/dashboard/contact/contact.component';
 import { ReportsComponent } from './pages/dashboard/reports/reports.component';
 import { ChangePictureComponent } from './pages/dashboard/change-picture/change-picture.component';
 import { AllOrdersComponent } from './pages/dashboard/all-orders/all-orders.component';
 import { PdfExportComponent } from './pages/pdf-export/pdf-export.component';
+import { AgentFormComponent } from './pages/dashboard/create-order/agent/agent-form/agent-form.component';
+import { CompanyFormComponent } from './pages/dashboard/create-order/company/company-form/company-form.component';
+import { CreateAgentComponent } from './pages/dashboard/create-agent/create-agent.component';
+import { OrderReviewComponent } from './pages/dashboard/order-review/order-review.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,10 @@ import { PdfExportComponent } from './pages/pdf-export/pdf-export.component';
     ChangePictureComponent,
     AllOrdersComponent,
     PdfExportComponent,
+    AgentFormComponent,
+    CompanyFormComponent,
+    CreateAgentComponent,
+    OrderReviewComponent,
   ],
   imports: [
     MaterialModule,
