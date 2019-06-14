@@ -1,3 +1,37 @@
-<p>
-  contact works!
-</p>
+<mat-card>
+  <mat-card-title-group>
+    <mat-card-title>Send An Email</mat-card-title>
+    <mat-card-subtitle>We will send an email with our response</mat-card-subtitle>
+  </mat-card-title-group>
+  <mat-card-content>
+    <form class="credentials_form" (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+      <mat-form-field>
+        <input matInput type="text" autocomplete="current-password" name="subject" ngModel placeholder="Subject"
+          #emailInput="ngModel" required />
+        <mat-error *ngIf="emailInput.invalid">Please enter your email subject</mat-error>
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <input matInput type="text" autocomplete="current-password" name="body" ngModel placeholder="Text"
+          #passwordInput="ngModel" required />
+        <mat-error>Please enter your message</mat-error>
+        <mat-error *ngIf="passwordInput.invalid">Password is <strong>required</strong></mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button class="submit_button" mat-stroked-button type="submit" (click)="onAction(event)">Submit</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="contact_details">
+  <mat-card-title-group>
+    <mat-card-title>Contact Us</mat-card-title>
+    <mat-card-subtitle>Expedio Team</mat-card-subtitle>
+  </mat-card-title-group>
+  <mat-card-content>
+    <hr style="width: 6%">
+    <p>Telephone: <a href="tel:+40768536123">0758128919</a></p>
+    <p>Mail: <a href="mailto:help@epocars.ro">contact@expedio.com</a></p>
+  </mat-card-content>
+</mat-card>

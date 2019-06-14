@@ -54,7 +54,7 @@ exports.loginUser = (req, res, next) => {
     .then(result => {
       if (!result) {
         return res.status(401).json({
-          message: "Passwords do not match"
+          message: "Password is not correct"
         });
       }
       const token = jwt.sign(

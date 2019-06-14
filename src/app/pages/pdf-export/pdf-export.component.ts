@@ -13,10 +13,10 @@ import { ClientFormModel } from 'src/app/models/client-form.model';
 export class PdfExportComponent implements OnInit, AfterViewInit {
   @ViewChild('content', { static: true }) private content: ElementRef;
   public order: ClientFormModel;
-  quality = 1;
+  quality = 2;
 
   print(quality: number) {
-    const filename = 'ThisIsYourPDFFilename.pdf';
+    const filename = this.router.snapshot.params.awb;
 
     html2canvas(document.querySelector('#content'), { scale: quality }).then(canvas => {
       const pdf = new jsPDF('p', 'mm', 'a4');
@@ -26,12 +26,13 @@ export class PdfExportComponent implements OnInit, AfterViewInit {
   }
 
   constructor(public orderService: OrderService,
-    private router: ActivatedRoute) { }
+              private router: ActivatedRoute) { }
 
   ngOnInit() {
     this.orderService.getClientOrder(this.router.snapshot.params.awb).subscribe(res => {
       this.order = res[0];
     });
+    console.log(this.order);
   }
 
 
