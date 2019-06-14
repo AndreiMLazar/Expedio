@@ -33,7 +33,6 @@
             <p>CNP: {{order.sender.cnp}}</p>
             <p>Address: {{order.sender.address}}</p>
             <p>Country: {{order.sender.country}}</p>
-            <button mat-button (click)="exportPDF(order.awb)">Export PDF</button>
           </ng-template>
         </mat-tab>
 
@@ -76,6 +75,12 @@
                 <p>Volume: {{_package.packageVolume}} m<sup>3</sup></p>
               </mat-card-content>
             </mat-card>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Export PDF">
+          <ng-template matTabContent>
+            <button mat-button (click)="exportPDF(order.awb)">Download PDF</button>
           </ng-template>
         </mat-tab>
       </mat-tab-group>
