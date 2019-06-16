@@ -4,7 +4,7 @@
     <mat-card-subtitle>We will send an email with our response</mat-card-subtitle>
   </mat-card-title-group>
   <mat-card-content>
-    <form class="credentials_form" (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+    <form #contactForm="ngForm">
       <mat-form-field>
         <input matInput type="text" autocomplete="current-password" name="subject" ngModel placeholder="Subject"
           #emailInput="ngModel" required />
@@ -20,7 +20,7 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <button class="submit_button" mat-stroked-button type="submit" (click)="onAction(event)">Submit</button>
+    <button class="submit_button" mat-stroked-button type="submit" (click)="onContact(contactForm)">Submit</button>
   </mat-card-actions>
 </mat-card>
 
