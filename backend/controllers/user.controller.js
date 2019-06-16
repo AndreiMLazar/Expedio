@@ -28,7 +28,7 @@ exports.createUser = (req, res, next) => {
     }).catch(err => {
       console.log(err);
       return res.status(500).json({
-        message: "User created"
+        message: "There are required fields that were left empty"
       });
     });
   }).catch(err => {

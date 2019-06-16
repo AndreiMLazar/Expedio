@@ -55,6 +55,7 @@ export class AuthService {
     signupData.append('cui', cui);
     signupData.append('country', country);
     signupData.append('postalCode', postalCode);
+    console.table(signupData);
 
     return this.http.post(AUTH_URL + '/signup', signupData).subscribe(() => {
       this.router.navigate(['/login']);

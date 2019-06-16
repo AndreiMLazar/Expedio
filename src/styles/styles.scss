@@ -464,6 +464,29 @@ table {
   color: $white;
 }
 
+.mat-stepper-horizontal,
+.mat-stepper-vertical {
+  box-shadow: 0.1em 0 3em -0.5em rgba($black, 0.2);
+}
+
+.mat-step-header .mat-step-icon {
+  background: linear-gradient($divider 0%, $gray-dark 100%);
+  color: $white;
+}
+
+.mat-step-header .mat-step-icon-selected,
+.mat-step-header .mat-step-icon-state-done,
+.mat-step-header .mat-step-icon-state-edit {
+  background: linear-gradient($logo-dark 0%, $accent 100%);
+  color: $white;
+}
+
+.mat-horizontal-stepper-header::after,
+.mat-horizontal-stepper-header::before,
+.mat-stepper-horizontal-line {
+  border-top-color: $divider;
+}
+
 textarea {
   max-height: 10em;
 }

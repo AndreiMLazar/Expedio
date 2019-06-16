@@ -36,6 +36,9 @@
         <li *ngIf="this.authService.currentUser.userType === 'admin'"><a routerLink="reports"
             routerLinkActive="active_link">Reports</a>
         </li>
+        <li *ngIf="this.authService.currentUser.userType === 'admin'">
+          <a routerLink="create-agent" routerLinkActive="active_link">Create Agent</a>
+        </li>
         <li
           *ngIf="this.authService.currentUser.userType === 'admin' || this.authService.currentUser.userType === 'agent'">
           <a routerLink="order-review" routerLinkActive="active_link">Orders Review</a>

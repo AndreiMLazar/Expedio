@@ -17,6 +17,7 @@ import { RoleGuard } from './guards/role.guard';
 import { AgentFormComponent } from './pages/dashboard/create-order/agent/agent-form/agent-form.component';
 import { CompanyFormComponent } from './pages/dashboard/create-order/company/company-form/company-form.component';
 import { OrderReviewComponent } from './pages/dashboard/order-review/order-review.component';
+import { CreateAgentComponent } from './pages/dashboard/create-agent/create-agent.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: 'company-form', component: CompanyFormComponent, canActivate: [RoleGuard], data: { roles: ['admin', 'company'] } },
       { path: 'reports', component: ReportsComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
       { path: 'order-review', component: OrderReviewComponent, canActivate: [RoleGuard], data: { roles: ['admin', 'agent'] } },
+      { path: 'create-agent', component: CreateAgentComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
       { path: 'contact', component: ContactComponent },
       { path: 'account', component: AccountComponent },
       { path: 'change-picture', component: ChangePictureComponent },

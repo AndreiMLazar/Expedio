@@ -15,4 +15,4 @@ export const fadeAnimation =
     //     style({ opacity: 1 })
     //   ]))
     // ])
-  ])
+  ]);

@@ -14,7 +14,7 @@
       <mat-form-field>
         <input formControlName="password" matInput type="password" autocomplete="new-password" placeholder="Password"
           required />
-        <mat-error *ngIf="signupForm.get('email').invalid">Please enter a valid password</mat-error>
+        <mat-error *ngIf="signupForm.get('password').invalid">Please enter a valid password</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input formControlName="fullName" matInput type="text" autocomplete="new-password" placeholder="Your Full Name"

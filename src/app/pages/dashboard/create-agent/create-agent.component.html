@@ -1,3 +1,114 @@
-<p>
-  create-agent works!
-</p>
+<div class="top_bar">
+  <div class="page_title">
+    <hr class="" />
+    <h1 class="page_title_h1">Create User</h1>
+  </div>
+  <div class="notifications">
+    <mat-icon aria-hidden="false" aria-label="Notification">
+      notifications_active</mat-icon>
+    <div class="notifications_number">
+      <p>2</p>
+    </div>
+  </div>
+</div>
+<hr class="title_divider" />
+
+<mat-horizontal-stepper [linear]="false" #stepper>
+  <mat-step [stepControl]="userBasicInfo">
+    <form [formGroup]="userBasicInfo">
+      <ng-template matStepLabel>User's Basic Information</ng-template>
+
+      <mat-radio-group aria-label="Tipul contului" formControlName="userType" required>
+        <mat-radio-button value="agent" checked="checked">Agent</mat-radio-button>
+        <mat-radio-button value="client">Client</mat-radio-button>
+        <mat-radio-button value="company">Shipping Company</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field>
+        <input formControlName="userEmail" matInput type="email" autocomplete="new-password" placeholder="User Mail"
+          required />
+        <mat-error *ngIf="userBasicInfo.get('userEmail').invalid">Please enter a valid email address</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="userPassword" matInput type="password" autocomplete="new-password"
+          placeholder="User Password" required />
+        <mat-error *ngIf="userBasicInfo.get('userPassword').invalid">Please enter a valid password</mat-error>
+      </mat-form-field>
+      <div>
+        <button mat-stroked-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="userDetails">
+    <form [formGroup]="userDetails">
+      <ng-template matStepLabel>User's Details</ng-template>
+
+      <mat-form-field>
+        <input formControlName="userFullName" matInput type="text" autocomplete="new-password"
+          placeholder="User Full Name" required />
+        <mat-error *ngIf="userDetails.get('userFullName').invalid">User full name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="userTelephone" matInput type="text" autocomplete="new-password"
+          placeholder="User Telephone Number" required />
+        <mat-error *ngIf="userDetails.get('userTelephone').invalid">User telephone number is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button class="upload_image_button" mat-stroked-button type="button" (click)="filePicker.click()">Upload
+        Avatar</button>
+      <input class="file_upload" name="avatar" type="file" #filePicker (change)="onImagePicked($event)">
+      <div class="avatar_preview" *ngIf="avatarPreview !== '' && avatarPreview && userDetails.get('avatar').valid">
+        <img [src]="avatarPreview" [alt]="userDetails.value.fullName + ' Avatar'">
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-stroked-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="userCompany">
+    <form [formGroup]="userCompany">
+      <ng-template matStepLabel>User's Company</ng-template>
+
+      <mat-form-field>
+        <input formControlName="userCompanyName" matInput type="text" autocomplete="new-password"
+          placeholder="User Company Name" required />
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="userCUI" matInput type="text" autocomplete="new-password" placeholder="User Company CUI"
+          required />
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="userCountry" placeholder="Country" required>
+          <mat-option *ngFor="let country of allCountries" [value]="country.name">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="userAddress" matInput type="text" autocomplete="new-password"
+          placeholder="User Company Address" required minlength="5" maxlength="80" />
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="userPostalCode" matInput type="text" autocomplete="new-password"
+          placeholder="User Company Postal Code" required minlength="2" />
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-stroked-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Create User</ng-template>
+    <p>You are ready to submit.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-flat-button (click)="submit()">Submit</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
