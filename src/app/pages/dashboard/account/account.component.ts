@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { CountriesList } from 'src/app/models/lists/countries-list';
 import { AuthService } from 'src/app/services/auth.service';
-import { mimeType } from 'src/validators/mime-type.validator';
+import { mimeType } from 'src/app/validators/mime-type.validator';
 
 @Component({
   selector: 'app-account',

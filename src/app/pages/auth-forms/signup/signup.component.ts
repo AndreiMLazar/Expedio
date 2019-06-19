@@ -2,7 +2,7 @@ import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
-import { mimeType } from '../../../../validators/mime-type.validator';
+import { mimeType } from '../../../validators/mime-type.validator';
 import { CountriesList } from 'src/app/models/lists/countries-list';
 import { fadeAnimation } from 'src/app/animations/fade-animation';
 

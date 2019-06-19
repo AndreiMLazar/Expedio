@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { mimeType } from 'src/validators/mime-type.validator';
+import { mimeType } from 'src/app/validators/mime-type.validator';
 import { User } from 'src/app/models/user.model';
 import { CountriesList } from 'src/app/models/lists/countries-list';
 import { AuthService } from 'src/app/services/auth.service';
