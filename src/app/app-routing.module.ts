@@ -26,24 +26,69 @@ const routes: Routes = [
   {
     path: 'dashboard', component: DashboardComponent, canActivate: [LoginActivateGuard], children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      { path: 'overview', component: OverviewComponent },
-      { path: 'my-orders', component: MyOrdersComponent },
-      { path: 'all-orders', component: AllOrdersComponent },
-      { path: 'client-form', component: ClientFormComponent, canActivate: [RoleGuard], data: { roles: ['admin', 'client'] } },
-      { path: 'agent-form', component: AgentFormComponent, canActivate: [RoleGuard], data: { roles: ['admin', 'agent'] } },
-      { path: 'company-form', component: CompanyFormComponent, canActivate: [RoleGuard], data: { roles: ['admin', 'company'] } },
-      { path: 'reports', component: ReportsComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
-      { path: 'order-review', component: OrderReviewComponent, canActivate: [RoleGuard], data: { roles: ['admin', 'agent'] } },
-      { path: 'create-agent', component: CreateAgentComponent, canActivate: [RoleGuard], data: { roles: ['admin'] } },
-      { path: 'contact', component: ContactComponent },
-      { path: 'account', component: AccountComponent },
-      { path: 'change-picture', component: ChangePictureComponent },
+      {
+        path: 'overview', component: OverviewComponent,
+        data: { title: 'Overview' }
+      },
+      {
+        path: 'my-orders', component: MyOrdersComponent,
+        data: { title: 'My Orders' }
+      },
+      {
+        path: 'all-orders', component: AllOrdersComponent,
+        data: { title: 'All Orders' }
+      },
+      {
+        path: 'client-form', component: ClientFormComponent, canActivate: [RoleGuard],
+        data: { roles: ['admin', 'client'], title: 'Create Order' }
+      },
+      {
+        path: 'agent-form', component: AgentFormComponent, canActivate: [RoleGuard],
+        data: { roles: ['admin', 'agent'], title: 'Create Order' }
+      },
+      {
+        path: 'company-form', component: CompanyFormComponent, canActivate: [RoleGuard],
+        data: { roles: ['admin', 'company'], title: 'Create Order' }
+      },
+      {
+        path: 'reports', component: ReportsComponent, canActivate: [RoleGuard],
+        data: { roles: ['admin'], title: 'Admin Reports' }
+      },
+      {
+        path: 'order-review', component: OrderReviewComponent, canActivate: [RoleGuard],
+        data: { roles: ['admin', 'agent'], title: 'Order Review' }
+      },
+      {
+        path: 'create-agent', component: CreateAgentComponent, canActivate: [RoleGuard],
+        data: { roles: ['admin'], title: 'Create User' }
+      },
+      {
+        path: 'contact', component: ContactComponent,
+        data: { title: 'Contact' }
+      },
+      {
+        path: 'account', component: AccountComponent,
+        data: { title: 'My Account' }
+      },
+      {
+        path: 'change-picture', component: ChangePictureComponent,
+        data: { title: 'Change Picture' }
+      },
       { path: '**', redirectTo: 'overview', pathMatch: 'full' }
     ]
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'pdf-export/:awb', component: PdfExportComponent },
+  {
+    path: 'login', component: LoginComponent,
+    data: { title: 'Login' }
+  },
+  {
+    path: 'signup', component: SignupComponent,
+    data: { title: 'Signup' }
+  },
+  {
+    path: 'pdf-export/:awb', component: PdfExportComponent,
+    data: { title: 'PDF Export' }
+  },
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' }
 ];
 

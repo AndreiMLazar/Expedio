@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   public env = env.imagesURL + 'avatars/';
 
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.userIsAuthenticated = this.authService.isLoggedIn();
