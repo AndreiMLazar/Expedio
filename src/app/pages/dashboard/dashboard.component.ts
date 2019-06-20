@@ -32,10 +32,9 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
-  openChangePicture(): void {
+  openChangePicture() {
     this.dialog.open(ChangePictureComponent, {
       width: 'auto',
-      data: { userId: this.authService.currentUser.userId }
     });
   }
 

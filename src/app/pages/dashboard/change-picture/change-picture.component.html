@@ -9,9 +9,7 @@
     <div class="centered">Drop your avatar here</div>
   </div>
 </div>
-<!--droped image preview-->
-<div *ngFor="let file of files">
-  <img *ngIf="file" [src]="file.url" width="100px" height="100px">
-</div>
 
-<button class="upload_button" mat-flat-button type="submit" (click)="upload()">Save</button>
+<img *ngIf="files[0]" [src]="files[0].url" width="100px" height="100px">
+<br>
+<button [mat-dialog-close] class="upload_button" mat-flat-button type="submit" (click)="upload()">Save</button>

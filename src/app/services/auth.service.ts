@@ -41,8 +41,8 @@ export class AuthService {
   }
 
   createUser(email: string, password: string, fullName: string, userType: string,
-             telephone: string, company: string, cui: string, country: string,
-             address: string, postalCode: string, avatar: File) {
+    telephone: string, company: string, cui: string, country: string,
+    address: string, postalCode: string, avatar: File) {
     const signupData = new FormData();
     signupData.append('email', email);
     signupData.append('password', password);
@@ -63,8 +63,8 @@ export class AuthService {
   }
 
   updateUser(password: string, fullName: string, userType: string, telephone: string,
-             company: string, cui: string, country: string,
-             address: string, postalCode: string) {
+    company: string, cui: string, country: string,
+    address: string, postalCode: string) {
     const updateData = new FormData();
     updateData.append('userId', localStorage.getItem('userId'));
     updateData.append('password', password);
@@ -103,6 +103,17 @@ export class AuthService {
           this.router.navigate(['/dashboard/overview']);
         }
       });
+  }
+
+  updateAvatar(avatar: File) {
+    const updateData = new FormData();
+    updateData.append('userId', localStorage.getItem('userId'));
+    updateData.append('avatar', avatar);
+    debugger
+    return this.http.post<UpdatedUserResponse>(AUTH_URL + '/avatar', updateData).subscribe(response => {
+      localStorage.setItem('user', JSON.stringify(response.result));
+      this.currentUser.avatarPath = response.result.avatarPath;
+    });
   }
 
   autoAuthUser() {

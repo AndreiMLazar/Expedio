@@ -124,3 +124,35 @@ exports.updateUser = (req, res, next) => {
       })
     })
 }
+
+exports.updateAvatar = (req, res, next) => {
+  const url = req.protocol + "://" + req.get("host");
+
+  User.findOne({ _id: req.body.userId })
+    .then(user => {
+      if (user) {
+        User.findOneAndUpdate({ _id: req.body.userId }, {
+          $set: {
+            avatarPath: url + "/images/avatars/" + req.file.filename,
+          }
+        }, {
+            "new": true
+          }).then(doc => {
+            res.status(200).json({
+              message: "Avatar updated",
+              result: doc
+            })
+          }).catch(err => {
+            console.log(err);
+            res.status(500).json({
+              message: "Error Occured"
+            })
+          })
+      }
+      else {
+        return res.status(401).json({
+          message: "User not found"
+        });
+      }
+    })
+}
