@@ -1,14 +1,17 @@
 <div class="top_bar">
   <div class="page_title">
-    <hr class="" />
     <h1 class="page_title_h1">Change Picture</h1>
-  </div>
-  <div class="notifications">
-    <mat-icon aria-hidden="false" aria-label="Notification">
-      notifications_active</mat-icon>
-    <div class="notifications_number">
-      <p>2</p>
-    </div>
   </div>
 </div>
 <hr class="title_divider" />
+<div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
+  <div class="text-wrapper">
+    <div class="centered">Drop your avatar here</div>
+  </div>
+</div>
+<!--droped image preview-->
+<div *ngFor="let file of files">
+  <img *ngIf="file" [src]="file.url" width="100px" height="100px">
+</div>
+
+<button class="upload_button" mat-flat-button type="submit" (click)="upload()">Save</button>

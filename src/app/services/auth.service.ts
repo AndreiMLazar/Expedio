@@ -62,19 +62,17 @@ export class AuthService {
     });
   }
 
-  updateUser(email: string, password: string, fullName: string, userType: string,
-             telephone: string, company: string, cui: string, country: string,
-             address: string, postalCode: string, avatar: File) {
+  updateUser(password: string, fullName: string, userType: string, telephone: string,
+             company: string, cui: string, country: string,
+             address: string, postalCode: string) {
     const updateData = new FormData();
     updateData.append('userId', localStorage.getItem('userId'));
-    updateData.append('email', email);
     updateData.append('password', password);
     updateData.append('fullName', fullName);
     updateData.append('userType', userType);
     updateData.append('telephone', telephone);
     updateData.append('company', company);
     updateData.append('address', address);
-    updateData.append('avatar', avatar);
     updateData.append('cui', cui);
     updateData.append('country', country);
     updateData.append('postalCode', postalCode);

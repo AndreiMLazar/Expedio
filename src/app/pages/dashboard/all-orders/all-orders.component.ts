@@ -18,7 +18,6 @@ export class AllOrdersComponent implements OnInit {
   ngOnInit() {
     this.orderService.getClientOrders(this.authService.currentUser.email).subscribe(res => {
       this.dataSource = res;
-      console.log(this.dataSource);
     });
   }
 }

@@ -3,7 +3,8 @@
 # compiled output
 /backend/*.zip
 /backend/expedioUI
-/backend/images
+/backend/images/avatars/*
+!backend/images/avatars/.gitkeep
 /*.zip
 /dist
 /tmp

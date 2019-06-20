@@ -1,3 +1,4 @@
+import { DragAndDropDirective } from './directives/drag-and-drop.directive';
 import { MaterialModule } from './material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -27,7 +28,7 @@ import { AllOrdersComponent } from './pages/dashboard/all-orders/all-orders.comp
 import { PdfExportComponent } from './pages/pdf-export/pdf-export.component';
 import { AgentFormComponent } from './pages/dashboard/create-order/agent/agent-form/agent-form.component';
 import { CompanyFormComponent } from './pages/dashboard/create-order/company/company-form/company-form.component';
-import { CreateAgentComponent } from './pages/dashboard/create-agent/create-agent.component';
+import { CreateAgentComponent } from './pages/dashboard/create-user/create-user.component';
 import { OrderReviewComponent } from './pages/dashboard/order-review/order-review.component';
 
 @NgModule({
@@ -51,6 +52,7 @@ import { OrderReviewComponent } from './pages/dashboard/order-review/order-revie
     CompanyFormComponent,
     CreateAgentComponent,
     OrderReviewComponent,
+    DragAndDropDirective
   ],
   imports: [
     MaterialModule,

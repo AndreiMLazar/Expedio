@@ -32,7 +32,6 @@ export class PdfExportComponent implements OnInit, AfterViewInit {
     this.orderService.getClientOrder(this.router.snapshot.params.awb).subscribe(res => {
       this.order = res[0];
     });
-    console.log(this.order);
   }
 
 

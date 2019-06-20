@@ -17,7 +17,7 @@ import { RoleGuard } from './guards/role.guard';
 import { AgentFormComponent } from './pages/dashboard/create-order/agent/agent-form/agent-form.component';
 import { CompanyFormComponent } from './pages/dashboard/create-order/company/company-form/company-form.component';
 import { OrderReviewComponent } from './pages/dashboard/order-review/order-review.component';
-import { CreateAgentComponent } from './pages/dashboard/create-agent/create-agent.component';
+import { CreateAgentComponent } from './pages/dashboard/create-user/create-user.component';
 
 const routes: Routes = [
   {
@@ -59,7 +59,7 @@ const routes: Routes = [
         data: { roles: ['admin', 'agent'], title: 'Order Review' }
       },
       {
-        path: 'create-agent', component: CreateAgentComponent, canActivate: [RoleGuard],
+        path: 'create-user', component: CreateAgentComponent, canActivate: [RoleGuard],
         data: { roles: ['admin'], title: 'Create User' }
       },
       {
@@ -69,10 +69,6 @@ const routes: Routes = [
       {
         path: 'account', component: AccountComponent,
         data: { title: 'My Account' }
-      },
-      {
-        path: 'change-picture', component: ChangePictureComponent,
-        data: { title: 'Change Picture' }
       },
       { path: '**', redirectTo: 'overview', pathMatch: 'full' }
     ]
@@ -88,6 +84,10 @@ const routes: Routes = [
   {
     path: 'pdf-export/:awb', component: PdfExportComponent,
     data: { title: 'PDF Export' }
+  },
+  {
+    path: 'change-picture', component: ChangePictureComponent,
+    data: { title: 'Change Picture' }
   },
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full' }
 ];

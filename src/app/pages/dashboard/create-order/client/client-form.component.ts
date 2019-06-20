@@ -113,13 +113,11 @@ export class ClientFormComponent implements OnInit {
 
   onClientForm() {
     if (this.clientForm.invalid) {
-      console.log(this.clientForm.value);
       return;
     }
     this.clientForm.value.packages.pop();
     this.clientForm.controls.packages.updateValueAndValidity();
     this.isLoading = true;
-    console.log(this.clientForm.value);
 
     this.clientFormModel.sender = new Sender();
     this.clientFormModel.sender.email = this.authService.currentUser.email;

@@ -6,9 +6,9 @@ import { CountriesList } from 'src/app/models/lists/countries-list';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-create-agent',
-  templateUrl: './create-agent.component.html',
-  styleUrls: ['./create-agent.component.scss']
+  selector: 'app-create-user',
+  templateUrl: './create-user.component.html',
+  styleUrls: ['./create-user.component.scss']
 })
 export class CreateAgentComponent implements OnInit {
   isLinear = false;

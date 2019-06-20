@@ -94,13 +94,13 @@ exports.updateUser = (req, res, next) => {
           User.findOneAndUpdate({ _id: req.body.userId }, {
             $set: {
               fullName: req.body.fullName,
+              userType: req.body.userType,
               telephone: req.body.telephone,
               company: req.body.company,
               cui: req.body.cui,
               country: req.body.country,
-              address: req.body.address,
               postalCode: req.body.postalCode,
-              userType: req.body.userType
+              address: req.body.address
             }
           }, {
               "new": true

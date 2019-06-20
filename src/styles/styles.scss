@@ -485,6 +485,10 @@ table {
   border-top-color: $divider;
 }
 
+.cdk-overlay-pane {
+  margin: auto !important;
+}
+
 textarea {
   max-height: 10em;
 }

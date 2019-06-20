@@ -95,7 +95,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
       return;
     }
     this.isLoading = true;
-
     this.authService.createUser(
       this.signupForm.value.email,
       this.signupForm.value.password,
@@ -111,6 +110,6 @@ export class SignupComponent implements OnInit, AfterViewInit {
     );
 
     this.isLoading = false;
-    this.signupForm.reset();
+    // this.signupForm.reset();
   }
 }

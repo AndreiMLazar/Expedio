@@ -59,12 +59,6 @@
     <input formControlName="postalCode" matInput type="text" autocomplete="new-password" placeholder="Postal Code"
       required minlength="2" />
   </mat-form-field>
-  <button class="upload_image_button" mat-stroked-button type="button" (click)="filePicker.click()">Upload
-    Avatar</button>
-  <input class="file_upload" name="avatar" type="file" #filePicker (change)="onImagePicked($event)">
-  <div class="avatar_preview" *ngIf="avatarPreview !== '' && avatarPreview && signupForm.get('avatar').valid">
-    <img [src]="avatarPreview" [alt]="signupForm.value.fullName + ' Avatar'">
-  </div>
   <br />
   <button class="submit_button" mat-flat-button type="submit">Save</button>
 </form>

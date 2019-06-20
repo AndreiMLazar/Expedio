@@ -18,14 +18,12 @@ export class MyOrdersComponent implements OnInit {
               private router: Router) { }
 
   exportPDF(awb: string) {
-    console.log(awb);
     this.router.navigate(['/pdf-export', awb], {replaceUrl: true});
   }
 
   ngOnInit() {
     this.orderService.getClientOrders(this.authService.currentUser.email).subscribe(res => {
       this.userOrders = res;
-      console.log(res);
     });
   }
 }

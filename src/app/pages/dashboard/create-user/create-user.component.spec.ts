@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateAgentComponent } from './create-agent.component';
+import { CreateAgentComponent } from './create-user.component';
 
 describe('CreateAgentComponent', () => {
   let component: CreateAgentComponent;

@@ -26,7 +26,6 @@ export class OverviewComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.orderService.getClientOrders(this.authService.currentUser.email).subscribe(res => {
       this.ELEMENT_DATA = res;
-      console.log(this.ELEMENT_DATA);
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
       this.dataSource.sortingDataAccessor = (item, property) => {

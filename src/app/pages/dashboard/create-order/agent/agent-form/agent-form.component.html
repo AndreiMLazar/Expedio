@@ -1,3 +1,47 @@
-<p>
-  agent-form works!
-</p>
+<div class="top_bar">
+  <div class="page_title">
+    <hr class="" />
+    <h1 class="page_title_h1">Create Order</h1>
+  </div>
+  <div class="notifications">
+    <mat-icon aria-hidden="false" aria-label="Notification">
+      notifications_active</mat-icon>
+    <div class="notifications_number">
+      <p>2</p>
+    </div>
+  </div>
+</div>
+<hr class="title_divider" />
+
+<mat-horizontal-stepper [linear]="false" #stepper>
+  <mat-step [stepControl]="userBasicInfo">
+    <form [formGroup]="userBasicInfo">
+      <ng-template matStepLabel>User's Basic Information</ng-template>
+
+
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="userDetails">
+    <form [formGroup]="userDetails">
+      <ng-template matStepLabel>User's Details</ng-template>
+
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="userCompany">
+    <form [formGroup]="userCompany">
+      <ng-template matStepLabel>User's Company</ng-template>
+
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Create User</ng-template>
+    <p>You are ready to submit.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-flat-button (click)="submit()">Submit</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
