@@ -345,6 +345,10 @@ table {
   color: $white;
   font-weight: 600;
   font-size: 1.2em;
+  position: absolute;
+  width: 300;
+  left: calc(50% - 150px);
+  bottom: 0;
 }
 
 .mat-radio-label-content {
