@@ -12,7 +12,7 @@ const ClientOrderSchema = mongoose.Schema({
   recipient: { type: Recipient, required: true },
   loadingPlace: { type: LoadingPlace, required: true },
   deposit: { type: Deposit, required: true },
-  packagesList: [{ type: mongoose.Schema.Types.Object, ref: 'Package', required: true, unique: true, sparse: true }]
+  packagesList: [{ type: mongoose.Schema.Types.Object, ref: 'Package', required: true }]
 });
 
 module.exports = mongoose.model("client-orders", ClientOrderSchema);

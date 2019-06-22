@@ -1,5 +1,6 @@
 // Order Model
 const Order = require("../models/order.model");
+const Notifications = require("../models/user-notifications.model");
 const randomstring = require("randomstring");
 
 exports.createClientOrder = (req, res, next) => {
@@ -18,6 +19,17 @@ exports.createClientOrder = (req, res, next) => {
     awb: awbGeneratedNumber
   });
   newOrder.save().then(createdOrder => {
+    notification = {
+      message: `Order ${createdOrder.awb} was created`,
+      type: 'succeed'
+    };
+
+    Notifications.findOneAndUpdate({ _id: req.body.sender.email }, {
+      $push: {
+        notificationsList: [notification]
+      }
+    }, { upsert: false, setDefaultsOnInsert: true, new: true })
+
     res.status(201).json({
       message: "Order created"
     });

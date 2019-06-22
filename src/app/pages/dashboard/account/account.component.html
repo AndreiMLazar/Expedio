@@ -7,7 +7,6 @@
 </div>
 <hr class="title_divider" />
 
-
 <form [formGroup]="signupForm" class="credentials_form" (submit)="onUpdate()" *ngIf="!isLoading">
   <mat-radio-group aria-label="Tipul contului" formControlName="userType" required>
     <mat-radio-button value="client">Client</mat-radio-button>

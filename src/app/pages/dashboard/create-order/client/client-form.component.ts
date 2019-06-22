@@ -115,8 +115,6 @@ export class ClientFormComponent implements OnInit {
     if (this.clientForm.invalid) {
       return;
     }
-    this.clientForm.value.packages.pop();
-    this.clientForm.controls.packages.updateValueAndValidity();
     this.isLoading = true;
 
     this.clientFormModel.sender = new Sender();
@@ -139,10 +137,17 @@ export class ClientFormComponent implements OnInit {
     this.clientFormModel.deposit.address = this.clientForm.value.depositAddress;
     this.clientFormModel.deposit.name = this.clientForm.value.depositName;
     this.clientFormModel.deposit.country = this.clientForm.value.depositCountry;
-    this.clientFormModel.packagesList = this.clientForm.value.packages;
 
+    for (let i = 0; i < this.clientForm.value.packages.length; i++) {
+      if (this.clientForm.value.packages[i].packageType === '') {
+        this.clientForm.value.packages.splice(i, 1);
+      }
+    }
+
+    this.clientFormModel.packagesList = this.clientForm.value.packages;
     this.orderService.createClientOrder(this.clientFormModel);
 
+    this.clientForm.controls.packages.updateValueAndValidity();
     this.isLoading = false;
   }
 }

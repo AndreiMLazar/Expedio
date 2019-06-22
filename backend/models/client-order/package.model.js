@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const PackageSchema = mongoose.Schema({
-  mode: { type: String, required: true, unique: true, sparse: true },
-  type: { type: String, required: true, unique: true, sparse: true },
-  weight: { type: Number, required: true, unique: true, sparse: true },
-  volume: { type: Number, required: true, unique: true, sparse: true }
+  mode: { type: String, required: true },
+  type: { type: String, required: true },
+  weight: { type: Number, required: true },
+  volume: { type: Number, required: true }
 });
 
-module.exports = mongoose.model('Package', PackageSchema);
+module.exports = PackageSchema

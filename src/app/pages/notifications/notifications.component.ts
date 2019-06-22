@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-notifications',
@@ -13,9 +14,10 @@ export class NotificationsComponent implements OnInit {
       { message: 'dummy3', type: 'succeed' }
     ];
 
-  constructor() { }
+  constructor(private notificationsService: NotificationsService) { }
 
   ngOnInit() {
+    this.notificationsService.getUserNotifications();
   }
 
 }
