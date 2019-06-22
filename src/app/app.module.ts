@@ -30,6 +30,7 @@ import { AgentFormComponent } from './pages/dashboard/create-order/agent/agent-f
 import { CompanyFormComponent } from './pages/dashboard/create-order/company/company-form/company-form.component';
 import { CreateAgentComponent } from './pages/dashboard/create-user/create-user.component';
 import { OrderReviewComponent } from './pages/dashboard/order-review/order-review.component';
+import { NotificationsComponent } from './pages/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { OrderReviewComponent } from './pages/dashboard/order-review/order-revie
     CompanyFormComponent,
     CreateAgentComponent,
     OrderReviewComponent,
-    DragAndDropDirective
+    DragAndDropDirective,
+    NotificationsComponent
   ],
   imports: [
     MaterialModule,

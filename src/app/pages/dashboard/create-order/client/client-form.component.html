@@ -3,13 +3,7 @@
     <hr class="" />
     <h1 class="page_title_h1">Create Client Order</h1>
   </div>
-  <div class="notifications">
-    <mat-icon aria-hidden="false" aria-label="Notification">
-      notifications_active</mat-icon>
-    <div class="notifications_number">
-      <p>2</p>
-    </div>
-  </div>
+  <app-notifications></app-notifications>
 </div>
 <hr class="title_divider" />
 
@@ -173,7 +167,7 @@
             <input formControlName="packageVolume" matInput type="text" autocomplete="new-password"
               placeholder="Package Volume (cubic meters)" />
           </mat-form-field>
-          <button *ngIf="i>0" mat-button color="danger" (click)="removePackage(i)" type="button">Remove Package</button>
+          <button *ngIf="i>0" mat-button color="warning" (click)="removePackage(i)" type="button">Remove Package</button>
         </div>
       </div>
     </mat-expansion-panel>
