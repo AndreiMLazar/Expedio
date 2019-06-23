@@ -50,11 +50,12 @@ $succeed: #C6FF9B;
 
 ::ng-deep .notification .mat-icon {
   position: absolute;
-  left: 10px;
-  top: 14px;
-  width: 20px;
-  font-size: 20px;
-  height: 20px;
+  left: 9.5px;
+  top: 13.5px;
+  width: 21px;
+  font-size: 21px;
+  height: 21px;
+  filter: drop-shadow(0 0 0.6em rgba($gray, 0.6));
 }
 
 ::ng-deep .notification button {

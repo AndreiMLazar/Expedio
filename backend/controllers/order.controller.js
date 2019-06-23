@@ -8,8 +8,7 @@ exports.createClientOrder = (req, res, next) => {
     capitalization: 'uppercase',
     charset: 'alphanumeric',
     length: 16
-  })
-  console.log(awbGeneratedNumber);
+  });
   const newOrder = new Order({
     sender: req.body.sender,
     recipient: req.body.recipient,
@@ -19,7 +18,12 @@ exports.createClientOrder = (req, res, next) => {
     awb: awbGeneratedNumber
   });
   newOrder.save().then(createdOrder => {
+    let notificationNumber = randomstring.generate({
+      charset: 'numeric',
+      length: 10
+    });
     notification = {
+      id: notificationNumber,
       message: `Order ${createdOrder.awb} was created`,
       type: 'succeed'
     };

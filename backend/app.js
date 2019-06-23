@@ -16,6 +16,7 @@ mongoose.set('useCreateIndex', true);
 // Routes
 const userRoute = require("./routes/user.route");
 const orderRoute = require('./routes/order.route');
+const notificationsRoute = require('./routes/notifications.route');
 
 // Environment Variables
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
@@ -48,7 +49,8 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Api URLs
 app.use("/api/auth", userRoute);
-app.use("/api/orders", orderRoute)
+app.use("/api/orders", orderRoute);
+app.use("/api/notifications", notificationsRoute);
 
 // Static Sources
 app.get("/ngsw-worker.js", (req, res) => {

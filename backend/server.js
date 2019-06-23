@@ -38,9 +38,6 @@ server.listen(port, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
 
+// WebSockets Configuration
 const io = require('socket.io')(server);
-
-io.on('connection', socket => {
-  console.log(`new conn: ${socket.id}`);
-  // sendData(socket);
-});
+app.set('socketio', io);
