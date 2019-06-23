@@ -21,14 +21,9 @@ exports.getUserNotifications = (req, res, next) => {
       });
 
       io.on('connection', socket => {
-        console.log(`Connected: ${socket_id}`);
+        console.log(`Connected: ${socket}`);
       });
     }
-
-    // socket.on('hello message', msg => {
-    //   console.log('just got: ', msg);
-    //   socket.emit('chat message', 'hi from server');
-    // });
 
   });
 }

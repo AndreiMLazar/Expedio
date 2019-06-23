@@ -27,8 +27,8 @@ export class NotificationsService {
         console.log(this.notifications);
       });
     } else {
-      this.socket.on('pong', data => {
-        console.log('Received Pong: ', data);
+      this.socket.on('disconnect', data => {
+        this.socket.disconnect();
       });
     }
     // const notificationsData = new FormData();

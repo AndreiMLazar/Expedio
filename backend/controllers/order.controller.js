@@ -1,48 +1,77 @@
 // Order Model
 const Order = require("../models/order.model");
 const Notifications = require("../models/user-notifications.model");
+const Notification = require("../models/notification/notification.model");
 const randomstring = require("randomstring");
 
 exports.createClientOrder = (req, res, next) => {
-  let awbGeneratedNumber = randomstring.generate({
-    capitalization: 'uppercase',
-    charset: 'alphanumeric',
-    length: 16
+  let notificationNumber = randomstring.generate({
+    charset: 'numeric',
+    length: 10
   });
-  const newOrder = new Order({
-    sender: req.body.sender,
-    recipient: req.body.recipient,
-    loadingPlace: req.body.loadingPlace,
-    deposit: req.body.deposit,
-    packagesList: req.body.packagesList,
-    awb: awbGeneratedNumber
+  const notification = new Notification({
+    _id: notificationNumber,
+    message: `Order 5 was created`,
+    type: 'succeed'
   });
-  newOrder.save().then(createdOrder => {
-    let notificationNumber = randomstring.generate({
-      charset: 'numeric',
-      length: 10
-    });
-    notification = {
-      id: notificationNumber,
-      message: `Order ${createdOrder.awb} was created`,
-      type: 'succeed'
-    };
 
-    Notifications.findOneAndUpdate({ _id: req.body.sender.email }, {
-      $push: {
-        notificationsList: [notification]
-      }
-    }, { upsert: false, setDefaultsOnInsert: true, new: true })
-
-    res.status(201).json({
-      message: "Order created"
-    });
-  }).catch(err => {
-    console.log(err);
-    return res.status(500).json({
-      message: "Error creating order"
-    });
+  const userNotification = new Notifications({
+    _id: req.body.sender.email,
+    notificationsList: notification
   });
+
+  Notifications.findOne({ _id: req.body.sender.email })
+    .then(exists => {
+      console.log(exists);
+      if (!exists) {
+        userNotification.save();
+      } else {
+        Notifications.findOneAndUpdate({ _id: req.body.sender.email }, {
+          $push: {
+            notificationsList: notification
+          }
+        });
+      };
+    });
+
+  // Notifications.updateOne({ _id: req.body.sender.email }, userNotification, { upsert: true }, (err, doc) => {
+  //   console.log(err);
+  //   console.log(doc);
+  // });
+
+
+
+
+  // Notifications.update({_id: req.body.sender.email}, userNotification, { upsert: true, setDefaultsOnInsert: true, new: true });
+
+  // Notifications.find({ _id: req.body.sender.email }, function(err, userNotification) {
+  //   userNotification.notificationsList = [...userNotification.notificationsList, notification]
+
+  // }, { upsert: true, setDefaultsOnInsert: true, new: true });
+  // let awbGeneratedNumber = randomstring.generate({
+  //   capitalization: 'uppercase',
+  //   charset: 'alphanumeric',
+  //   length: 16
+  // });
+  // const newOrder = new Order({
+  //   sender: req.body.sender,
+  //   recipient: req.body.recipient,
+  //   loadingPlace: req.body.loadingPlace,
+  //   deposit: req.body.deposit,
+  //   packagesList: req.body.packagesList,
+  //   awb: awbGeneratedNumber
+  // });
+  // newOrder.save().then(createdOrder => {
+
+  //   res.status(201).json({
+  //     message: "Order created"
+  //   });
+  // }).catch(err => {
+  //   console.log(err);
+  //   return res.status(500).json({
+  //     message: "Error creating order"
+  //   });
+  // });
 }
 
 exports.showClientOrders = (req, res, next) => {

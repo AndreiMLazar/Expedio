@@ -113,7 +113,7 @@ export class ClientFormComponent implements OnInit {
 
   onClientForm() {
     if (this.clientForm.invalid) {
-      return;
+      // return;
     }
     this.isLoading = true;
 
