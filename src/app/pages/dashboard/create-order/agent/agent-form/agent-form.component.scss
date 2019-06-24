@@ -1,6 +1,12 @@
 @import "../../../../../../styles/variables.scss";
 
 .mat-form-field {
+  display: block;
+  width: 30em;
+  margin: 1em 0px 1.5em 0;
+}
+
+.packages_form .mat-form-field {
   display: inline-block;
   width: 20em;
   margin: 1em 10px 1em 0;

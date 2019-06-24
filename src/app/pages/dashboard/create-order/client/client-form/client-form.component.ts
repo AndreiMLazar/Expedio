@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { CountriesList } from 'src/app/models/lists/countries-list';
 import { AuthService } from 'src/app/services/auth.service';
-import { ClientFormModel } from 'src/app/models/client-form.model';
+import { ClientFormModel } from 'src/app/models/client-form/client-form.model';
 import { PackagesList } from 'src/app/models/lists/package-list';
 import { OrderService } from 'src/app/services/order.service';
-import { Recipient } from 'src/app/models/recipient.model';
-import { LoadingPlace } from 'src/app/models/loading-place.model';
-import { Deposit } from 'src/app/models/deposit.model';
-import { Package } from 'src/app/models/package.model';
-import { Sender } from 'src/app/models/sender.model';
+import { ClientSender } from 'src/app/models/client-form/client-sender.model';
+import { Recipient } from 'src/app/models/client-form/client-recipient.model';
+import { LoadingPlace } from 'src/app/models/client-form/loading-place.model';
+import { Deposit } from 'src/app/models/client-form/deposit.model';
 
 @Component({
   selector: 'app-client-form',
@@ -18,16 +17,13 @@ import { Sender } from 'src/app/models/sender.model';
 })
 export class ClientFormComponent implements OnInit {
   isLoading = false;
-  avatarPreview: string;
   clientForm: FormGroup;
   clientFormModel = new ClientFormModel();
   allCountries = CountriesList.countriesList;
   allPackageModes = PackagesList.modes;
-  step = 0;
 
   constructor(public authService: AuthService,
-              public orderService: OrderService,
-              private formBuilder: FormBuilder) { }
+              public orderService: OrderService) { }
 
   ngOnInit() {
     this.clientForm = new FormGroup({
@@ -117,7 +113,8 @@ export class ClientFormComponent implements OnInit {
     }
     this.isLoading = true;
 
-    this.clientFormModel.sender = new Sender();
+    this.clientFormModel.createdDate = new Date(Date.now());
+    this.clientFormModel.sender = new ClientSender();
     this.clientFormModel.sender.email = this.authService.currentUser.email;
     this.clientFormModel.sender.fullName = this.clientForm.value.clientFullName;
     this.clientFormModel.sender.address = this.clientForm.value.clientAddress;

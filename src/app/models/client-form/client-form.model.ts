@@ -1,12 +1,13 @@
-import { Recipient } from './recipient.model';
+import { Recipient } from './client-recipient.model';
 import { LoadingPlace } from './loading-place.model';
 import { Deposit } from './deposit.model';
-import { Package } from './package.model';
-import { Sender } from './sender.model';
+import { Package } from '../package.model';
+import { ClientSender } from './client-sender.model';
 
 export class ClientFormModel {
   awb: string;
-  sender: Sender;
+  createdDate: Date;
+  sender: ClientSender;
   recipient: Recipient;
   loadingPlace: LoadingPlace;
   deposit: Deposit;

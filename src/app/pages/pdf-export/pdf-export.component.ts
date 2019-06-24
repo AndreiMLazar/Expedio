@@ -3,7 +3,7 @@ import { OrderService } from 'src/app/services/order.service';
 import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { ActivatedRoute } from '@angular/router';
-import { ClientFormModel } from 'src/app/models/client-form.model';
+import { ClientFormModel } from 'src/app/models/client-form/client-form.model';
 
 @Component({
   selector: 'app-pdf-export',

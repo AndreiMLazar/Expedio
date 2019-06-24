@@ -1,4 +1,4 @@
-export class Sender {
+export class ClientSender {
   fullName: string;
   email: string;
   address: string;

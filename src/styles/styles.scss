@@ -283,7 +283,7 @@ table {
 
 .mat-form-field-flex {
   border: 1px solid rgba($divider, 0.45);
-  padding: 2px 4px;
+  padding: 5px;
   filter: drop-shadow(0 0 0.2em rgba($black, 0.15));
 }
 
@@ -424,6 +424,10 @@ table {
 .mat-chip.mat-standard-chip.mat-chip-selected.mat-accent {
   background: $accent;
   color: $white;
+}
+
+.mat-chip-list-wrapper .mat-standard-chip, .mat-chip-list-wrapper input.mat-input-element {
+  margin: 1em 0 0 5px !important;
 }
 
 .mat-stepper-horizontal,

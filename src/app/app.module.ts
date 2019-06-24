@@ -19,7 +19,7 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { ErrorComponent } from './pages/error/error.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
 import { AccountComponent } from './pages/dashboard/account/account.component';
-import { ClientFormComponent } from './pages/dashboard/create-order/client/client-form.component';
+import { ClientFormComponent } from './pages/dashboard/create-order/client/client-form/client-form.component';
 import { MyOrdersComponent } from './pages/dashboard/my-orders/my-orders.component';
 import { ContactComponent } from './pages/dashboard/contact/contact.component';
 import { ReportsComponent } from './pages/dashboard/reports/reports.component';

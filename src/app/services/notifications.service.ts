@@ -16,15 +16,11 @@ export class NotificationsService {
   constructor(private http: HttpClient) { }
 
   getUserNotifications() {
-    console.log(this.socket);
-
-
     if (!this.socket) {
       this.socket = openSocket(environment.host);
 
       this.socket.on('newNotifications', (data: Notification) => {
         this.notifications.push(data);
-        console.log(this.notifications);
       });
     } else {
       this.socket.on('disconnect', data => {
@@ -36,7 +32,6 @@ export class NotificationsService {
 
     // return this.http.post<Notification[]>(NOTIFICATIONS_URL, notificationsData).subscribe(response => {
     //   this.notifications = response;
-    //   console.log(response);
     // });
   }
 }

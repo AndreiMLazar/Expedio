@@ -6,7 +6,7 @@ import { SignupComponent } from './pages/auth-forms/signup/signup.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AccountComponent } from './pages/dashboard/account/account.component';
 import { OverviewComponent } from './pages/dashboard/overview/overview.component';
-import { ClientFormComponent } from './pages/dashboard/create-order/client/client-form.component';
+import { ClientFormComponent } from './pages/dashboard/create-order/client/client-form/client-form.component';
 import { MyOrdersComponent } from './pages/dashboard/my-orders/my-orders.component';
 import { ReportsComponent } from './pages/dashboard/reports/reports.component';
 import { ContactComponent } from './pages/dashboard/contact/contact.component';

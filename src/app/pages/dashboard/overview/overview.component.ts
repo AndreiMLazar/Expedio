@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
-import { ClientFormModel } from 'src/app/models/client-form.model';
+import { ClientFormModel } from 'src/app/models/client-form/client-form.model';
 import { OrderService } from 'src/app/services/order.service';
 import { AuthService } from 'src/app/services/auth.service';
 

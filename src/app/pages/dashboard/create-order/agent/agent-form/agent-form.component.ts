@@ -16,6 +16,7 @@ import { PackagesList } from 'src/app/models/lists/package-list';
 export class AgentFormComponent implements OnInit {
   isLoading = false;
   senderInfo: FormGroup;
+  recipientInfo: FormGroup;
   companyDetails: FormGroup;
   packages: FormGroup;
   allCountries = CountriesList.countriesList;
@@ -28,12 +29,30 @@ export class AgentFormComponent implements OnInit {
     this.senderInfo = new FormGroup({
       senderName: new FormControl('', { validators: [Validators.required] }),
       senderEmail: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      senderCNP: new FormControl('', {
+        validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(13), Validators.maxLength(13)],
+        updateOn: 'blur'
+      }),
       senderTelephone: new FormControl('', { validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(8)] }),
       senderCompanyName: new FormControl('', { validators: [Validators.required] }),
-      senderCUI: new FormControl('', { validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(7)] }),
+      senderCompanyCUI: new FormControl('', { validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(7)] }),
       senderAddress: new FormControl('', { validators: [Validators.minLength(5), Validators.maxLength(80)] }),
       senderCountry: new FormControl('', { validators: [Validators.required] }),
       senderPostalCode: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] })
+    });
+
+    this.recipientInfo = new FormGroup({
+      recipientName: new FormControl('', { validators: [Validators.required] }),
+      recipientEmail: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      // tslint:disable-next-line: max-line-length
+      recipientCNP: new FormControl('', {
+        validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(13), Validators.maxLength(13)],
+        updateOn: 'blur'
+      }),
+      recipientTelephone: new FormControl('', { validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(8)] }),
+      recipientAddress: new FormControl('', { validators: [Validators.minLength(5), Validators.maxLength(80)] }),
+      recipientCountry: new FormControl('', { validators: [Validators.required] }),
+      recipientPostalCode: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] })
     });
 
     this.companyDetails = new FormGroup({
@@ -67,5 +86,9 @@ export class AgentFormComponent implements OnInit {
   removePackage(index: number) {
     const packages = this.packages.controls.packages as FormArray;
     packages.removeAt(index);
+  }
+
+  submit() {
+
   }
 }

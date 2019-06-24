@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const SenderSchema = mongoose.Schema({
+const ClientSenderSchema = mongoose.Schema({
   fullName: { type: String, required: true },
   email: { type: String, required: true },
   cnp: { type: Number, required: true },
@@ -9,4 +9,4 @@ const SenderSchema = mongoose.Schema({
   instructions: { type: String, required: false }
 });
 
-module.exports = SenderSchema;
+module.exports = ClientSenderSchema;

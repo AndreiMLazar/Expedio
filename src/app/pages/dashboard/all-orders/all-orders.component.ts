@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientFormModel } from 'src/app/models/client-form.model';
+import { ClientFormModel } from 'src/app/models/client-form/client-form.model';
 import { OrderService } from 'src/app/services/order.service';
 import { AuthService } from 'src/app/services/auth.service';
 
