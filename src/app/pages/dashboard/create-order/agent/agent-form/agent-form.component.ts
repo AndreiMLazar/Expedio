@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { CountriesList } from 'src/app/models/lists/countries-list';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { PackagesList } from 'src/app/models/lists/package-list';
 
 @Component({
   selector: 'app-agent-form',
   templateUrl: './agent-form.component.html',
-  styleUrls: ['./agent-form.component.scss']
+  styleUrls: ['./agent-form.component.scss'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+  }]
 })
 export class AgentFormComponent implements OnInit {
   isLoading = false;
@@ -14,6 +19,7 @@ export class AgentFormComponent implements OnInit {
   companyDetails: FormGroup;
   packages: FormGroup;
   allCountries = CountriesList.countriesList;
+  allPackageModes = PackagesList.modes;
 
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService) { }
@@ -41,8 +47,25 @@ export class AgentFormComponent implements OnInit {
     });
 
     this.packages = new FormGroup({
-
+      packages: new FormArray([])
     });
+
+    this.addPackage();
+    this.addPackage();
   }
 
+  addPackage() {
+    const packages = this.packages.controls.packages as FormArray;
+    packages.push(new FormGroup({
+      packageMode: new FormControl(''),
+      packageType: new FormControl(''),
+      packageWeight: new FormControl(''),
+      packageVolume: new FormControl('')
+    }));
+  }
+
+  removePackage(index: number) {
+    const packages = this.packages.controls.packages as FormArray;
+    packages.removeAt(index);
+  }
 }

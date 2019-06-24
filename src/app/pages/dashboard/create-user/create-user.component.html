@@ -8,6 +8,9 @@
 <hr class="title_divider" />
 
 <mat-horizontal-stepper [linear]="false" #stepper>
+  <ng-template matStepperIcon="edit">
+    <mat-icon>account_circle</mat-icon>
+  </ng-template>
   <mat-step [stepControl]="userBasicInfo">
     <form [formGroup]="userBasicInfo">
       <ng-template matStepLabel>User's Basic Information</ng-template>
