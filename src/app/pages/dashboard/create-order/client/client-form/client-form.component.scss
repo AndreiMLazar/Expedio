@@ -1,0 +1,19 @@
+@import "../../../../../../styles/variables.scss";
+
+.mat-form-field {
+  display: block;
+  width: 20em;
+  margin: 0.5em 0;
+}
+
+.submit_button {
+  margin-top: 2em;
+  float: right;
+  width: 10em;
+}
+
+.package .mat-form-field {
+  display: inline-block;
+  width: 14em !important;
+  margin: 1em 1.5em 0 0 !important;
+}

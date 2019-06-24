@@ -28,7 +28,7 @@ exports.createUser = (req, res, next) => {
     }).catch(err => {
       console.log(err);
       return res.status(500).json({
-        message: "User created"
+        message: "There are required fields that were left empty"
       });
     });
   }).catch(err => {
@@ -54,7 +54,7 @@ exports.loginUser = (req, res, next) => {
     .then(result => {
       if (!result) {
         return res.status(401).json({
-          message: "Passwords do not match"
+          message: "Password is not correct"
         });
       }
       const token = jwt.sign(
@@ -94,13 +94,13 @@ exports.updateUser = (req, res, next) => {
           User.findOneAndUpdate({ _id: req.body.userId }, {
             $set: {
               fullName: req.body.fullName,
+              userType: req.body.userType,
               telephone: req.body.telephone,
               company: req.body.company,
               cui: req.body.cui,
               country: req.body.country,
-              address: req.body.address,
               postalCode: req.body.postalCode,
-              userType: req.body.userType
+              address: req.body.address
             }
           }, {
               "new": true
@@ -122,5 +122,37 @@ exports.updateUser = (req, res, next) => {
           });
         }
       })
+    })
+}
+
+exports.updateAvatar = (req, res, next) => {
+  const url = req.protocol + "://" + req.get("host");
+
+  User.findOne({ _id: req.body.userId })
+    .then(user => {
+      if (user) {
+        User.findOneAndUpdate({ _id: req.body.userId }, {
+          $set: {
+            avatarPath: url + "/images/avatars/" + req.file.filename,
+          }
+        }, {
+            "new": true
+          }).then(doc => {
+            res.status(200).json({
+              message: "Avatar updated",
+              result: doc
+            })
+          }).catch(err => {
+            console.log(err);
+            res.status(500).json({
+              message: "Error Occured"
+            })
+          })
+      }
+      else {
+        return res.status(401).json({
+          message: "User not found"
+        });
+      }
     })
 }

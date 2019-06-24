@@ -21,3 +21,4 @@ export class LoginActivateGuard implements CanActivate  {
       return isLoggedIn;
     }
 }
+

@@ -1,9 +1,11 @@
+import { ChangePictureComponent } from './change-picture/change-picture.component';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment as env } from '../../../environments/environment';
 import { dashboardAnimation } from 'src/app/animations/dashboard-animation';
+import { MatDialog } from '@angular/material';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -17,7 +19,9 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   public env = env.imagesURL + 'avatars/';
 
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService,
+              private router: Router,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.userIsAuthenticated = this.authService.isLoggedIn();
@@ -26,6 +30,12 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
       });
+  }
+
+  openChangePicture() {
+    this.dialog.open(ChangePictureComponent, {
+      width: 'auto',
+    });
   }
 
   ngAfterViewInit() {

@@ -1,0 +1,98 @@
+<div class="top_bar">
+  <div class="page_title">
+    <hr class="" />
+    <h1 class="page_title_h1">Create Company Order</h1>
+  </div>
+  <app-notifications></app-notifications>
+</div>
+<hr class="title_divider" />
+
+<form [formGroup]="companyForm" (submit)="onCompanyForm()" *ngIf="!isLoading">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>account_circle</mat-icon>
+          Transport Details
+        </mat-panel-title>
+        <mat-panel-description>
+          Date of the transport, address, country
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input formControlName="transportDate" matInput [matDatepicker]="picker" placeholder="Transport Date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="fromAddress" matInput type="text" autocomplete="new-password"
+          placeholder="From Address" />
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="fromCountry" placeholder="From Country">
+          <mat-option *ngFor="let country of allCountries" [value]="country.name">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="toAddress" matInput type="text" autocomplete="new-password" placeholder="To Address" />
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="toCountry" placeholder="To Country">
+          <mat-option *ngFor="let country of allCountries" [value]="country.name">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>airport_shuttle</mat-icon>
+          Trucks
+        </mat-panel-title>
+        <mat-panel-description>
+          How many free trucks does the transport have?
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <button mat-stroked-button color="primary" (click)="addTruck()" type="button">Add Truck</button>
+      <div class="package" formArrayName="trucks"
+        *ngFor="let truck of companyForm.controls.trucks?.value | slice:1; let i = index;">
+        <div [formGroupName]="i">
+          <mat-chip-list aria-label="Trucks">
+            <mat-chip color="accent" selected>Truck {{ i + 1 }}</mat-chip>
+          </mat-chip-list>
+          <mat-form-field>
+          <input formControlName="truckType" matInput type="text" autocomplete="new-password"
+            placeholder="Type" />
+          </mat-form-field>
+          <mat-form-field>
+          <input formControlName="truckAvailablePallets" matInput type="text" autocomplete="new-password"
+            placeholder="Available EUR-Pallets" />
+          </mat-form-field>
+          <button *ngIf="i>0" mat-button color="warning" (click)="removeTruck(i)" type="button">Remove
+            Truck</button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>short_text</mat-icon>
+          Details
+        </mat-panel-title>
+        <mat-panel-description>
+          Additional information
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-form-field>
+        <textarea formControlName="instructions" matInput placeholder="Instructions"></textarea>
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <button mat-flat-button color="primary" class="submit_button" type="submit">Submit</button>
+</form>

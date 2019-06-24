@@ -5,7 +5,7 @@
     <form [formGroup]="signupForm" class="credentials_form" (submit)="onSignup()" *ngIf="!isLoading">
       <mat-radio-group aria-label="Tipul contului" formControlName="userType" required>
         <mat-radio-button value="client">Client</mat-radio-button>
-        <mat-radio-button value="firma">Firma de Transport</mat-radio-button>
+        <mat-radio-button value="company">Shipping Company</mat-radio-button>
       </mat-radio-group>
       <mat-form-field>
         <input formControlName="email" matInput type="email" autocomplete="new-password" placeholder="Mail" required />
@@ -14,7 +14,7 @@
       <mat-form-field>
         <input formControlName="password" matInput type="password" autocomplete="new-password" placeholder="Password"
           required />
-        <mat-error *ngIf="signupForm.get('email').invalid">Please enter a valid password</mat-error>
+        <mat-error *ngIf="signupForm.get('password').invalid">Please enter a valid password</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input formControlName="fullName" matInput type="text" autocomplete="new-password" placeholder="Your Full Name"
@@ -28,10 +28,10 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input formControlName="company" matInput type="text" autocomplete="new-password" placeholder="Company" required />
+        <input formControlName="company" matInput type="text" autocomplete="new-password" placeholder="Company" />
       </mat-form-field>
       <mat-form-field>
-        <input formControlName="cui" matInput type="text" autocomplete="new-password" placeholder="CUI" required />
+        <input formControlName="cui" matInput type="text" autocomplete="new-password" placeholder="CUI" />
       </mat-form-field>
       <mat-form-field fxFlex>
         <mat-select formControlName="country" placeholder="Country" required>

@@ -13,4 +13,6 @@ router.post("/login", UserController.loginUser);
 
 router.post("/update", fileMiddleware, UserController.updateUser);
 
+router.post("/avatar", fileMiddleware, UserController.updateAvatar);
+
 module.exports = router;

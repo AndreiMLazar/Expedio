@@ -1,0 +1,112 @@
+@import "../../../styles/variables.scss";
+
+$warning: #F97A7A;
+$information: #F7E288;
+$succeed: #C6FF9B;
+
+.notifications {
+  display: inline-block;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  filter: drop-shadow(0 0 0.3em rgba($red-dark, 0.5));
+  transition: 0.1s $transition;
+
+  mat-icon {
+    cursor: pointer;
+    fill: $red-dark;
+    color: $red-dark;
+    &:hover {
+      fill: $red;
+      color: $red;
+      transition: 0.1s $transition;
+    }
+  }
+
+  .notifications_number {
+    height: 1.3em;
+    width: 1.3em;
+    background: $red;
+    position: absolute;
+    top: 0;
+    right: -0.4em;
+    border-radius: 100%;
+    filter: drop-shadow(-0.1em 0.1em 0.4em rgba($red, 0.3));
+
+    p {
+      color: $whitest;
+      font-size: 1em;
+      margin-top: -0.1em;
+      margin-left: 0.3em;
+      font-weight: 800;
+      text-shadow: 0 0 0.1em rgba($black, 1);
+    }
+  }
+}
+
+.notification {
+  position: relative;
+}
+
+::ng-deep .notification .mat-icon {
+  position: absolute;
+  left: 9.5px;
+  top: 13.5px;
+  width: 21px;
+  font-size: 21px;
+  height: 21px;
+  filter: drop-shadow(0 0 0.6em rgba($gray, 0.6));
+}
+
+::ng-deep .notification button {
+  padding-left: 36px !important;
+  text-transform: capitalize;
+}
+
+::ng-deep .mat-menu-panel {
+  position: absolute;
+  right: 7em;
+  top: 5px;
+  background: linear-gradient($whitest 0%, $white 100%);
+  filter: drop-shadow(0 0.8em 1.5em rgba($black, 0.5));
+  width: auto !important;
+  min-width: 220px !important;
+  max-width: 300px !important;
+  min-height: 48px !important;
+  border-radius: 2px;
+}
+
+::ng-deep .mat-menu-content:not(:empty) {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-menu-item {
+  color: $gray;
+}
+
+::ng-deep .mat-menu-item:not(:last-child) {
+  border-bottom: 1px solid $divider;
+}
+
+.notification_type {
+  position: absolute;
+  left: 0;
+  width: 4px;
+  height: 48px;
+  z-index: 2;
+}
+
+::ng-deep div [type="succeed"] {
+  background: $succeed;
+  box-shadow: 0.5em 0 1.2em rgba($succeed, 0.5);
+}
+
+::ng-deep div [type="information"] {
+  background: $information;
+  box-shadow: 0.5em 0 1.2em rgba($information, 0.5);
+}
+
+::ng-deep div [type="warning"] {
+  background: $warning;
+  box-shadow: 0.5em 0 1.2em rgba($warning, 0.2);
+}

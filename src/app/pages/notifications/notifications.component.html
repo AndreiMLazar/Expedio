@@ -1,0 +1,30 @@
+<div class="notifications">
+  <mat-icon *ngIf="this.notificationsService.notifications.length" aria-hidden="false" aria-label="Notification"
+    [matMenuTriggerFor]="notificationsMenu">
+    notifications_active</mat-icon>
+  <mat-icon *ngIf="this.notificationsService.notifications.length === 0" aria-hidden="false" aria-label="Notification"
+    [matMenuTriggerFor]="notificationsMenu">
+    notifications</mat-icon>
+  <div *ngIf="this.notificationsService.notifications.length" class="notifications_number">
+    <p>{{ this.notificationsService.notifications.length }}</p>
+  </div>
+  <mat-menu #notificationsMenu="matMenu">
+    <ng-container *ngIf="this.notificationsService.notifications.length === 0; then hideNotifications; else showNotifications"></ng-container>
+    <ng-template #hideNotifications>
+      <button mat-menu-item>You don't have new notifications yet</button>
+    </ng-template>
+    <ng-template #showNotifications>
+      <ng-container *ngFor="let notification of this.notificationsService.notifications; let i=index">
+        <div class="notification">
+          <div class="notification_type" [attr.type]="notification.type"></div>
+          <ng-container [ngSwitch]="notification.type">
+            <mat-icon *ngSwitchCase="'warning'" aria-hidden="false" aria-label="Notification">error</mat-icon>
+            <mat-icon *ngSwitchCase="'information'" aria-hidden="false" aria-label="Notification">info</mat-icon>
+            <mat-icon *ngSwitchCase="'succeed'" aria-hidden="false" aria-label="Notification">check_circle</mat-icon>
+          </ng-container>
+          <button mat-menu-item>{{ notification.message }}</button>
+        </div>
+      </ng-container>
+    </ng-template>
+  </mat-menu>
+</div>

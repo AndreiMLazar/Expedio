@@ -5,22 +5,30 @@
   text-align: center;
 }
 
-.user_picture img {
-  border-radius: 40%;
+.user_picture {
   width: 80px;
   height: 80px;
+  margin: auto;
+  background-size: cover !important;
+  border-radius: 40%;
+  margin: auto;
+}
+
+.original {
   z-index: 2;
-  filter: drop-shadow(0 0.5em 0.5em rgba($black, 0.25));
+  margin-top: -80px;
+  position: absolute;
+  left: calc(50% - 40px);
+  filter: drop-shadow(0 0.2em 0.3em rgba($black, 0.4));
 }
 
 .blur {
   content: "";
   width: 80px;
   height: 80px;
-  margin-right: -80px;
-  opacity: 0.5;
+  opacity: 0.7;
   z-index: 1 !important;
-  -webkit-filter: blur(0.8em) saturate(4) !important;
+  -webkit-filter: blur(1em) saturate(4) !important;
   filter: blur(1.4em) saturate(4) !important;
 }
 
@@ -166,17 +174,18 @@
 .logo {
   position: absolute;
   text-align: center;
-  height: 10em;
+  height: 6em;
   width: 100%;
   left: 0;
   bottom: 0;
   border-bottom-left-radius: 10px;
   padding-bottom: 0.5em;
-  background: linear-gradient(transparent 0%, rgba($divider, 0.8) 100%);
+  background: linear-gradient(transparent 0%, rgba($divider, 0.3) 100%);
+  filter: drop-shadow(2px 3px 3px rgba($accent, 0.6));
 }
 
 .logo img {
-  width: 5em;
+  width: 4em;
   height: auto;
 }
 
@@ -184,7 +193,7 @@
   margin: -0.5em 0 0 0;
   color: $navy;
   text-transform: uppercase;
-  font-size: 1.2em;
+  font-size: 1em;
   letter-spacing: -0.05em;
   font-weight: 600;
 }

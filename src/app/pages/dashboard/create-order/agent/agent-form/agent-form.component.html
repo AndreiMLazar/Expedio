@@ -1,0 +1,242 @@
+<div class="top_bar">
+  <div class="page_title">
+    <hr class="" />
+    <h1 class="page_title_h1">Create Order</h1>
+  </div>
+  <app-notifications></app-notifications>
+</div>
+<hr class="title_divider" />
+
+<mat-horizontal-stepper [linear]="false" #stepper>
+  <ng-template matStepperIcon="edit">
+    <mat-icon>airport_shuttle</mat-icon>
+  </ng-template>
+  <mat-step [stepControl]="senderInfo">
+    <form [formGroup]="senderInfo">
+      <ng-template matStepLabel>Sender's Information</ng-template>
+
+      <mat-form-field>
+        <input formControlName="senderEmail" matInput type="email" autocomplete="new-password"
+          placeholder="Sender's Mail" required />
+        <mat-error *ngIf="senderInfo.get('senderEmail').invalid">Please enter a valid email address</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="senderName" matInput type="text" autocomplete="new-password"
+          placeholder="Sender's Full Name" required />
+        <mat-error *ngIf="senderInfo.get('senderName').invalid">Sender's full name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="senderCNP" matInput type="text" autocomplete="new-password" placeholder="Client CNP" />
+        <mat-error *ngIf="senderInfo.get('senderCNP').invalid">Sender's CNP must consist of <strong>numbers</strong> and is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="senderTelephone" matInput type="text" autocomplete="new-password"
+          placeholder="Sender's Telephone Number" required />
+        <mat-error *ngIf="senderInfo.get('senderTelephone').invalid">Sender's telephone number is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="senderCountry" placeholder="Sender's Country" required>
+          <mat-option *ngFor="let country of allCountries" [value]="country.name">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="senderInfo.get('senderCountry').invalid">Please enter a valid country
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="senderAddress" matInput type="text" autocomplete="new-password"
+          placeholder="Sender's Address" required minlength="5" maxlength="80" />
+        <mat-error *ngIf="senderInfo.get('senderAddress').invalid">Please enter a valid address
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="senderPostalCode" matInput type="text" autocomplete="new-password"
+          placeholder="Sender's Postal Code" required minlength="2" />
+        <mat-error *ngIf="senderInfo.get('senderPostalCode').invalid">Please enter a valid postal code
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="senderCompanyName" matInput type="text" autocomplete="new-password"
+          placeholder="Sender's Company Name" />
+        <mat-error *ngIf="senderInfo.get('senderCompanyName').invalid">Please enter a valid company name</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="senderCompanyCUI" matInput type="text" autocomplete="new-password"
+          placeholder="Sender's Company CUI" />
+        <mat-error *ngIf="senderInfo.get('senderCompanyCUI').invalid">Please enter a valid company CUI number
+        </mat-error>
+      </mat-form-field>
+    </form>
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-stroked-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="packages">
+    <form [formGroup]="packages" class="packages_form">
+      <ng-template matStepLabel>Packages</ng-template>
+      <button mat-stroked-button color="primary" (click)="addPackage()" type="button">Add Package</button>
+      <div class="package" formArrayName="packages"
+        *ngFor="let package of packages.controls.packages?.value | slice:1; let i = index;">
+        <div [formGroupName]="i">
+          <mat-chip-list aria-label="Packages">
+            <mat-chip color="accent" selected>Package {{ i + 1 }}</mat-chip>
+          </mat-chip-list>
+          <mat-form-field fxFlex>
+            <mat-select formControlName="packageMode" placeholder="Package Mode">
+              <mat-option *ngFor="let packageMode of allPackageModes" [value]="packageMode.name">
+                {{ packageMode.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="packageType" matInput type="text" autocomplete="new-password"
+              placeholder="Package Type" />
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="packageWeight" matInput type="text" autocomplete="new-password"
+              placeholder="Package Weight (kg)" />
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="packageVolume" matInput type="text" autocomplete="new-password"
+              placeholder="Package Volume (cubic meters)" />
+          </mat-form-field>
+          <button *ngIf="i>0" mat-button color="warning" (click)="removePackage(i)" type="button">Remove
+            Package</button>
+        </div>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-stroked-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="recipientInfo">
+    <form [formGroup]="recipientInfo">
+      <ng-template matStepLabel>Recipient's Information</ng-template>
+
+      <mat-form-field>
+        <input formControlName="recipientEmail" matInput type="email" autocomplete="new-password"
+          placeholder="Recipient's Mail" required />
+        <mat-error *ngIf="recipientInfo.get('recipientEmail').invalid">Please enter a valid email address</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="recipientName" matInput type="text" autocomplete="new-password"
+          placeholder="Recipient's Full Name" required />
+        <mat-error *ngIf="recipientInfo.get('recipientName').invalid">Recipient's full name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="recipientCNP" matInput type="text" autocomplete="new-password"
+          placeholder="Client CNP" />
+        <mat-error *ngIf="recipientInfo.get('recipientCNP').invalid">Recipient's CNP must consist of <strong>numbers</strong> and is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="recipientTelephone" matInput type="text" autocomplete="new-password"
+          placeholder="Recipient's Telephone Number" required />
+        <mat-error *ngIf="recipientInfo.get('recipientTelephone').invalid">Recipient's telephone number is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="recipientCountry" placeholder="Recipient's Country" required>
+          <mat-option *ngFor="let country of allCountries" [value]="country.name">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="recipientInfo.get('recipientCountry').invalid">Please enter a valid country
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="recipientAddress" matInput type="text" autocomplete="new-password"
+          placeholder="Recipient's Address" required minlength="5" maxlength="80" />
+        <mat-error *ngIf="recipientInfo.get('recipientAddress').invalid">Please enter a valid address
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="recipientPostalCode" matInput type="text" autocomplete="new-password"
+          placeholder="Recipient's Postal Code" required minlength="2" />
+        <mat-error *ngIf="recipientInfo.get('recipientPostalCode').invalid">Please enter a valid postal code
+        </mat-error>
+      </mat-form-field>
+    </form>
+
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-stroked-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="companyDetails">
+    <form [formGroup]="companyDetails">
+      <ng-template matStepLabel>Transport Company</ng-template>
+      <mat-form-field>
+        <input formControlName="companyName" matInput type="text" autocomplete="new-password" placeholder="Company Name"
+          required />
+        <mat-error *ngIf="companyDetails.get('companyName').invalid">Company full name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="companyEmail" matInput type="email" autocomplete="new-password"
+          placeholder="Company Mail" required />
+        <mat-error *ngIf="companyDetails.get('companyEmail').invalid">Please enter a valid email address</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="companyTelephone" matInput type="text" autocomplete="new-password"
+          placeholder="Company Telephone Number" required />
+        <mat-error *ngIf="companyDetails.get('companyTelephone').invalid">Company telephone number is
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="companyCUI" matInput type="text" autocomplete="new-password" placeholder="Company CUI"
+          required />
+        <mat-error *ngIf="companyDetails.get('companyCUI').invalid">Please enter a valid CUI number</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="companyAddress" matInput type="text" autocomplete="new-password"
+          placeholder="Company Address" required minlength="5" maxlength="80" />
+        <mat-error *ngIf="companyDetails.get('companyAddress').invalid">Please enter a valid company address</mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-select formControlName="companyCountry" placeholder="Company Country" required>
+          <mat-option *ngFor="let country of allCountries" [value]="country.name">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="companyDetails.get('companyCountry').invalid">Please enter a valid country for the company
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input formControlName="companyPostalCode" matInput type="text" autocomplete="new-password"
+          placeholder="Company Postal Code" required minlength="2" />
+        <mat-error *ngIf="companyDetails.get('companyPostalCode').invalid">Please enter a valid company postal code
+        </mat-error>
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-stroked-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Finish</ng-template>
+    <p>You are ready to submit this form.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-flat-button (click)="submit()">Submit</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { CountriesList } from 'src/app/models/lists/countries-list';
 import { AuthService } from 'src/app/services/auth.service';
-import { mimeType } from 'src/validators/mime-type.validator';
+import { mimeType } from 'src/app/validators/mime-type.validator';
 
 @Component({
   selector: 'app-account',
@@ -85,9 +85,7 @@ export class AccountComponent implements OnInit {
       return;
     }
     this.isLoading = true;
-
     this.authService.updateUser(
-      this.signupForm.value.email,
       this.signupForm.value.password,
       this.signupForm.value.fullName,
       this.signupForm.value.userType,
@@ -96,8 +94,7 @@ export class AccountComponent implements OnInit {
       this.signupForm.value.cui,
       this.signupForm.value.country,
       this.signupForm.value.address,
-      this.signupForm.value.postalCode,
-      this.signupForm.value.avatar
+      this.signupForm.value.postalCode
     );
     this.isLoading = false;
   }

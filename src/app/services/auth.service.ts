@@ -55,25 +55,24 @@ export class AuthService {
     signupData.append('cui', cui);
     signupData.append('country', country);
     signupData.append('postalCode', postalCode);
+    console.table(signupData);
 
     return this.http.post(AUTH_URL + '/signup', signupData).subscribe(() => {
       this.router.navigate(['/login']);
     });
   }
 
-  updateUser(email: string, password: string, fullName: string, userType: string,
-             telephone: string, company: string, cui: string, country: string,
-             address: string, postalCode: string, avatar: File) {
+  updateUser(password: string, fullName: string, userType: string, telephone: string,
+             company: string, cui: string, country: string,
+             address: string, postalCode: string) {
     const updateData = new FormData();
     updateData.append('userId', localStorage.getItem('userId'));
-    updateData.append('email', email);
     updateData.append('password', password);
     updateData.append('fullName', fullName);
     updateData.append('userType', userType);
     updateData.append('telephone', telephone);
     updateData.append('company', company);
     updateData.append('address', address);
-    updateData.append('avatar', avatar);
     updateData.append('cui', cui);
     updateData.append('country', country);
     updateData.append('postalCode', postalCode);
@@ -104,6 +103,16 @@ export class AuthService {
           this.router.navigate(['/dashboard/overview']);
         }
       });
+  }
+
+  updateAvatar(avatar: File) {
+    const updateData = new FormData();
+    updateData.append('userId', localStorage.getItem('userId'));
+    updateData.append('avatar', avatar);
+    return this.http.post<UpdatedUserResponse>(AUTH_URL + '/avatar', updateData).subscribe(response => {
+      localStorage.setItem('user', JSON.stringify(response.result));
+      this.currentUser.avatarPath = response.result.avatarPath;
+    });
   }
 
   autoAuthUser() {

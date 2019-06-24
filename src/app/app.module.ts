@@ -1,3 +1,4 @@
+import { DragAndDropDirective } from './directives/drag-and-drop.directive';
 import { MaterialModule } from './material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -18,11 +19,18 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { ErrorComponent } from './pages/error/error.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
 import { AccountComponent } from './pages/dashboard/account/account.component';
-import { ClientFormComponent } from './pages/dashboard/client-form/client-form.component';
-import { MyCommandsComponent } from './pages/dashboard/my-commands/my-commands.component';
+import { ClientFormComponent } from './pages/dashboard/create-order/client/client-form/client-form.component';
+import { MyOrdersComponent } from './pages/dashboard/my-orders/my-orders.component';
 import { ContactComponent } from './pages/dashboard/contact/contact.component';
 import { ReportsComponent } from './pages/dashboard/reports/reports.component';
 import { ChangePictureComponent } from './pages/dashboard/change-picture/change-picture.component';
+import { AllOrdersComponent } from './pages/dashboard/all-orders/all-orders.component';
+import { PdfExportComponent } from './pages/pdf-export/pdf-export.component';
+import { AgentFormComponent } from './pages/dashboard/create-order/agent/agent-form/agent-form.component';
+import { CompanyFormComponent } from './pages/dashboard/create-order/company/company-form/company-form.component';
+import { CreateAgentComponent } from './pages/dashboard/create-user/create-user.component';
+import { OrderReviewComponent } from './pages/dashboard/order-review/order-review.component';
+import { NotificationsComponent } from './pages/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -35,10 +43,18 @@ import { ChangePictureComponent } from './pages/dashboard/change-picture/change-
     ErrorComponent,
     AccountComponent,
     ClientFormComponent,
-    MyCommandsComponent,
+    MyOrdersComponent,
     ContactComponent,
     ReportsComponent,
-    ChangePictureComponent
+    ChangePictureComponent,
+    AllOrdersComponent,
+    PdfExportComponent,
+    AgentFormComponent,
+    CompanyFormComponent,
+    CreateAgentComponent,
+    OrderReviewComponent,
+    DragAndDropDirective,
+    NotificationsComponent
   ],
   imports: [
     MaterialModule,

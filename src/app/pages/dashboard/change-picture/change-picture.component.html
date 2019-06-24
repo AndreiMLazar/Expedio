@@ -1,3 +1,15 @@
-<p>
-  change-picture works!
-</p>
+<div class="top_bar">
+  <div class="page_title">
+    <h1 class="page_title_h1">Change Picture</h1>
+  </div>
+</div>
+<hr class="title_divider" />
+<div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
+  <div class="text-wrapper">
+    <div class="centered">Drop your avatar here</div>
+  </div>
+</div>
+
+<img *ngIf="files[0]" [src]="files[0].url" width="100px" height="100px">
+<br>
+<button [mat-dialog-close] class="upload_button" mat-flat-button type="submit" (click)="upload()">Save</button>
