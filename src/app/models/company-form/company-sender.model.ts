@@ -2,6 +2,6 @@ export class CompanySender {
   email: string;
   company: string;
   address: string;
-  cui: number;
+  cui: string;
   country: string;
 }

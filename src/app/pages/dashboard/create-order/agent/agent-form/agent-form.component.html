@@ -16,10 +16,18 @@
       <ng-template matStepLabel>Sender's Information</ng-template>
 
       <mat-form-field>
-        <input formControlName="senderEmail" matInput type="email" autocomplete="new-password"
-          placeholder="Sender's Mail" required />
+        <input formControlName="senderEmail" matInput type="email" [matAutocomplete]="senderAuto"
+          autocomplete="new-password" placeholder="Sender's Mail" required />
         <mat-error *ngIf="senderInfo.get('senderEmail').invalid">Please enter a valid email address</mat-error>
       </mat-form-field>
+      <mat-autocomplete #senderAuto="matAutocomplete" [displayWith]="displayUser"
+        (optionSelected)='populateSender($event.option.value)'>
+        <mat-option *ngFor="let user of filteredSenders" [value]="user">
+          <span>{{ user.fullName }}</span>
+          <small> | {{ user.email }}</small>
+        </mat-option>
+      </mat-autocomplete>
+
       <mat-form-field>
         <input formControlName="senderName" matInput type="text" autocomplete="new-password"
           placeholder="Sender's Full Name" required />
@@ -125,10 +133,18 @@
       <ng-template matStepLabel>Recipient's Information</ng-template>
 
       <mat-form-field>
-        <input formControlName="recipientEmail" matInput type="email" autocomplete="new-password"
-          placeholder="Recipient's Mail" required />
+        <input formControlName="recipientEmail" matInput type="email" [matAutocomplete]="recipientAuto"
+          autocomplete="new-password" placeholder="Recipient's Mail" required />
         <mat-error *ngIf="recipientInfo.get('recipientEmail').invalid">Please enter a valid email address</mat-error>
       </mat-form-field>
+      <mat-autocomplete #recipientAuto="matAutocomplete" [displayWith]="displayUser"
+        (optionSelected)='populateRecipient($event.option.value)'>
+        <mat-option *ngFor="let user of filteredRecipients" [value]="user">
+          <span>{{ user.fullName }}</span>
+          <small> | {{ user.email }}</small>
+        </mat-option>
+      </mat-autocomplete>
+
       <mat-form-field>
         <input formControlName="recipientName" matInput type="text" autocomplete="new-password"
           placeholder="Recipient's Full Name" required />
@@ -182,17 +198,27 @@
   <mat-step [stepControl]="companyDetails">
     <form [formGroup]="companyDetails">
       <ng-template matStepLabel>Transport Company</ng-template>
+
+      <mat-form-field>
+        <input formControlName="companyEmail" matInput type="email" [matAutocomplete]="companyAuto"
+          autocomplete="new-password" placeholder="Company Mail" required />
+        <mat-error *ngIf="companyDetails.get('companyEmail').invalid">Please enter a valid email address</mat-error>
+      </mat-form-field>
+      <mat-autocomplete #companyAuto="matAutocomplete" [displayWith]="displayUser"
+        (optionSelected)='populateCompany($event.option.value)'>
+        <mat-option *ngFor="let user of filteredCompanies" [value]="user">
+          <span>{{ user.fullName }}</span>
+          <small> | {{ user.email }}</small>
+        </mat-option>
+      </mat-autocomplete>
+
       <mat-form-field>
         <input formControlName="companyName" matInput type="text" autocomplete="new-password" placeholder="Company Name"
           required />
         <mat-error *ngIf="companyDetails.get('companyName').invalid">Company full name is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-      <mat-form-field>
-        <input formControlName="companyEmail" matInput type="email" autocomplete="new-password"
-          placeholder="Company Mail" required />
-        <mat-error *ngIf="companyDetails.get('companyEmail').invalid">Please enter a valid email address</mat-error>
-      </mat-form-field>
+
       <mat-form-field>
         <input formControlName="companyTelephone" matInput type="text" autocomplete="new-password"
           placeholder="Company Telephone Number" required />

@@ -6,7 +6,8 @@ export class User {
   company: string;
   address: string;
   avatarPath: string;
-  cui: number;
+  cnp: number;
+  cui: string;
   postalCode: string;
   country: string;
 }

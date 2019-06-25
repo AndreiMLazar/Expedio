@@ -156,3 +156,20 @@ exports.updateAvatar = (req, res, next) => {
       }
     })
 }
+
+exports.searchClient = (req, res, next) => {
+  User.find({ "email": req.params.email })
+    .then(users => {
+      if (users) {
+        res.status(200).json(users);
+      } else {
+        res.status(404).json({ message: "No users matched to your query" });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Fetching users failed"
+      });
+    });
+}
+

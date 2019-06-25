@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { CountriesList } from 'src/app/models/lists/countries-list';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { PackagesList } from 'src/app/models/lists/package-list';
+import { User } from 'src/app/models/user.model';
+import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-agent-form',
@@ -20,6 +22,10 @@ import { PackagesList } from 'src/app/models/lists/package-list';
 })
 export class AgentFormComponent implements OnInit {
   isLoading = false;
+  filteredSenders: User[] = [];
+  filteredRecipients: User[] = [];
+  filteredCompanies: User[] = [];
+
   senderInfo: FormGroup;
   recipientInfo: FormGroup;
   companyDetails: FormGroup;
@@ -35,7 +41,7 @@ export class AgentFormComponent implements OnInit {
 
   ngOnInit() {
     this.senderInfo = new FormGroup({
-      senderEmail: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      senderEmail: new FormControl('', { validators: [Validators.required] }),
       senderName: new FormControl('', { validators: [Validators.required] }),
       senderCNP: new FormControl('', {
         validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(13), Validators.maxLength(13)],
@@ -51,7 +57,7 @@ export class AgentFormComponent implements OnInit {
 
     this.recipientInfo = new FormGroup({
       recipientName: new FormControl('', { validators: [Validators.required] }),
-      recipientEmail: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      recipientEmail: new FormControl('', { validators: [Validators.required] }),
       // tslint:disable-next-line: max-line-length
       recipientCNP: new FormControl('', {
         validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(13), Validators.maxLength(13)],
@@ -66,7 +72,7 @@ export class AgentFormComponent implements OnInit {
 
     this.companyDetails = new FormGroup({
       companyName: new FormControl('', { validators: [Validators.required] }),
-      companyEmail: new FormControl('', { validators: [Validators.required, Validators.email] }),
+      companyEmail: new FormControl('', { validators: [Validators.required] }),
       companyTelephone: new FormControl('', { validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(8)] }),
       companyCUI: new FormControl('', { validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(7)] }),
       companyAddress: new FormControl('', { validators: [Validators.minLength(5), Validators.maxLength(80)] }),
@@ -82,8 +88,40 @@ export class AgentFormComponent implements OnInit {
       instructions: new FormControl('')
     });
 
+    this.getListOfUsers('senderEmail', this.senderInfo, this.filteredSenders);
+    this.getListOfUsers('recipientEmail', this.recipientInfo, this.filteredRecipients);
+    this.getListOfUsers('companyEmail', this.companyDetails, this.filteredCompanies);
+
     this.addPackage();
     this.addPackage();
+  }
+
+  getListOfUsers(formField: string, formGroup: FormGroup, filteredField: User[]) {
+    console.log('1');
+    formGroup
+      .get(formField)
+      .valueChanges
+      .pipe(
+        debounceTime(300),
+        tap(() => this.isLoading = true),
+        switchMap(email => this.authService.searchUser(email)
+          .pipe(finalize(() => this.isLoading = false))
+        )
+      )
+      .subscribe((users: User[]) => {
+        console.log(filteredField);
+        if (filteredField === this.filteredSenders) {
+          this.filteredSenders = users;
+        } else if (filteredField === this.filteredRecipients) {
+          this.filteredRecipients = users;
+        } else if (filteredField === this.filteredCompanies) {
+          this.filteredCompanies = users;
+        }
+      });
+  }
+
+  displayUser(user: User) {
+    if (user) { return user.email; }
   }
 
   addPackage() {
@@ -144,12 +182,45 @@ export class AgentFormComponent implements OnInit {
       }
     }
 
-    console.log(this.agentFormModel);
-
     this.agentFormModel.packagesList = this.packages.value.packages;
     this.orderService.createAgentOrder(this.agentFormModel);
 
     this.packages.controls.packages.updateValueAndValidity();
     this.isLoading = false;
+  }
+
+  populateSender(email: string) {
+    this.senderInfo.controls.senderAddress.setValue(this.filteredSenders[0].address);
+    this.senderInfo.controls.senderCNP.setValue(this.filteredSenders[0].cnp);
+    this.senderInfo.controls.senderCompanyCUI.setValue(this.filteredSenders[0].cui);
+    this.senderInfo.controls.senderCompanyName.setValue(this.filteredSenders[0].company);
+    this.senderInfo.controls.senderCountry.setValue(this.filteredSenders[0].country);
+    this.senderInfo.controls.senderEmail.setValue(email);
+    this.senderInfo.controls.senderEmail.updateValueAndValidity();
+    this.senderInfo.controls.senderName.setValue(this.filteredSenders[0].fullName);
+    this.senderInfo.controls.senderPostalCode.setValue(this.filteredSenders[0].postalCode);
+    this.senderInfo.controls.senderTelephone.setValue(this.filteredSenders[0].telephone);
+  }
+
+  populateRecipient(email: string) {
+    this.recipientInfo.controls.recipientAddress.setValue(this.filteredRecipients[0].address);
+    this.recipientInfo.controls.recipientCNP.setValue(this.filteredRecipients[0].cnp);
+    this.recipientInfo.controls.recipientCountry.setValue(this.filteredRecipients[0].country);
+    this.recipientInfo.controls.recipientEmail.setValue(email);
+    this.recipientInfo.controls.recipientEmail.updateValueAndValidity();
+    this.recipientInfo.controls.recipientName.setValue(this.filteredRecipients[0].fullName);
+    this.recipientInfo.controls.recipientTelephone.setValue(this.filteredRecipients[0].telephone);
+    this.recipientInfo.controls.recipientPostalCode.setValue(this.filteredRecipients[0].postalCode);
+  }
+
+  populateCompany(email: string) {
+    this.companyDetails.controls.companyAddress.setValue(this.filteredCompanies[0].address);
+    this.companyDetails.controls.companyCUI.setValue(this.filteredCompanies[0].cui);
+    this.companyDetails.controls.companyCountry.setValue(this.filteredCompanies[0].country);
+    this.companyDetails.controls.companyEmail.setValue(email);
+    this.companyDetails.controls.companyEmail.updateValueAndValidity();
+    this.companyDetails.controls.companyName.setValue(this.filteredCompanies[0].fullName);
+    this.companyDetails.controls.companyTelephone.setValue(this.filteredCompanies[0].telephone);
+    this.companyDetails.controls.companyPostalCode.setValue(this.filteredCompanies[0].postalCode);
   }
 }

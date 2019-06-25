@@ -15,4 +15,6 @@ router.post("/update", fileMiddleware, UserController.updateUser);
 
 router.post("/avatar", fileMiddleware, UserController.updateAvatar);
 
+router.get("/user/:email", UserController.searchClient);
+
 module.exports = router;

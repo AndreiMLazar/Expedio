@@ -2,10 +2,12 @@ import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { UserLoginData } from '../interfaces/user-login-data.interface';
 import { CurrentUser } from '../models/current-user.model';
 import { UpdatedUserResponse } from '../models/responses/updated-user-response';
+import { User } from '../models/user.model';
+import { empty, of } from "rxjs";
 
 const AUTH_URL = environment.apiURL + '/auth';
 
@@ -139,6 +141,16 @@ export class AuthService {
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
     this.router.navigate(['/login']);
+  }
+
+  searchUser(email: string): Observable<User[]> {
+    console.log(email);
+    if (email.length) {
+      console.log('yes');
+      return this.http.get<User[]>(AUTH_URL + '/user/' + email);
+    } else {
+      return empty();
+    }
   }
 
   private setAuthTimer(duration: number) {
