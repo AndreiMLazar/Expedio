@@ -1,8 +1,10 @@
 <div class="dashboard">
   <div *ngIf="userIsAuthenticated" class="left_section">
     <div class="user_section">
-      <div class="user_picture blur" [ngStyle]="{background: 'url(' + this.authService.currentUser.avatarPath + ') 50% 50% no-repeat' }"></div>
-      <div class="user_picture original" [ngStyle]="{background: 'url(' + this.authService.currentUser.avatarPath + ') 50% 50% no-repeat' }"></div>
+      <div class="user_picture blur"
+        [ngStyle]="{background: 'url(' + this.authService.currentUser.avatarPath + ') 50% 50% no-repeat' }"></div>
+      <div class="user_picture original"
+        [ngStyle]="{background: 'url(' + this.authService.currentUser.avatarPath + ') 50% 50% no-repeat' }"></div>
 
       <h2 class="user_name">{{ this.authService.currentUser.fullName }}</h2>
       <h3 class="user_role">{{ this.authService.currentUser.userType }}</h3>
@@ -16,7 +18,15 @@
       </div>
       <ul>
         <li><a routerLink="overview" routerLinkActive="active_link">Overview</a></li>
-        <li><a routerLink="my-orders" routerLinkActive="active_link">My Orders</a></li>
+        <li *ngIf="this.authService.currentUser.userType === 'client'"><a routerLink="client-orders"
+            routerLinkActive="active_link">My Orders</a>
+        </li>
+        <li *ngIf="this.authService.currentUser.userType === 'company'"><a routerLink="company-orders"
+            routerLinkActive="active_link">My Orders</a>
+        </li>
+        <li *ngIf="this.authService.currentUser.userType === 'agent'"><a routerLink="agent-orders"
+            routerLinkActive="active_link">My Orders</a>
+        </li>
         <li *ngIf="this.authService.currentUser.userType === 'client'"><a routerLink="client-form"
             routerLinkActive="active_link">Create Order</a>
         </li>

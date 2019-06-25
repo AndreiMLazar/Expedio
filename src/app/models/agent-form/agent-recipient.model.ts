@@ -5,4 +5,5 @@ export class AgentRecipient {
   cnp: string;
   address: string;
   country: string;
+  postalCode: string;
 }

@@ -36,8 +36,8 @@ export class AgentFormComponent implements OnInit {
   allPackageModes = PackagesList.modes;
 
   constructor(private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private orderService: OrderService) { }
+              private authService: AuthService,
+              private orderService: OrderService) { }
 
   ngOnInit() {
     this.senderInfo = new FormGroup({
@@ -76,8 +76,7 @@ export class AgentFormComponent implements OnInit {
       companyTelephone: new FormControl('', { validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(8)] }),
       companyCUI: new FormControl('', { validators: [Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(7)] }),
       companyAddress: new FormControl('', { validators: [Validators.minLength(5), Validators.maxLength(80)] }),
-      companyCountry: new FormControl('', { validators: [Validators.required] }),
-      companyPostalCode: new FormControl('', { validators: [Validators.required, Validators.minLength(2)] })
+      companyCountry: new FormControl('', { validators: [Validators.required] })
     });
 
     this.packages = new FormGroup({
@@ -97,7 +96,6 @@ export class AgentFormComponent implements OnInit {
   }
 
   getListOfUsers(formField: string, formGroup: FormGroup, filteredField: User[]) {
-    console.log('1');
     formGroup
       .get(formField)
       .valueChanges
@@ -109,7 +107,6 @@ export class AgentFormComponent implements OnInit {
         )
       )
       .subscribe((users: User[]) => {
-        console.log(filteredField);
         if (filteredField === this.filteredSenders) {
           this.filteredSenders = users;
         } else if (filteredField === this.filteredRecipients) {
@@ -150,6 +147,7 @@ export class AgentFormComponent implements OnInit {
     this.agentFormModel.transport = new AgentTransport();
     this.agentFormModel.createdDate = new Date(Date.now());
     this.agentFormModel.instructions = this.additionalInformation.value.instructions;
+    this.agentFormModel.creator = this.authService.currentUser.email;
 
     this.agentFormModel.sender.email = this.senderInfo.value.senderEmail;
     this.agentFormModel.sender.fullName = this.senderInfo.value.senderName;
@@ -167,6 +165,7 @@ export class AgentFormComponent implements OnInit {
     this.agentFormModel.recipient.country = this.recipientInfo.value.recipientCountry;
     this.agentFormModel.recipient.address = this.recipientInfo.value.recipientAddress;
     this.agentFormModel.recipient.telephone = this.recipientInfo.value.recipientTelephone;
+    this.agentFormModel.recipient.postalCode = this.recipientInfo.value.recipientPostalCode;
 
     this.agentFormModel.transport.name = this.companyDetails.value.companyName;
     this.agentFormModel.transport.email = this.companyDetails.value.companyEmail;
@@ -174,7 +173,6 @@ export class AgentFormComponent implements OnInit {
     this.agentFormModel.transport.cui = this.companyDetails.value.companyCUI;
     this.agentFormModel.transport.address = this.companyDetails.value.companyAddress;
     this.agentFormModel.transport.country = this.companyDetails.value.companyCountry;
-    this.agentFormModel.transport.postalCode = this.companyDetails.value.companyPostalCode;
 
     for (let i = 0; i < this.packages.value.packages.length; i++) {
       if (this.packages.value.packages[i].packageType === '') {

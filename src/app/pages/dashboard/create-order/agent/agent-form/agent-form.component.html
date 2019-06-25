@@ -20,9 +20,8 @@
           autocomplete="new-password" placeholder="Sender's Mail" required />
         <mat-error *ngIf="senderInfo.get('senderEmail').invalid">Please enter a valid email address</mat-error>
       </mat-form-field>
-      <mat-autocomplete #senderAuto="matAutocomplete" [displayWith]="displayUser"
-        (optionSelected)='populateSender($event.option.value)'>
-        <mat-option *ngFor="let user of filteredSenders" [value]="user">
+      <mat-autocomplete #senderAuto="matAutocomplete" (optionSelected)='populateSender($event.option.value)'>
+        <mat-option *ngFor="let user of filteredSenders" [value]="user.email">
           <span>{{ user.fullName }}</span>
           <small> | {{ user.email }}</small>
         </mat-option>
@@ -137,9 +136,8 @@
           autocomplete="new-password" placeholder="Recipient's Mail" required />
         <mat-error *ngIf="recipientInfo.get('recipientEmail').invalid">Please enter a valid email address</mat-error>
       </mat-form-field>
-      <mat-autocomplete #recipientAuto="matAutocomplete" [displayWith]="displayUser"
-        (optionSelected)='populateRecipient($event.option.value)'>
-        <mat-option *ngFor="let user of filteredRecipients" [value]="user">
+      <mat-autocomplete #recipientAuto="matAutocomplete" (optionSelected)='populateRecipient($event.option.value)'>
+        <mat-option *ngFor="let user of filteredRecipients" [value]="user.email">
           <span>{{ user.fullName }}</span>
           <small> | {{ user.email }}</small>
         </mat-option>
@@ -204,9 +202,8 @@
           autocomplete="new-password" placeholder="Company Mail" required />
         <mat-error *ngIf="companyDetails.get('companyEmail').invalid">Please enter a valid email address</mat-error>
       </mat-form-field>
-      <mat-autocomplete #companyAuto="matAutocomplete" [displayWith]="displayUser"
-        (optionSelected)='populateCompany($event.option.value)'>
-        <mat-option *ngFor="let user of filteredCompanies" [value]="user">
+      <mat-autocomplete #companyAuto="matAutocomplete" (optionSelected)='populateCompany($event.option.value)'>
+        <mat-option *ngFor="let user of filteredCompanies" [value]="user.email">
           <span>{{ user.fullName }}</span>
           <small> | {{ user.email }}</small>
         </mat-option>
@@ -243,12 +240,6 @@
           </mat-option>
         </mat-select>
         <mat-error *ngIf="companyDetails.get('companyCountry').invalid">Please enter a valid country for the company
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input formControlName="companyPostalCode" matInput type="text" autocomplete="new-password"
-          placeholder="Company Postal Code" required minlength="2" />
-        <mat-error *ngIf="companyDetails.get('companyPostalCode').invalid">Please enter a valid company postal code
         </mat-error>
       </mat-form-field>
 

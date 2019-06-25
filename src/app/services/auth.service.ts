@@ -144,9 +144,7 @@ export class AuthService {
   }
 
   searchUser(email: string): Observable<User[]> {
-    console.log(email);
     if (email.length) {
-      console.log('yes');
       return this.http.get<User[]>(AUTH_URL + '/user/' + email);
     } else {
       return empty();

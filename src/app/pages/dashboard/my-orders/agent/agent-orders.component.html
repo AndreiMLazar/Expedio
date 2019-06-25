@@ -1,0 +1,88 @@
+<div class="top_bar">
+  <div class="page_title">
+    <hr class="" />
+    <h1 class="page_title_h1">My Orders</h1>
+  </div>
+  <app-notifications></app-notifications>
+</div>
+<hr class="title_divider" />
+
+<ng-container *ngIf="userOrders.length">
+  <mat-accordion *ngFor="let order of userOrders">
+
+    <mat-expansion-panel [expanded]="panelOpenState">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          AWB:&nbsp;{{order.awb}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{order.createdDate | date: 'dd/MM/yyyy'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-tab-group>
+        <mat-tab label="Sender Information">
+          <ng-template matTabContent>
+            <p>Name: {{order.sender.fullName}}</p>
+            <p>Email: {{order.sender.email}}</p>
+            <p>CNP: {{order.sender.cnp}}</p>
+            <p>Address: {{order.sender.address}}</p>
+            <p>Country: {{order.sender.country}}</p>
+            <p>Postal Code: {{order.sender.postalCode}}</p>
+            <p>Telephone Number: {{order.sender.telephone}}</p>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Recipient Information">
+          <ng-template matTabContent>
+            <p>Name: {{order.recipient.fullName}}</p>
+            <p>Email: {{order.recipient.email}}</p>
+            <p>CNP: {{order.recipient.cnp}}</p>
+            <p>Address: {{order.recipient.address}}</p>
+            <p>Country: {{order.recipient.country}}</p>
+            <p>Postal Code: {{order.recipient.postalCode}}</p>
+            <p>Telephone Number: {{order.recipient.telephone}}</p>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Packages">
+          <ng-template matTabContent>
+            <p>Instructions: {{order.sender.instructions}}</p>
+            <mat-card class="packages_cards" *ngFor="let _package of order.packagesList; let i = index">
+              <mat-chip-list aria-label="Packages">
+                <mat-chip color="accent" selected>Package {{i + 1}}</mat-chip>
+              </mat-chip-list>
+              <mat-card-content>
+                <p>Type: {{_package.packageType}}</p>
+                <p>Mode: {{_package.packageMode}}</p>
+                <p>Weight: {{_package.packageWeight}} kg</p>
+                <p>Volume: {{_package.packageVolume}} m<sup>3</sup></p>
+              </mat-card-content>
+            </mat-card>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Transport Company Information">
+          <ng-template matTabContent>
+            <p>Name: {{order.transport.name}}</p>
+            <p>Email: {{order.transport.email}}</p>
+            <p>CUI: {{order.transport.cui}}</p>
+            <p>Address: {{order.transport.address}}</p>
+            <p>Country: {{order.transport.country}}</p>
+            <p>Telephone Number: {{order.transport.telephone}}</p>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Export PDF">
+          <ng-template matTabContent>
+            <button mat-button (click)="exportPDF(order.awb)">Download PDF</button>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-container>
+<ng-container *ngIf="!userOrders.length">
+  <h2 class="center_message">You have not placed an order yet</h2>
+</ng-container>

@@ -5,6 +5,7 @@ import { Package } from '../package.model';
 import { ClientSender } from './client-sender.model';
 
 export class ClientFormModel {
+  creator: string;
   awb: string;
   createdDate: Date;
   sender: ClientSender;

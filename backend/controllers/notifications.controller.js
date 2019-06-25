@@ -4,7 +4,6 @@ var ObjectId = require('mongodb').ObjectID;
 const UserNotifications = require("../models/user-notifications.model");
 
 exports.getUserNotifications = (req, res, next) => {
-  console.log('1');
   let socket_id = [];
   const io = req.app.get('socketio');
 
@@ -13,10 +12,7 @@ exports.getUserNotifications = (req, res, next) => {
     if (socket_id[0] === socket.id) {
       io.removeAllListeners('connection');
 
-      console.log(socket_id);
-
       UserNotifications.watch().on('change', (newNotifications) => {
-        console.log(newNotifications.fullDocument);
         io.emit('newNotifications', newNotifications.fullDocument);
       });
 

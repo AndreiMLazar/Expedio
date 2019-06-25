@@ -80,6 +80,7 @@ export class CompanyFormComponent implements OnInit {
     }
 
     this.companyFormModel.createdDate = new Date(Date.now());
+    this.companyFormModel.creator = this.authService.currentUser.email;
     this.companyFormModel.instructions = this.companyForm.value.instructions;
     this.companyFormModel.sender = new CompanySender();
     this.companyFormModel.sender.address = this.authService.currentUser.address;

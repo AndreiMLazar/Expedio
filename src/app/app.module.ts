@@ -20,7 +20,9 @@ import { ErrorComponent } from './pages/error/error.component';
 import { ErrorInterceptor } from './interceptors/error-interceptor';
 import { AccountComponent } from './pages/dashboard/account/account.component';
 import { ClientFormComponent } from './pages/dashboard/create-order/client/client-form/client-form.component';
-import { MyOrdersComponent } from './pages/dashboard/my-orders/my-orders.component';
+import { ClientOrdersComponent } from './pages/dashboard/my-orders/client/client-orders.component';
+import { AgentOrdersComponent } from './pages/dashboard/my-orders/agent/agent-orders.component';
+import { CompanyOrdersComponent } from './pages/dashboard/my-orders/company/company-orders.component';
 import { ContactComponent } from './pages/dashboard/contact/contact.component';
 import { ReportsComponent } from './pages/dashboard/reports/reports.component';
 import { ChangePictureComponent } from './pages/dashboard/change-picture/change-picture.component';
@@ -43,7 +45,7 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
     ErrorComponent,
     AccountComponent,
     ClientFormComponent,
-    MyOrdersComponent,
+    ClientOrdersComponent,
     ContactComponent,
     ReportsComponent,
     ChangePictureComponent,
@@ -54,7 +56,9 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
     CreateAgentComponent,
     OrderReviewComponent,
     DragAndDropDirective,
-    NotificationsComponent
+    NotificationsComponent,
+    AgentOrdersComponent,
+    CompanyOrdersComponent
   ],
   imports: [
     MaterialModule,

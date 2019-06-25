@@ -1,0 +1,41 @@
+@import "../../../../../styles/variables.scss";
+
+::ng-deep p {
+  margin: 0.5em 0;
+  font-weight: 400;
+  font-size: 1em;
+}
+
+::ng-deep .mat-tab-body-wrapper {
+  margin-top: 1em;
+}
+
+.mat-standard-chip.mat-chip-selected.mat-accent {
+  background: $white;
+  color: $accent;
+  margin: 0 0 1em 0 !important;
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.packages_cards {
+  display: inline-block;
+  width: 10em;
+  margin: 0.5em 1.5em 2em 0;
+  background: linear-gradient(135deg, $navy 0%, $accent 100%);
+  color: $white;
+
+  &:before {
+    background: linear-gradient(135deg, $navy 0%, $accent 100%);
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0.4em;
+    left: 0;
+    opacity: 0.5;
+    z-index: -1;
+    filter: blur(0.5em);
+  }
+}

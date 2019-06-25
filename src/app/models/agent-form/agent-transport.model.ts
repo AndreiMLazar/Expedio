@@ -5,5 +5,4 @@ export class AgentTransport {
   cui: string;
   address: string;
   country: string;
-  postalCode: string;
 }

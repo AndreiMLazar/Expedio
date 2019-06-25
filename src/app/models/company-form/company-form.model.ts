@@ -3,6 +3,7 @@ import { Truck } from '../truck.model';
 import { CompanySender } from './company-sender.model';
 
 export class CompanyFormModel {
+  creator: string;
   awb: string;
   createdDate: Date;
   instructions: string;

@@ -16,7 +16,11 @@
 }
 
 .mat-form-field {
-  margin-top: 1em;
+  margin: 1em auto 0 auto;
+}
+
+::ng-deep .contact_team .mat-form-field-appearance-legacy .mat-form-field-label {
+  color: $white;
 }
 
 .submit_button {

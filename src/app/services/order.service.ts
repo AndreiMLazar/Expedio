@@ -20,19 +20,19 @@ export class OrderService {
 
   createClientOrder(clientFormModel: ClientFormModel) {
     return this.http.post(CLIENT_URL + '/create', clientFormModel).subscribe(() => {
-      this.router.navigate(['dashboard/my-orders']);
+      this.router.navigate(['dashboard/client-orders']);
     });
   }
 
   createCompanyOrder(companyFormModel: CompanyFormModel) {
     return this.http.post(COMPANY_URL + '/create', companyFormModel).subscribe(() => {
-      this.router.navigate(['dashboard/my-orders']);
+      this.router.navigate(['dashboard/company-orders']);
     });
   }
 
   createAgentOrder(agentFormModel: AgentFormModel) {
     return this.http.post(AGENT_URL + '/create', agentFormModel).subscribe(() => {
-      this.router.navigate(['dashboard/my-orders']);
+      this.router.navigate(['dashboard/agent-orders']);
     });
   }
 
@@ -42,6 +42,10 @@ export class OrderService {
 
   getCompanyOrders(email: string) {
     return this.http.get<CompanyFormModel[]>(COMPANY_URL + '/all/' + email);
+  }
+
+  getAgentOrders(email: string) {
+    return this.http.get<AgentFormModel[]>(AGENT_URL + '/all/' + email);
   }
 
   getClientOrder(awb: string) {

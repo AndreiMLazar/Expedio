@@ -13,6 +13,7 @@ exports.createClientOrder = (req, res, next) => {
     length: 16
   });
   const newOrder = new ClientOrder({
+    creator: req.body.creator,
     createdDate: req.body.createdDate,
     sender: req.body.sender,
     recipient: req.body.recipient,
@@ -37,7 +38,6 @@ exports.createClientOrder = (req, res, next) => {
     });
     Notifications.findOne({ _id: req.body.sender.email })
       .then(exists => {
-        console.log(exists);
         if (!exists) {
           userNotification.save();
         } else {
@@ -61,6 +61,7 @@ exports.createClientOrder = (req, res, next) => {
 
 exports.createCompanyOrder = (req, res, next) => {
   const newOrder = new CompanyOrder({
+    creator: req.body.creator,
     createdDate: req.body.createdDate,
     instructions: req.body.instructions,
     sender: req.body.sender,
@@ -86,6 +87,7 @@ exports.createAgentOrder = (req, res, next) => {
     length: 16
   });
   const newOrder = new AgentOrder({
+    creator: req.body.creator,
     awb: awbGeneratedNumber,
     createdDate: req.body.createdDate,
     instructions: req.body.instructions,
@@ -107,7 +109,23 @@ exports.createAgentOrder = (req, res, next) => {
 }
 
 exports.showCompanyOrders = (req, res, next) => {
-  CompanyOrder.find({ "sender.email": req.params.id })
+  CompanyOrder.find({ "creator": req.params.email })
+    .then(order => {
+      if (order) {
+        res.status(200).json(order);
+      } else {
+        res.status(404).json({ message: "You have no orders yet" });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Fetching order failed"
+      });
+    });
+}
+
+exports.showAgentOrders = (req, res, next) => {
+  AgentOrder.find({ "creator": req.params.email })
     .then(order => {
       if (order) {
         res.status(200).json(order);
@@ -123,7 +141,7 @@ exports.showCompanyOrders = (req, res, next) => {
 }
 
 exports.showClientOrders = (req, res, next) => {
-  ClientOrder.find({ "sender.email": req.params.id })
+  ClientOrder.find({ "sender.email": req.params.email })
     .then(order => {
       if (order) {
         res.status(200).json(order);

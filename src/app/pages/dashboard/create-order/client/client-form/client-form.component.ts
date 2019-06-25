@@ -114,6 +114,7 @@ export class ClientFormComponent implements OnInit {
     this.isLoading = true;
 
     this.clientFormModel.createdDate = new Date(Date.now());
+    this.clientFormModel.creator = this.authService.currentUser.email;
     this.clientFormModel.sender = new ClientSender();
     this.clientFormModel.sender.email = this.authService.currentUser.email;
     this.clientFormModel.sender.fullName = this.clientForm.value.clientFullName;

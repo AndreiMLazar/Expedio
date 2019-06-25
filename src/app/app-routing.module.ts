@@ -7,7 +7,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AccountComponent } from './pages/dashboard/account/account.component';
 import { OverviewComponent } from './pages/dashboard/overview/overview.component';
 import { ClientFormComponent } from './pages/dashboard/create-order/client/client-form/client-form.component';
-import { MyOrdersComponent } from './pages/dashboard/my-orders/my-orders.component';
+import { ClientOrdersComponent } from './pages/dashboard/my-orders/client/client-orders.component';
+import { CompanyOrdersComponent } from './pages/dashboard/my-orders/company/company-orders.component';
+import { AgentOrdersComponent } from './pages/dashboard/my-orders/agent/agent-orders.component';
 import { ReportsComponent } from './pages/dashboard/reports/reports.component';
 import { ContactComponent } from './pages/dashboard/contact/contact.component';
 import { ChangePictureComponent } from './pages/dashboard/change-picture/change-picture.component';
@@ -31,8 +33,16 @@ const routes: Routes = [
         data: { title: 'Overview' }
       },
       {
-        path: 'my-orders', component: MyOrdersComponent,
-        data: { title: 'My Orders' }
+        path: 'client-orders', component: ClientOrdersComponent, canActivate: [RoleGuard],
+        data: { roles: ['admin', 'client'], title: 'My Client Orders' }
+      },
+      {
+        path: 'company-orders', component: CompanyOrdersComponent, canActivate: [RoleGuard],
+        data: { roles: ['admin', 'company'], title: 'My Company Orders' }
+      },
+      {
+        path: 'agent-orders', component: AgentOrdersComponent, canActivate: [RoleGuard],
+        data: { roles: ['admin', 'agent'], title: 'My Agent Orders' }
       },
       {
         path: 'all-orders', component: AllOrdersComponent,

@@ -7,6 +7,7 @@ var Deposit = require('./deposit.model');
 var Package = require('../package.model').schema;
 
 const ClientOrderSchema = mongoose.Schema({
+  creator: { type: String, required: true },
   awb: { type: String, required: true },
   createdDate: { type: Date, required: true },
   sender: { type: ClientSender, required: true },

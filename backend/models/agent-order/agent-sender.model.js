@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const AgentSenderSchema = mongoose.Schema({
-  email: { type: String, required: true, unique: true },
+  email: { type: String, required: true },
   fullName: { type: String, required: true },
   telephone: { type: String, required: true },
   company: { type: String, required: false },
