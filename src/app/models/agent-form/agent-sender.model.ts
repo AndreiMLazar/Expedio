@@ -1,6 +1,6 @@
 export class AgentSender {
-  fullName: string;
   email: string;
+  fullName: string;
   telephone: number;
   cnp: number;
   companyName: string;

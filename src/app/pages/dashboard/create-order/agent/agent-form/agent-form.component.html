@@ -27,8 +27,9 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input formControlName="senderCNP" matInput type="text" autocomplete="new-password" placeholder="Client CNP" />
-        <mat-error *ngIf="senderInfo.get('senderCNP').invalid">Sender's CNP must consist of <strong>numbers</strong> and is
+        <input formControlName="senderCNP" matInput type="text" autocomplete="new-password" placeholder="Sender CNP" />
+        <mat-error *ngIf="senderInfo.get('senderCNP').invalid">Sender's CNP must consist of <strong>numbers</strong> and
+          is
           <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -136,8 +137,9 @@
       </mat-form-field>
       <mat-form-field>
         <input formControlName="recipientCNP" matInput type="text" autocomplete="new-password"
-          placeholder="Client CNP" />
-        <mat-error *ngIf="recipientInfo.get('recipientCNP').invalid">Recipient's CNP must consist of <strong>numbers</strong> and is
+          placeholder="Recipient CNP" />
+        <mat-error *ngIf="recipientInfo.get('recipientCNP').invalid">Recipient's CNP must consist of
+          <strong>numbers</strong> and is
           <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -231,12 +233,17 @@
     </form>
   </mat-step>
 
-  <mat-step>
-    <ng-template matStepLabel>Finish</ng-template>
-    <p>You are ready to submit this form.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-flat-button (click)="submit()">Submit</button>
-    </div>
+  <mat-step [stepControl]="additionalInformation">
+    <form [formGroup]="additionalInformation">
+      <ng-template matStepLabel>Finish</ng-template>
+      <mat-form-field>
+        <textarea formControlName="instructions" matInput placeholder="Instructions"></textarea>
+      </mat-form-field>
+      <p>You are ready to submit this form.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-flat-button (click)="submit()">Submit</button>
+      </div>
+    </form>
   </mat-step>
 </mat-horizontal-stepper>

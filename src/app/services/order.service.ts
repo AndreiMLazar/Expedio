@@ -1,3 +1,4 @@
+import { AgentFormModel } from './../models/agent-form/agent-form.model';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClientFormModel } from 'src/app/models/client-form/client-form.model';
@@ -8,6 +9,7 @@ import { CompanyFormModel } from '../models/company-form/company-form.model';
 const ORDERS_URL = environment.apiURL + '/orders';
 const CLIENT_URL = ORDERS_URL + '/client';
 const COMPANY_URL = ORDERS_URL + '/company';
+const AGENT_URL = ORDERS_URL + '/agent';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +26,12 @@ export class OrderService {
 
   createCompanyOrder(companyFormModel: CompanyFormModel) {
     return this.http.post(COMPANY_URL + '/create', companyFormModel).subscribe(() => {
+      this.router.navigate(['dashboard/my-orders']);
+    });
+  }
+
+  createAgentOrder(agentFormModel: AgentFormModel) {
+    return this.http.post(AGENT_URL + '/create', agentFormModel).subscribe(() => {
       this.router.navigate(['dashboard/my-orders']);
     });
   }

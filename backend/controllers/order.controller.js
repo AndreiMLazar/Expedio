@@ -1,6 +1,7 @@
 // Order Model
 const ClientOrder = require("../models/client-order/client-order.model");
 const CompanyOrder = require("../models/company-order/company-order.model");
+const AgentOrder = require("../models/agent-order/agent-order.model");
 const Notifications = require("../models/user-notifications.model");
 const Notification = require("../models/notification/notification.model");
 const randomstring = require("randomstring");
@@ -84,13 +85,14 @@ exports.createAgentOrder = (req, res, next) => {
     charset: 'alphanumeric',
     length: 16
   });
-  const newOrder = new ClientOrder({
+  const newOrder = new AgentOrder({
+    awb: awbGeneratedNumber,
+    createdDate: req.body.createdDate,
+    instructions: req.body.instructions,
     sender: req.body.sender,
     recipient: req.body.recipient,
-    loadingPlace: req.body.loadingPlace,
-    deposit: req.body.deposit,
-    packagesList: req.body.packagesList,
-    awb: awbGeneratedNumber
+    transport: req.body.transport,
+    packagesList: req.body.packagesList
   });
   newOrder.save().then(createdOrder => {
     res.status(201).json({

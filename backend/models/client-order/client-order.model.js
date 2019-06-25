@@ -4,7 +4,7 @@ var ClientSender = require('./client-sender.model');
 var Recipient = require('./recipient.model');
 var LoadingPlace = require('./loading-place.model');
 var Deposit = require('./deposit.model');
-var Package = require('./package.model').schema;
+var Package = require('../package.model').schema;
 
 const ClientOrderSchema = mongoose.Schema({
   awb: { type: String, required: true },
