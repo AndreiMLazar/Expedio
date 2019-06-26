@@ -20,7 +20,7 @@
     "backend": "nodemon ./backend/server.js --no-deprecation",
     "backend-debug": "nodemon ./backend/server.js --inspect --no-deprecation",
     "node-debug": "node --nolazy --inspect-brk=9229 ./backend/server.js --no-deprecation",
-    "prod": "ng build --prod && npm run ngsw-config && npm run ngsw-copy",
+    "prod": "ng build --prod -c production && npm run ngsw-config && npm run ngsw-copy",
     "ngsw-config": "node_modules/.bin/ngsw-config backend/expedioUI ngsw-config.json",
     "ngsw-copy": "cp node_modules/@angular/service-worker/ngsw-worker.js backend/expedioUI/"
   },
