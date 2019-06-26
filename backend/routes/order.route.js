@@ -16,8 +16,10 @@ router.post("/company/create", OrderController.createCompanyOrder);
 
 router.get("/company/all/:email", OrderController.showCompanyOrders);
 
+router.post("/agent/create", OrderController.createAgentOrder);
+
 router.get("/agent/all/:email", OrderController.showAgentOrders);
 
-router.post("/agent/create", OrderController.createAgentOrder);
+router.get("/admin/all/:email", OrderController.showAdminOrders);
 
 module.exports = router;

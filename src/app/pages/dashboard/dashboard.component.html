@@ -24,7 +24,7 @@
         <li *ngIf="this.authService.currentUser.userType === 'company'"><a routerLink="company-orders"
             routerLinkActive="active_link">My Orders</a>
         </li>
-        <li *ngIf="this.authService.currentUser.userType === 'agent'"><a routerLink="agent-orders"
+        <li *ngIf="this.authService.currentUser.userType === 'agent' || this.authService.currentUser.userType === 'admin'"><a routerLink="agent-orders"
             routerLinkActive="active_link">My Orders</a>
         </li>
         <li *ngIf="this.authService.currentUser.userType === 'client'"><a routerLink="client-form"

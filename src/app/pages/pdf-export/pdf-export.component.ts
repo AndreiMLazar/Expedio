@@ -34,7 +34,6 @@ export class PdfExportComponent implements OnInit, AfterViewInit {
     });
   }
 
-
   ngAfterViewInit(): void {
     this.print(this.quality);
   }

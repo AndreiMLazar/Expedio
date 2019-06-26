@@ -60,13 +60,19 @@ exports.createClientOrder = (req, res, next) => {
 }
 
 exports.createCompanyOrder = (req, res, next) => {
+  let awbGeneratedNumber = randomstring.generate({
+    capitalization: 'uppercase',
+    charset: 'alphanumeric',
+    length: 16
+  });
   const newOrder = new CompanyOrder({
     creator: req.body.creator,
     createdDate: req.body.createdDate,
     instructions: req.body.instructions,
     sender: req.body.sender,
     transportDetails: req.body.transportDetails,
-    trucks: req.body.trucks
+    trucks: req.body.trucks,
+    awb: awbGeneratedNumber
   });
   newOrder.save().then(createdOrder => {
     res.status(201).json({
@@ -137,6 +143,39 @@ exports.showAgentOrders = (req, res, next) => {
       res.status(500).json({
         message: "Fetching order failed"
       });
+    });
+}
+
+exports.showAdminOrders = (req, res, next) => {
+  let results = [];
+  let companyOrders;
+  let clientOrders;
+  let agentOrders;
+
+  ClientOrder.find({})
+    .then(order => {
+      results = results.concat(order);
+      clientOrders = order.length;
+      CompanyOrder.find({})
+        .then(order => {
+          results = results.concat(order);
+          companyOrders = order.length;
+          AgentOrder.find({})
+            .then(order => {
+              results = results.concat(order);
+              agentOrders = order.length;
+              if (results.length) {
+                res.status(200).json({
+                  clientOrders: clientOrders,
+                  companyOrders: companyOrders,
+                  agentOrders: agentOrders,
+                  results: results
+                })
+              } else {
+                res.status(404).json({ message: "There are no orders yet" });
+              }
+            });
+        });
     });
 }
 

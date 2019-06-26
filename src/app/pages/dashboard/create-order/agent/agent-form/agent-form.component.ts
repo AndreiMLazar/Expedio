@@ -219,6 +219,5 @@ export class AgentFormComponent implements OnInit {
     this.companyDetails.controls.companyEmail.updateValueAndValidity();
     this.companyDetails.controls.companyName.setValue(this.filteredCompanies[0].fullName);
     this.companyDetails.controls.companyTelephone.setValue(this.filteredCompanies[0].telephone);
-    this.companyDetails.controls.companyPostalCode.setValue(this.filteredCompanies[0].postalCode);
   }
 }

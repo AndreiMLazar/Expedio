@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-client-orders',
   templateUrl: './client-orders.component.html',
-  styleUrls: ['./client-orders.component.scss']
+  styleUrls: ['../orders.component.scss']
 })
 export class ClientOrdersComponent implements OnInit {
   panelOpenState = true;

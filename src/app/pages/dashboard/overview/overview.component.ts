@@ -11,11 +11,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class OverviewComponent implements OnInit, AfterViewInit {
   state = 'none';
-  displayedColumns: string[] = ['AWB', 'Recipient Name', 'Recipient Address', 'Date'];
-  ELEMENT_DATA: ClientFormModel[] = [];
+  displayedColumns: string[] = ['AWB', 'Sender Email', 'Sender Address', 'Created Date'];
+  ELEMENT_DATA = [];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(public orderService: OrderService, public authService: AuthService) { }
 
@@ -24,22 +24,41 @@ export class OverviewComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.orderService.getClientOrders(this.authService.currentUser.email).subscribe(res => {
-      this.ELEMENT_DATA = res;
-      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+    if (this.authService.currentUser.userType === 'admin') {
+      this.orderService.getAdminOrders(this.authService.currentUser.email).subscribe(res => {
+        this.ELEMENT_DATA = res.results;
+        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
 
-      this.dataSource.sortingDataAccessor = (item, property) => {
-        switch (property) {
-          case 'AWB': return item.awb;
-          case 'Recipient Name': return item.recipient.fullName;
-          case 'Recipient Address': return item.recipient.address;
-          case 'Date': return item.loadingPlace.date;
-          default: return item[property];
-        }
-      };
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    });
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch (property) {
+            case 'AWB': return item.awb;
+            case 'Sender Email': return item.sender.email;
+            case 'Sender Address': return item.sender.address;
+            case 'Created Date': return item.created;
+            default: return item[property];
+          }
+        };
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
+    } else {
+      this.orderService.getClientOrders(this.authService.currentUser.email).subscribe(res => {
+        this.ELEMENT_DATA = res;
+        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          switch (property) {
+            case 'AWB': return item.awb;
+            case 'Sender Email': return item.sender.email;
+            case 'Sender Address': return item.sender.address;
+            case 'Created Date': return item.created;
+            default: return item[property];
+          }
+        };
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
+    }
   }
 
   ngAfterViewInit() {

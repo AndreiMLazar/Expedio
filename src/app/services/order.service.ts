@@ -5,11 +5,13 @@ import { ClientFormModel } from 'src/app/models/client-form/client-form.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { CompanyFormModel } from '../models/company-form/company-form.model';
+import { AllOrdersResponse } from '../models/responses/all-orders.response';
 
 const ORDERS_URL = environment.apiURL + '/orders';
 const CLIENT_URL = ORDERS_URL + '/client';
 const COMPANY_URL = ORDERS_URL + '/company';
 const AGENT_URL = ORDERS_URL + '/agent';
+const ADMIN_URL = ORDERS_URL + '/admin';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +48,10 @@ export class OrderService {
 
   getAgentOrders(email: string) {
     return this.http.get<AgentFormModel[]>(AGENT_URL + '/all/' + email);
+  }
+
+  getAdminOrders(email: string) {
+    return this.http.get<AllOrdersResponse>(ADMIN_URL + '/all/' + email);
   }
 
   getClientOrder(awb: string) {

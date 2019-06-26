@@ -1,3 +1,71 @@
-<p>
-  company-orders works!
-</p>
+<div class="top_bar">
+  <div class="page_title">
+    <hr class="" />
+    <h1 class="page_title_h1">My Orders</h1>
+  </div>
+  <app-notifications></app-notifications>
+</div>
+<hr class="title_divider" />
+
+<ng-container *ngIf="userOrders.length">
+  <mat-accordion *ngFor="let order of userOrders">
+
+    <mat-expansion-panel [expanded]="panelOpenState">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          AWB:&nbsp;{{order.awb}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{order.createdDate | date: 'dd/MM/yyyy'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <mat-tab-group>
+        <mat-tab label="Company Information">
+          <ng-template matTabContent>
+            <p>Name: {{order.sender.company}}</p>
+            <p>Email: {{order.sender.email}}</p>
+            <p>CUI: {{order.sender.cui}}</p>
+            <p>Address: {{order.sender.address}}</p>
+            <p>Country: {{order.sender.country}}</p>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Transport Information">
+          <ng-template matTabContent>
+            <p>Transport Date: {{order.transportDetails.transportDate | date: 'dd/MM/yyyy'}}}</p>
+            <p>From Address: {{order.transportDetails.fromAddress}}</p>
+            <p>From Country: {{order.transportDetails.fromCountry}}</p>
+            <p>To Address: {{order.transportDetails.toAddress}}</p>
+            <p>To Country: {{order.transportDetails.toCountry}}</p>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Trucks">
+          <ng-template matTabContent>
+            <p>Instructions: {{order.sender.instructions}}</p>
+            <mat-card class="packages_cards" *ngFor="let _truck of order.trucks; let i = index">
+              <mat-chip-list aria-label="Packages">
+                <mat-chip color="accent" selected>Truck {{i + 1}}</mat-chip>
+              </mat-chip-list>
+              <mat-card-content>
+                <p>Type: {{_truck.truckType}}</p>
+                <p>Available Pallets: {{_truck.truckAvailablePallets}}</p>
+              </mat-card-content>
+            </mat-card>
+          </ng-template>
+        </mat-tab>
+
+        <mat-tab label="Export PDF">
+          <ng-template matTabContent>
+            <button mat-button (click)="exportPDF(order.awb)">Download PDF</button>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-container>
+<ng-container *ngIf="!userOrders.length">
+  <h2 class="center_message">You have not placed an order yet</h2>
+</ng-container>

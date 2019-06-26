@@ -33,6 +33,7 @@ import { CompanyFormComponent } from './pages/dashboard/create-order/company/com
 import { CreateAgentComponent } from './pages/dashboard/create-user/create-user.component';
 import { OrderReviewComponent } from './pages/dashboard/order-review/order-review.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ChartsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: true })
   ],
   providers: [
