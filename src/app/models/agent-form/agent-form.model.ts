@@ -1,4 +1,4 @@
-import { Recipient } from './agent-recipient.model';
+import { AgentRecipient } from './agent-recipient.model';
 import { Package } from '../package.model';
 import { AgentSender } from './agent-sender.model';
 
@@ -7,6 +7,6 @@ export class AgentFormModel {
   instructions: string;
   createdDate: Date;
   sender: AgentSender;
-  recipient: Recipient;
+  recipient: AgentRecipient;
   packagesList: Package[];
 }
